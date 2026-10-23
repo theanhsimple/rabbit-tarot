@@ -1,0 +1,8 @@
+# Publish only the website; internal docs, spec and tools stay local
+/*
+!/.gitignore
+!/index.html
+!/README.md
+!/assets/
+/assets/rabbit-tarot-primary-emblem.png
+.DS_Store
