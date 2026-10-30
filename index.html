@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rabbit Tarot — Tarot để suy ngẫm</title>
-<meta name="description" content="Rabbit Tarot — không gian Tarot để suy ngẫm và nhìn rõ câu hỏi của bạn. Rút một lá bài hôm nay; đặt lịch trải bài online hoặc tại studio sắp mở.">
+<meta name="description" content="Rabbit Tarot — không gian Tarot để suy ngẫm và nhìn rõ câu hỏi của bạn. Chọn reader và đặt lịch trải bài qua Zalo, online hoặc tại studio.">
 <link rel="icon" type="image/png" href="assets/emblem-144.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -410,10 +410,10 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
       <li><a href="#faq">Hỏi đáp</a></li>
       <li data-booking><a href="#lookup">Tra cứu lịch</a></li>
       <li class="nav-cta" data-booking><a href="#booking" class="btn btn-primary">Đặt lịch</a></li>
-      <li class="nav-cta" data-soon><a href="#daily" class="btn btn-primary">Rút một lá</a></li>
+      <li class="nav-cta" data-soon><a href="#zalo" class="btn btn-primary">Đặt lịch qua Zalo</a></li>
     </ul>
     <a href="#booking" class="btn btn-primary" data-booking>Đặt lịch</a>
-    <a href="#daily" class="btn btn-primary" data-soon>Rút một lá hôm nay</a>
+    <a href="#zalo" class="btn btn-primary" data-soon>Đặt lịch</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navList">Menu</button>
   </nav>
 </header>
@@ -431,8 +431,8 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
         <div class="hero-cta">
           <a href="#booking" class="btn btn-primary" data-booking>Đặt lịch trải bài</a>
           <a href="#daily" class="link" data-booking>Rút một lá hôm nay →</a>
-          <a href="#daily" class="btn btn-primary" data-soon>Rút một lá hôm nay</a>
-          <a href="#zalo" class="link" data-soon>Giữ lịch qua Zalo →</a>
+          <a href="#zalo" class="btn btn-primary" data-soon>Đặt lịch qua Zalo</a>
+          <a href="#daily" class="link" data-soon>Rút một lá hôm nay →</a>
         </div>
       </div>
       <div class="emblem reveal">
@@ -491,11 +491,11 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
     <div class="section-head reveal">
       <div><span class="eyebrow">Đặt lịch</span><h2 id="bookingTitle">Giữ chỗ cho buổi trải bài</h2></div>
       <p class="lead" data-booking>Không cần thanh toán trước. Bạn có thể đổi hoặc huỷ miễn phí trước 12 giờ.</p>
-      <p class="lead" data-soon>Đặt lịch trực tuyến sẽ sớm mở. Hiện tại, bạn có thể giữ lịch qua Zalo.</p>
+      <p class="lead" data-soon>Chọn reader bạn muốn trò chuyện và nhắn trực tiếp qua Zalo để giữ lịch.</p>
     </div>
     <div class="zalo-box reveal" id="zalo" data-soon>
       <div class="zalo-text">
-        <span class="eyebrow">Trong lúc chờ đặt lịch trực tuyến</span>
+        <span class="eyebrow">Đặt lịch qua Zalo</span>
         <h3>Chọn reader, nhắn qua Zalo</h3>
         <p>Gửi câu hỏi bạn đang trăn trở cùng khung giờ mong muốn, reader sẽ phản hồi để giữ lịch cho bạn.</p>
         <ol class="zalo-steps">
@@ -608,6 +608,7 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
       <div class="daily-actions">
         <button type="button" class="btn btn-secondary" id="redraw" hidden>Rút lá khác</button>
         <a href="#booking" class="btn btn-primary" id="readMore" data-booking hidden>Đặt lịch trải bài đầy đủ</a>
+        <a href="#zalo" class="btn btn-primary" id="readMoreZalo" data-soon hidden>Đặt lịch trải bài qua Zalo</a>
       </div>
       <p class="disclaimer">Rút ngẫu nhiên trong 78 lá của bộ Rabbit Tarot, chỉ mang tính gợi mở.</p>
     </div>
@@ -664,7 +665,7 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
         <p>Một không gian Tarot nơi biểu tượng, trực giác và nghệ thuật gặp nhau.</p>
       </div>
       <div><h2>Giờ nhận lịch</h2><ul><li>Thứ 2 – Thứ 7: 9:00 – 21:00</li><li>Chủ nhật: 13:00 – 21:00</li><li id="footZalo" hidden></li></ul></div>
-      <div><h2>Trang</h2><ul><li><a href="#services">Gói trải bài</a></li><li><a href="#readers">Reader</a></li><li data-booking><a href="#booking">Đặt lịch</a></li><li data-booking><a href="#lookup">Tra cứu lịch</a></li><li data-soon><a href="#daily">Lá bài hôm nay</a></li></ul></div>
+      <div><h2>Trang</h2><ul><li><a href="#services">Gói trải bài</a></li><li><a href="#readers">Reader</a></li><li data-booking><a href="#booking">Đặt lịch</a></li><li data-booking><a href="#lookup">Tra cứu lịch</a></li><li data-soon><a href="#zalo">Đặt lịch qua Zalo</a></li><li data-soon><a href="#daily">Lá bài hôm nay</a></li></ul></div>
     </div>
     <div class="copy"><span>© 2026 Rabbit Tarot</span><span>Tarot mang tính tham khảo, không thay thế tư vấn y tế, pháp lý hay tài chính.</span></div>
   </div>
@@ -998,7 +999,7 @@ function draw(){
   setTimeout(()=>{
     const meta = c.arcana==='major' ? `Ẩn chính · ${c.label}` : `Ẩn phụ · Bộ ${RabbitCard.SUIT_VI[c.suit]}`;
     $('#reading').innerHTML=`<p class="meta">${meta}</p><h3>${esc(c.vi)} <i>· ${esc(c.name)}</i></h3><ul class="kw">${c.kw.map(k=>`<li>${esc(k)}</li>`).join('')}</ul><p>${esc(c.q)}</p><p class="scene"><b>Trên lá bài</b>${esc(c.concept)}</p>`;
-    $('#redraw').hidden=$('#readMore').hidden=false;
+    $('#redraw').hidden=$('#readMore').hidden=$('#readMoreZalo').hidden=false;
   },500);
 }
 function reveal(){ if(flipBusy || flip.classList.contains('on')) return; draw(); flip.classList.add('on'); }
