@@ -408,7 +408,7 @@ async function publish(content = S.draft, note = '') {
   const ok = await modal({
     title: 'Publish lên website?',
     body: `<p>Nội dung sau sẽ hiển thị công khai trên <b>${esc(CFG.site.replace('https://', ''))}</b> sau khoảng 1 phút:</p>
-      <ul class="rows panel" style="margin-top:12px">${(list.length ? list : [note]).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <ul class="rows panel" style="margin-top:12px">${(note ? [note, ...list] : list).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
       <p class="muted" style="margin-top:12px">Phiên bản hiện tại vẫn được lưu trong Lịch sử và có thể khôi phục.</p>`,
     ok: 'Publish'
   });
@@ -420,7 +420,7 @@ async function publish(content = S.draft, note = '') {
     if (cur.sha !== S.publishedSha && !await confirmBox('Website vừa được cập nhật ở nơi khác', 'Nội dung đang hiển thị đã thay đổi sau khi bạn mở CMS. Publish sẽ thay thế thay đổi đó bằng bản của bạn.', 'Vẫn publish', true)) return;
     const html = buildPage(content, await getTemplate(true));
     await commitFiles(CFG.main, [{path: P.published, text: pretty(content)}, {path: P.index, text: html}],
-      `CMS: publish — ${(list.length ? list : [note]).slice(0, 4).join('; ')}${list.length > 4 ? '…' : ''} (${S.user.login})`);
+      `CMS: publish — ${note ? note + (list.length ? ': ' : '') : ''}${list.slice(0, 4).join('; ')}${list.length > 4 ? '…' : ''} (${S.user.login})`);
     S.published = clone(content); S.publishedJson = JSON.stringify(S.published);
     S.publishedSha = (await readFile(P.published, CFG.main)).sha;
     S.errors = []; S.history = null;
