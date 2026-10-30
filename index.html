@@ -102,18 +102,27 @@ header.scrolled{border-bottom-color:var(--color-stone)}
 .step p{color:var(--color-muted-ink);font-size:.95rem}
 
 /* ---------- readers ---------- */
-.readers{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8)}
-.reader{display:flex;flex-direction:column}
-.reader .initial{aspect-ratio:4/3;background:var(--color-paper);border-radius:var(--radius-sm);display:grid;place-items:center;font-family:var(--font-display);font-style:italic;font-size:5.5rem;color:var(--color-ink);position:relative;overflow:hidden}
-.reader .initial::after{content:"";position:absolute;width:38%;aspect-ratio:1;border-radius:50%;background:var(--color-vermilion);right:-8%;bottom:-14%;background:none;border:1px solid var(--color-ink)}
-.reader h3{margin-top:var(--space-6)}
-.reader .focus{font-size:.85rem;color:var(--color-vermilion);font-weight:500;margin-top:var(--space-1)}
-.reader p{color:var(--color-muted-ink);font-size:.95rem;margin:var(--space-3) 0 var(--space-6);flex:1}
-.reader .link{align-self:flex-start}
-.reader .off{font-size:.82rem;color:var(--color-muted-ink);border-top:var(--border-subtle);padding-top:var(--space-3);margin-bottom:var(--space-4)}
-
-/* ---------- booking ---------- */
-#booking{background:var(--color-paper)}
+.readers{display:grid;gap:var(--space-22)}
+.reader-profile{display:grid;grid-template-columns:5fr 7fr;gap:var(--space-16);align-items:center}
+.reader-profile:nth-child(even) .rp-photo{order:2}
+.rp-photo{position:relative;margin:0;padding:0 var(--space-8) var(--space-8) 0}
+.rp-photo::before{content:"";position:absolute;right:0;bottom:0;width:58%;aspect-ratio:1;border-radius:50%;background:var(--color-vermilion)}
+.rp-photo img{position:relative;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-sm);display:block}
+.rp-body h3{font-size:clamp(2.4rem,4vw,3.4rem);margin:var(--space-3) 0 var(--space-4)}
+.rp-title{font-family:var(--font-display);font-style:italic;font-size:1.45rem;line-height:1.35;color:var(--color-ink);padding-left:var(--space-6);border-left:2px solid var(--color-vermilion);max-width:560px}
+.rp-bio{color:var(--color-muted-ink);margin:var(--space-6) 0 var(--space-8);max-width:600px}
+.rp-foot{display:grid;grid-template-columns:auto 1fr;gap:var(--space-8);align-items:center;padding-top:var(--space-6);border-top:1px solid var(--color-ink);max-width:600px}
+.rp-card{display:flex;gap:var(--space-4);align-items:center}
+.rp-card .mini{width:64px;aspect-ratio:3/5;border-radius:4px;overflow:hidden;box-shadow:var(--shadow-soft);flex:none}
+.rp-card .mini svg{display:block;width:100%;height:100%}
+.rp-meta small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-muted-ink)}
+.rp-meta b{display:block;font-family:var(--font-display);font-size:1.35rem;font-weight:500;line-height:1.2;margin-top:var(--space-1)}
+.rp-meta span{font-family:var(--font-display);font-style:italic;color:var(--color-muted-ink)}
+.rp-contact{display:flex;gap:var(--space-4);align-items:center;justify-content:flex-end}
+.rp-contact .qr-mini{width:92px;flex:none;padding:6px;background:var(--color-white);border:var(--border-subtle);border-radius:var(--radius-sm)}
+.rp-contact .qr-mini img{display:block;width:100%;height:auto}
+.rp-contact .btn{white-space:nowrap}
+.rp-contact p{font-size:.82rem;color:var(--color-muted-ink);line-height:1.4;margin-bottom:var(--space-2)}
 .zalo-box{background:var(--color-ivory);border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-12);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--space-12);align-items:center}
 .zalo-text h3{font-size:2.2rem;margin:var(--space-3) 0}
 .zalo-text > p{color:var(--color-muted-ink);max-width:520px}
@@ -121,6 +130,10 @@ header.scrolled{border-bottom-color:var(--color-stone)}
 .zalo-steps li{display:flex;gap:var(--space-3);align-items:baseline;font-size:.95rem;padding-bottom:var(--space-3);border-bottom:var(--border-subtle)}
 .zalo-steps b{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:1.3rem;color:var(--color-vermilion);min-width:1.2em;font-variant-numeric:lining-nums}
 .zalo-actions{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center}
+.qr-list{display:grid;gap:var(--space-6)}
+.zalo-box.multi{grid-template-columns:1fr}
+.zalo-box.multi .qr-list{grid-template-columns:repeat(auto-fit,minmax(220px,260px))}
+.qr-card .btn{margin-top:var(--space-4);width:100%}
 .qr-card{margin:0;background:var(--color-white);border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-6);text-align:center}
 .qr-frame{position:relative;aspect-ratio:1;display:grid;place-items:center;padding:var(--space-3)}
 .qr-frame .c{position:absolute;width:22px;height:22px;border:0 solid var(--color-ink)}
@@ -137,7 +150,8 @@ header.scrolled{border-bottom-color:var(--color-stone)}
 .only-mobile{display:none}
 @media (max-width:820px){
   .zalo-box{grid-template-columns:1fr;gap:var(--space-8);padding:var(--space-8) var(--space-6)}
-  .qr-card{width:100%;max-width:280px;justify-self:center}
+  .qr-list{justify-items:center}
+  .qr-card{width:100%;max-width:280px}
   .only-mobile{display:inline}
   .only-desktop{display:none}
 }
@@ -316,8 +330,12 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
   .emblem{order:-1;width:min(64vw,300px)}
   .hero-notes{grid-template-columns:1fr;margin-top:var(--space-12)}
   .hero-notes div{padding:var(--space-4) 0;border-bottom:var(--border-subtle)}
-  .readers{grid-template-columns:1fr;gap:var(--space-12)}
-  .reader .initial{aspect-ratio:16/7}
+  .readers{gap:var(--space-16)}
+  .reader-profile{grid-template-columns:1fr;gap:var(--space-8)}
+  .reader-profile:nth-child(even) .rp-photo{order:0}
+  .rp-photo{max-width:420px;padding:0 var(--space-6) var(--space-6) 0}
+  .rp-foot{grid-template-columns:1fr;gap:var(--space-6)}
+  .rp-contact{justify-content:flex-start}
   .daily{gap:var(--space-12)}
   .deck{order:-1}
   .faq-grid,.lookup-grid{gap:var(--space-8)}
@@ -431,7 +449,7 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
   <div class="container">
     <div class="section-head reveal">
       <div><span class="eyebrow">Reader</span><h2>Người cùng bạn lắng nghe</h2></div>
-      <p class="lead">Mỗi reader có một chủ đề mình hiểu sâu. Bạn có thể chọn trực tiếp khi đặt lịch.</p>
+      <p class="lead">Mỗi reader mang năng lượng của một lá bài riêng. Bạn có thể nhắn trực tiếp cho reader qua Zalo.</p>
     </div>
     <div class="readers" id="readerGrid"></div>
   </div>
@@ -451,23 +469,23 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
         <h3>Nhắn Rabbit Tarot qua Zalo</h3>
         <p>Gửi câu hỏi bạn đang trăn trở cùng khung giờ mong muốn, Rabbit Tarot sẽ phản hồi để giữ lịch cho bạn.</p>
         <ol class="zalo-steps">
-          <li><b>1</b><span><span class="only-desktop">Mở Zalo trên điện thoại và quét mã QR bên cạnh</span><span class="only-mobile">Bấm “Mở Zalo” hoặc lưu mã QR bên dưới</span></span></li>
+          <li><b>1</b><span><span class="only-desktop">Mở Zalo trên điện thoại và quét mã QR bên cạnh</span><span class="only-mobile">Bấm “Mở Zalo” dưới mã QR của reader</span></span></li>
           <li><b>2</b><span>Gửi gói bạn quan tâm, ngày giờ và hình thức: online hoặc tại studio</span></li>
           <li><b>3</b><span>Nhận xác nhận lịch hẹn qua Zalo</span></li>
         </ol>
         <div class="zalo-actions">
-          <a class="btn btn-primary" id="zaloOpen" href="#zalo" target="_blank" rel="noopener" hidden>Mở Zalo</a>
           <a href="#daily" class="link">Rút một lá hôm nay →</a>
         </div>
       </div>
-      <figure class="qr-card">
-        <div class="qr-frame">
-          <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
-          <img id="qrImg" alt="Mã QR Zalo của Rabbit Tarot" width="240" height="240" hidden>
-          <div class="qr-empty" id="qrEmpty"><span class="mark" aria-hidden="true"><span></span></span>Mã QR Zalo<br>đang được cập nhật</div>
-        </div>
-        <figcaption>Zalo Rabbit Tarot<b id="zaloPhone">Sắp cập nhật</b></figcaption>
-      </figure>
+      <div class="qr-list" id="qrList">
+        <figure class="qr-card">
+          <div class="qr-frame">
+            <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+            <div class="qr-empty"><span class="mark" aria-hidden="true"><span></span></span>Mã QR Zalo<br>đang được cập nhật</div>
+          </div>
+          <figcaption>Zalo Rabbit Tarot<b>Sắp cập nhật</b></figcaption>
+        </figure>
+      </div>
     </div>
     <div class="booking-box" data-booking>
       <div class="wizard">
@@ -621,7 +639,7 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
         <img src="assets/emblem-144.png" alt="Rabbit Tarot" width="72" height="72">
         <p>Một không gian Tarot nơi biểu tượng, trực giác và nghệ thuật gặp nhau.</p>
       </div>
-      <div><h2>Giờ nhận lịch</h2><ul><li>Thứ 2 – Thứ 7: 9:00 – 21:00</li><li>Chủ nhật: 13:00 – 21:00</li><li id="footZalo" hidden>Zalo: <a href="#zalo" data-zalo-link></a></li></ul></div>
+      <div><h2>Giờ nhận lịch</h2><ul><li>Thứ 2 – Thứ 7: 9:00 – 21:00</li><li>Chủ nhật: 13:00 – 21:00</li><li id="footZalo" hidden></li></ul></div>
       <div><h2>Trang</h2><ul><li><a href="#services">Gói trải bài</a></li><li><a href="#readers">Reader</a></li><li data-booking><a href="#booking">Đặt lịch</a></li><li data-booking><a href="#lookup">Tra cứu lịch</a></li><li data-soon><a href="#daily">Lá bài hôm nay</a></li></ul></div>
     </div>
     <div class="copy"><span>© 2026 Rabbit Tarot</span><span>Tarot mang tính tham khảo, không thay thế tư vấn y tế, pháp lý hay tài chính.</span></div>
@@ -630,6 +648,7 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
 
 <div class="toast" id="toast" role="status"></div>
 
+<script src="assets/readers.js"></script>
 <script src="assets/firebase-config.js"></script>
 <script src="assets/booking-store.js"></script>
 <script src="assets/deck-data.js"></script>
@@ -642,11 +661,7 @@ const SERVICES = [
   {id:'love', name:'Tình cảm & kết nối', dur:60, price:449000, desc:'Nhìn vào mối quan hệ giữa bạn và một người, cùng những điều bạn có thể chủ động.'},
   {id:'year', name:'Hành trình năm', dur:90, price:799000, desc:'Trải bài cho 12 tháng tới: chủ đề, bài học và điều nên để ý từng giai đoạn.'},
 ];
-const READERS = [
-  {id:'ngan', name:'Bảo Ngân', focus:'Tình cảm · Chữa lành', bio:'Nhẹ nhàng và kiên nhẫn, hợp với những câu hỏi về cảm xúc và các mối quan hệ.', off:[0]},
-  {id:'khai', name:'Minh Khải', focus:'Sự nghiệp · Tài chính', bio:'Thực tế, đi thẳng vào vấn đề, hợp với câu hỏi công việc và kế hoạch dài hạn.', off:[1]},
-  {id:'an', name:'Thiên An', focus:'Học tập · Định hướng', bio:'Gần gũi, hợp với các bạn sinh viên và người mới đi làm đang tìm hướng đi.', off:[3]},
-];
+const READERS = window.RT_READERS || [];
 const HOURS = ['09:00','10:30','13:00','14:30','16:00','17:30','19:00','20:30'];
 const DOW = ['CN','T2','T3','T4','T5','T6','T7'];
 const DOW_FULL = ['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
@@ -667,20 +682,29 @@ $('#svcList').innerHTML = SERVICES.map((s,i)=>`
     <button type="button" class="link" data-booking data-pick-svc="${s.id}">Chọn gói <span aria-hidden="true">→</span></button>
   </li>`).join('');
 
-const offText = r => 'Nghỉ ' + r.off.map(d=>DOW_FULL[d]).join(', ');
-$('#readerGrid').innerHTML = READERS.map(r=>`
-  <article class="reader reveal">
-    <div class="initial" aria-hidden="true">${r.name.split(' ').pop()[0]}</div>
-    <h3>${r.name}</h3>
-    <div class="focus">${r.focus}</div>
-    <p>${r.bio}</p>
-    <div class="off">${offText(r)}</div>
-    <button type="button" class="link" data-booking data-pick-reader="${r.id}">Đặt lịch với ${r.name.split(' ').pop()} <span aria-hidden="true">→</span></button>
-  </article>`).join('');
+const offText = r => r.off && r.off.length ? 'Nghỉ ' + r.off.map(d=>DOW_FULL[d]).join(', ') : 'Nhận lịch mọi ngày';
+const readerCard = r => (window.RABBIT_DECK||[]).find(c=>c.id===r.card);
+$('#readerGrid').innerHTML = READERS.map(r=>{
+  const card = readerCard(r);
+  return `
+  <article class="reader-profile reveal">
+    <figure class="rp-photo"><img src="${esc(r.photo)}" alt="Reader ${esc(r.name)} đang trải bài Tarot" width="720" height="960" loading="lazy"></figure>
+    <div class="rp-body">
+      <span class="eyebrow">Reader${r.alias?` · ${esc(r.alias)}`:''}</span>
+      <h3>${esc(r.name)}</h3>
+      <p class="rp-title">“${esc(r.title)}”</p>
+      <p class="rp-bio">${esc(r.bio)}</p>
+      <div class="rp-foot">
+        ${card?`<div class="rp-card"><div class="mini">${RabbitCard.face(card)}</div><div class="rp-meta"><small>Lá bài đại diện</small><b>${esc(card.vi)}</b><span>${esc(card.name)}</span></div></div>`:'<div></div>'}
+        ${r.zalo?`<div class="rp-contact">${r.qr?`<div class="qr-mini"><img src="${esc(r.qr)}" alt="Mã QR Zalo của ${esc(r.name)}" width="520" height="520" loading="lazy"></div>`:''}<div><p class="only-desktop">Quét mã bằng Zalo<br>để nhắn ${esc(r.name)}</p><a class="btn btn-primary" href="${esc(r.zalo)}" target="_blank" rel="noopener">Nhắn Zalo</a></div></div>`:''}
+      </div>
+      <button type="button" class="link" data-booking data-pick-reader="${r.id}">Đặt lịch với ${esc(r.name)} <span aria-hidden="true">→</span></button>
+    </div>
+  </article>`;}).join('');
 
 $('#optSvc').innerHTML = SERVICES.map(s=>`<button type="button" class="opt" aria-pressed="false" data-id="${s.id}"><b>${s.name}</b><small>${s.dur} phút</small><span class="p">${fmt(s.price)}</span></button>`).join('');
 $('#optReader').innerHTML = `<button type="button" class="opt" aria-pressed="false" data-id="any"><b>Để chúng tôi gợi ý</b><small>Chọn reader hợp với chủ đề của bạn</small></button>` +
-  READERS.map(r=>`<button type="button" class="opt" aria-pressed="false" data-id="${r.id}"><b>${r.name}</b><small>${r.focus} · ${offText(r)}</small></button>`).join('');
+  READERS.map(r=>`<button type="button" class="opt" aria-pressed="false" data-id="${r.id}"><b>${esc(r.name)}</b><small>${readerCard(r)?`Năng lượng ${esc(readerCard(r).name)} · `:''}${offText(r)}</small></button>`).join('');
 
 /* ---------- booking state ---------- */
 const B = {step:1, svc:null, mode:'Online (Google Meet)', reader:null, date:null, time:null};
@@ -948,21 +972,23 @@ if('IntersectionObserver' in window){
 } else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
 $('#demoNote').hidden = DB.mode!=='demo';
 
-/* ---------- Zalo contact (filled from assets/site-config.js) ---------- */
+/* ---------- Zalo contact: one QR card per reader (assets/readers.js) ---------- */
 (function(){
-  const z = window.RT_ZALO || {}, digits = String(z.phone || '').replace(/\D/g, '');
-  if(digits){
-    const link = `https://zalo.me/${digits}`, pretty = digits.replace(/^(\d{4})(\d{3})(\d+)$/, '$1 $2 $3');
-    $('#zaloOpen').href = link; $('#zaloOpen').hidden = false;
-    $('#zaloPhone').textContent = pretty;
-    const a = $('[data-zalo-link]'); a.href = link; a.target = '_blank'; a.rel = 'noopener'; a.textContent = pretty;
-    $('#footZalo').hidden = false;
-  }
-  if(z.qr){
-    const img = $('#qrImg');
-    img.onload = () => { img.hidden = false; $('#qrEmpty').hidden = true; };   // keep the placeholder if the file is missing
-    img.src = z.qr;
-  }
+  const withZalo = READERS.filter(r=>r.zalo || r.qr);
+  if(!withZalo.length) return;   // keep the "đang cập nhật" placeholder
+  $('#qrList').innerHTML = withZalo.map(r=>`
+    <figure class="qr-card">
+      <div class="qr-frame">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        ${r.qr?`<img src="${esc(r.qr)}" alt="Mã QR Zalo của ${esc(r.name)}" width="520" height="520">`:`<div class="qr-empty"><span class="mark" aria-hidden="true"><span></span></span>Mã QR Zalo<br>đang được cập nhật</div>`}
+      </div>
+      <figcaption>Zalo reader<b>${esc(r.name)}</b></figcaption>
+      ${r.zalo?`<a class="btn btn-secondary" href="${esc(r.zalo)}" target="_blank" rel="noopener">Mở Zalo</a>`:''}
+    </figure>`).join('');
+  $('#zalo').classList.toggle('multi', withZalo.length > 1);
+  const foot = $('#footZalo');
+  foot.innerHTML = 'Zalo: ' + withZalo.filter(r=>r.zalo).map(r=>`<a href="${esc(r.zalo)}" target="_blank" rel="noopener">${esc(r.name)}</a>`).join(', ');
+  foot.hidden = !withZalo.some(r=>r.zalo);
 })();
 summary();
 </script>
