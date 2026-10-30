@@ -821,16 +821,11 @@ async function showLogin(message) {
         <label for="accessCode" class="sr-only">Mã truy cập</label>
         <input type="password" id="accessCode" class="input" placeholder="Nhập mã truy cập" autocomplete="current-password" required>
         <button class="btn btn-dark" id="codeBtn">Vào CMS</button>
-      </form>` : `<p class="notice" style="margin-top:20px;text-align:left">Chưa có mã truy cập. Thiết lập một lần để từ sau chỉ cần nhập mã.</p>
-      <button class="btn btn-dark" id="setupLink">Thiết lập mã truy cập</button>`}
+      </form>` : `<p class="notice" style="margin-top:20px;text-align:left">CMS đang được kích hoạt. Vui lòng thử lại sau ít phút.</p>`}
     <p class="login-err" id="loginErr"${message ? '' : ' hidden'}>${esc(message || '')}</p>
-    <div class="login-alt">
-      <button class="btn btn-ghost btn-sm" id="ghBtn">Đăng nhập bằng GitHub</button>
-      ${hasCode ? '<button class="btn btn-ghost btn-sm" id="setupLink">Thiết lập lại mã</button>' : ''}
-    </div>
+    <div class="login-alt"><button class="btn btn-ghost btn-sm" id="ghBtn">Đăng nhập bằng GitHub</button></div>
   </div></main>`;
   $('#ghBtn').onclick = login;
-  $('#setupLink').onclick = () => showSetup();
   if (hasCode) { $('#codeForm').onsubmit = codeLogin; $('#accessCode').focus(); }
 }
 
@@ -920,7 +915,7 @@ function viewDashboard() {
   const lastPub = S.history && S.history.published[0];
   const lastDraft = S.history && S.history.drafts[0];
   const days = keyDaysLeft();
-  return `${days != null && days <= 21 ? `<div class="notice">Khoá GitHub dùng cho mã truy cập ${days > 0 ? `sẽ hết hạn sau ${days} ngày` : 'đã hết hạn'}. Hãy tạo khoá mới rồi chọn “Thiết lập lại mã” ở màn hình đăng nhập.</div>` : ''}<div class="stats">
+  return `${days != null && days <= 21 ? `<div class="notice">Khoá GitHub dùng cho mã truy cập ${days > 0 ? `sẽ hết hạn sau ${days} ngày` : 'đã hết hạn'}. Cần gia hạn khoá trước ngày đó để tiếp tục đăng nhập bằng mã.</div>` : ''}<div class="stats">
       <div class="panel stat"><span class="label-s">Section</span><b>${secs.length}</b><small>${visible} đang hiển thị</small></div>
       <div class="panel stat"><span class="label-s">Mục nội dung</span><b>${items}</b><small>gói, reader, câu hỏi, ghi chú…</small></div>
       <div class="panel stat"><span class="label-s">Thư viện ảnh</span><b>${S.media.items.length}</b><small>${fmtBytes(mediaSize)}</small></div>
@@ -1105,7 +1100,7 @@ function viewSettings() {
   return `<p class="muted" style="margin-bottom:16px">Thay đổi ở đây nằm trong bản nháp và chỉ lên website khi bạn publish. Màu sắc, font và cấu hình kỹ thuật không chỉnh được từ CMS để giữ nhận diện thương hiệu.</p>${settingsForm(SETTINGS_FORM)}
     <section class="panel" style="margin-top:20px"><div class="panel-head"><h2>Đăng nhập CMS</h2><button class="btn btn-sm" data-change-code>${S.accessBox ? 'Đổi mã truy cập' : 'Tạo mã truy cập'}</button></div>
       <div class="panel-body"><p>${S.accessBox ? `Đăng nhập bằng mã truy cập đang bật. ${days != null ? `Khoá GitHub hết hạn ngày <b>${esc(fmtTime((S.accessBox.expires) + 'T12:00:00').slice(0, 10))}</b> (còn ${days} ngày).` : ''}` : 'Chưa có mã truy cập; đang dùng đăng nhập GitHub.'}</p>
-      <p class="help" style="margin-top:6px">Đổi mã không làm mất nội dung. Khi khoá GitHub sắp hết hạn, tạo khoá mới rồi chọn “Thiết lập lại mã” ở màn hình đăng nhập.</p></div></section>`;
+      <p class="help" style="margin-top:6px">Đổi mã không làm mất nội dung. Khi khoá GitHub sắp hết hạn, tạo khoá mới rồi mở <span class="mono">/admin/#setup</span> để gia hạn.</p></div></section>`;
 }
 function viewSeo() {
   return `<div class="grid-2"><div>${settingsForm(SEO_FORM)}</div>
@@ -1257,7 +1252,7 @@ async function boot() {
 }
 (async () => {
   const s = readSession();
-  if (!s) return showLogin();
+  if (!s) return location.hash === '#setup' ? showSetup() : showLogin();
   S.token = s.token;
   try { await authorize(); saveSession(); await boot(); }
   catch (e) { if (S.token) endSession(e.message); }
