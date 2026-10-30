@@ -20,7 +20,7 @@ window.RT_READERS = [
     bio: 'Mang năng lượng của lá bài Justice, Rabbit đại diện cho sự công tâm, thấu hiểu và khả năng nhìn nhận mọi vấn đề từ nhiều góc độ. Với mong muốn trở thành người truyền cảm hứng, Rabbit tin rằng mỗi trải nghiệm đều mang đến một bài học, mỗi lựa chọn đều mở ra một hướng đi mới. Thông qua Tarot, Rabbit mong muốn giúp mọi người hiểu rõ bản thân, tìm thấy sự cân bằng và tự tin hơn trên hành trình của chính mình.',
     photo: 'assets/readers/rabbit.jpg',
     qr: 'assets/readers/rabbit-zalo-qr.jpg',
-    phone: '',
+    phone: '0855108999',
     off: []
   },
   {
@@ -42,7 +42,7 @@ window.RT_READERS = [
     ],
     photo: 'assets/readers/moon.jpg',
     qr: 'assets/readers/moon-zalo-qr.jpg',
-    phone: '',
+    phone: '0966429968',
     off: []
   },
   {
@@ -59,7 +59,7 @@ window.RT_READERS = [
     photo: 'assets/readers/kb.jpg',
     avatar: 'assets/readers/kb-avatar.jpg',
     qr: 'assets/readers/kb-zalo-qr.jpg',
-    phone: '',
+    phone: '0898981696',
     off: []
   }
 ];
