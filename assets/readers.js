@@ -6,7 +6,9 @@
    photo   portrait, 3:4, about 720×960 px, in assets/readers/
    avatar  optional close-up of the face (square) for the Zalo popup and the reader picker; defaults to photo
    qr      square crop of the Zalo QR code, in assets/readers/
-   zalo    the link inside that QR code (opens the reader's Zalo on phones)
+   phone   the reader's Zalo phone number, e.g. '0909123456'. The 'Mở Zalo' button opens https://zalo.me/<phone>,
+           which goes straight to that person. Leave '' to show only the QR code (the link inside a Zalo QR
+           only works when scanned in the Zalo app, so it is not used for the button).
    bio     a string, or a list of blocks: 'paragraph text', {list: ['…', '…']}, {quote: '…'}
    off     weekly days off for online booking: 0 = Chủ nhật … 6 = Thứ 7 */
 window.RT_READERS = [
@@ -18,7 +20,7 @@ window.RT_READERS = [
     bio: 'Mang năng lượng của lá bài Justice, Rabbit đại diện cho sự công tâm, thấu hiểu và khả năng nhìn nhận mọi vấn đề từ nhiều góc độ. Với mong muốn trở thành người truyền cảm hứng, Rabbit tin rằng mỗi trải nghiệm đều mang đến một bài học, mỗi lựa chọn đều mở ra một hướng đi mới. Thông qua Tarot, Rabbit mong muốn giúp mọi người hiểu rõ bản thân, tìm thấy sự cân bằng và tự tin hơn trên hành trình của chính mình.',
     photo: 'assets/readers/rabbit.jpg',
     qr: 'assets/readers/rabbit-zalo-qr.jpg',
-    zalo: 'https://zaloapp.com/qr/p/1n4zt5cdb2j30',
+    phone: '',
     off: []
   },
   {
@@ -40,7 +42,7 @@ window.RT_READERS = [
     ],
     photo: 'assets/readers/moon.jpg',
     qr: 'assets/readers/moon-zalo-qr.jpg',
-    zalo: 'https://zaloapp.com/qr/p/4yefgnajzotr',
+    phone: '',
     off: []
   },
   {
@@ -57,7 +59,7 @@ window.RT_READERS = [
     photo: 'assets/readers/kb.jpg',
     avatar: 'assets/readers/kb-avatar.jpg',
     qr: 'assets/readers/kb-zalo-qr.jpg',
-    zalo: 'https://zaloapp.com/qr/p/n0shl1xegqk9',
+    phone: '',
     off: []
   }
 ];
