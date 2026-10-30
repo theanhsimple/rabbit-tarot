@@ -103,14 +103,21 @@ header.scrolled{border-bottom-color:var(--color-stone)}
 
 /* ---------- readers ---------- */
 .readers{display:grid;gap:var(--space-22)}
-.reader-profile{display:grid;grid-template-columns:5fr 7fr;gap:var(--space-16);align-items:center}
+.reader-profile{display:grid;grid-template-columns:5fr 7fr;gap:var(--space-16);align-items:start}
 .reader-profile:nth-child(even) .rp-photo{order:2}
-.rp-photo{position:relative;margin:0;padding:0 var(--space-8) var(--space-8) 0}
+.rp-photo{position:sticky;top:110px;margin:0;padding:0 var(--space-8) var(--space-8) 0}
+.reader-profile:nth-child(even) .rp-photo{padding:0 0 var(--space-8) var(--space-8)}
+.reader-profile:nth-child(even) .rp-photo::before{right:auto;left:0}
 .rp-photo::before{content:"";position:absolute;right:0;bottom:0;width:58%;aspect-ratio:1;border-radius:50%;background:var(--color-vermilion)}
 .rp-photo img{position:relative;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-sm);display:block}
 .rp-body h3{font-size:clamp(2.4rem,4vw,3.4rem);margin:var(--space-3) 0 var(--space-4)}
 .rp-title{font-family:var(--font-display);font-style:italic;font-size:1.45rem;line-height:1.35;color:var(--color-ink);padding-left:var(--space-6);border-left:2px solid var(--color-vermilion);max-width:560px}
 .rp-bio{color:var(--color-muted-ink);margin:var(--space-6) 0 var(--space-8);max-width:600px}
+.rp-bio p + p,.rp-bio p + ul,.rp-bio ul + p,.rp-bio blockquote + p{margin-top:var(--space-4)}
+.rp-bio ul{list-style:none;display:grid;gap:var(--space-2);margin-top:var(--space-3)}
+.rp-bio li{position:relative;padding-left:var(--space-6);color:var(--color-ink)}
+.rp-bio li::before{content:"";position:absolute;left:0;top:.75em;width:12px;height:1px;background:var(--color-vermilion)}
+.rp-bio blockquote{margin:var(--space-3) 0 0;padding:var(--space-4) var(--space-6);background:var(--color-paper);border-radius:var(--radius-sm);font-family:var(--font-display);font-style:italic;font-size:1.3rem;line-height:1.4;color:var(--color-ink)}
 .rp-foot{display:grid;grid-template-columns:auto 1fr;gap:var(--space-8);align-items:center;padding-top:var(--space-6);border-top:1px solid var(--color-ink);max-width:600px}
 .rp-card{display:flex;gap:var(--space-4);align-items:center}
 .rp-card .mini{width:64px;aspect-ratio:3/5;border-radius:4px;overflow:hidden;box-shadow:var(--shadow-soft);flex:none}
@@ -131,9 +138,10 @@ header.scrolled{border-bottom-color:var(--color-stone)}
 .zalo-steps b{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:1.3rem;color:var(--color-vermilion);min-width:1.2em;font-variant-numeric:lining-nums}
 .zalo-actions{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center}
 .qr-list{display:grid;gap:var(--space-6)}
-.zalo-box.multi{grid-template-columns:1fr}
-.zalo-box.multi .qr-list{grid-template-columns:repeat(auto-fit,minmax(220px,260px))}
-.qr-card .btn{margin-top:var(--space-4);width:100%}
+.zalo-box.multi{grid-template-columns:minmax(0,1fr) auto}
+.zalo-box.multi .qr-list{grid-template-columns:repeat(2,210px)}
+.zalo-box.multi .qr-card{padding:var(--space-4)}
+.qr-card .btn{margin-top:var(--space-4);width:100%;white-space:nowrap;padding:0 var(--space-3)}
 .qr-card{margin:0;background:var(--color-white);border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-6);text-align:center}
 .qr-frame{position:relative;aspect-ratio:1;display:grid;place-items:center;padding:var(--space-3)}
 .qr-frame .c{position:absolute;width:22px;height:22px;border:0 solid var(--color-ink)}
@@ -152,6 +160,8 @@ header.scrolled{border-bottom-color:var(--color-stone)}
   .zalo-box{grid-template-columns:1fr;gap:var(--space-8);padding:var(--space-8) var(--space-6)}
   .qr-list{justify-items:center}
   .qr-card{width:100%;max-width:280px}
+  .zalo-box.multi{grid-template-columns:1fr}
+  .zalo-box.multi .qr-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}
   .only-mobile{display:inline}
   .only-desktop{display:none}
 }
@@ -333,7 +343,8 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
   .readers{gap:var(--space-16)}
   .reader-profile{grid-template-columns:1fr;gap:var(--space-8)}
   .reader-profile:nth-child(even) .rp-photo{order:0}
-  .rp-photo{max-width:420px;padding:0 var(--space-6) var(--space-6) 0}
+  .rp-photo,.reader-profile:nth-child(even) .rp-photo{position:relative;top:auto;max-width:420px;padding:0 var(--space-6) var(--space-6) 0}
+  .reader-profile:nth-child(even) .rp-photo::before{left:auto;right:0}
   .rp-foot{grid-template-columns:1fr;gap:var(--space-6)}
   .rp-contact{justify-content:flex-start}
   .daily{gap:var(--space-12)}
@@ -469,7 +480,7 @@ footer li a:hover{text-decoration:underline;text-decoration-color:var(--color-ve
         <h3>Nhắn Rabbit Tarot qua Zalo</h3>
         <p>Gửi câu hỏi bạn đang trăn trở cùng khung giờ mong muốn, Rabbit Tarot sẽ phản hồi để giữ lịch cho bạn.</p>
         <ol class="zalo-steps">
-          <li><b>1</b><span><span class="only-desktop">Mở Zalo trên điện thoại và quét mã QR bên cạnh</span><span class="only-mobile">Bấm “Mở Zalo” dưới mã QR của reader</span></span></li>
+          <li><b>1</b><span><span class="only-desktop">Mở Zalo trên điện thoại và quét mã QR của reader bạn muốn nhắn</span><span class="only-mobile">Bấm “Mở Zalo” dưới mã QR của reader</span></span></li>
           <li><b>2</b><span>Gửi gói bạn quan tâm, ngày giờ và hình thức: online hoặc tại studio</span></li>
           <li><b>3</b><span>Nhận xác nhận lịch hẹn qua Zalo</span></li>
         </ol>
@@ -684,6 +695,10 @@ $('#svcList').innerHTML = SERVICES.map((s,i)=>`
 
 const offText = r => r.off && r.off.length ? 'Nghỉ ' + r.off.map(d=>DOW_FULL[d]).join(', ') : 'Nhận lịch mọi ngày';
 const readerCard = r => (window.RABBIT_DECK||[]).find(c=>c.id===r.card);
+const bioHtml = b => (Array.isArray(b) ? b : [b]).map(x =>
+  typeof x === 'string' ? `<p>${esc(x)}</p>`
+  : x.list ? `<ul>${x.list.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`
+  : x.quote ? `<blockquote>“${esc(x.quote)}”</blockquote>` : '').join('');
 $('#readerGrid').innerHTML = READERS.map(r=>{
   const card = readerCard(r);
   return `
@@ -693,7 +708,7 @@ $('#readerGrid').innerHTML = READERS.map(r=>{
       <span class="eyebrow">Reader${r.alias?` · ${esc(r.alias)}`:''}</span>
       <h3>${esc(r.name)}</h3>
       <p class="rp-title">“${esc(r.title)}”</p>
-      <p class="rp-bio">${esc(r.bio)}</p>
+      <div class="rp-bio">${bioHtml(r.bio)}</div>
       <div class="rp-foot">
         ${card?`<div class="rp-card"><div class="mini">${RabbitCard.face(card)}</div><div class="rp-meta"><small>Lá bài đại diện</small><b>${esc(card.vi)}</b><span>${esc(card.name)}</span></div></div>`:'<div></div>'}
         ${r.zalo?`<div class="rp-contact">${r.qr?`<div class="qr-mini"><img src="${esc(r.qr)}" alt="Mã QR Zalo của ${esc(r.name)}" width="520" height="520" loading="lazy"></div>`:''}<div><p class="only-desktop">Quét mã bằng Zalo<br>để nhắn ${esc(r.name)}</p><a class="btn btn-primary" href="${esc(r.zalo)}" target="_blank" rel="noopener">Nhắn Zalo</a></div></div>`:''}
