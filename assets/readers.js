@@ -15,7 +15,7 @@ window.RT_READERS = [
     name: 'Rabbit',
     card: 'major-11',
     title: 'Thấu hiểu bản thân, cân bằng lựa chọn, truyền cảm hứng sống.',
-    bio: 'Mang năng lượng của lá bài Justice, Thế Anh đại diện cho sự công tâm, thấu hiểu và khả năng nhìn nhận mọi vấn đề từ nhiều góc độ. Với mong muốn trở thành người truyền cảm hứng, Thế Anh tin rằng mỗi trải nghiệm đều mang đến một bài học, mỗi lựa chọn đều mở ra một hướng đi mới. Thông qua Tarot, Thế Anh mong muốn giúp mọi người hiểu rõ bản thân, tìm thấy sự cân bằng và tự tin hơn trên hành trình của chính mình.',
+    bio: 'Mang năng lượng của lá bài Justice, Rabbit đại diện cho sự công tâm, thấu hiểu và khả năng nhìn nhận mọi vấn đề từ nhiều góc độ. Với mong muốn trở thành người truyền cảm hứng, Rabbit tin rằng mỗi trải nghiệm đều mang đến một bài học, mỗi lựa chọn đều mở ra một hướng đi mới. Thông qua Tarot, Rabbit mong muốn giúp mọi người hiểu rõ bản thân, tìm thấy sự cân bằng và tự tin hơn trên hành trình của chính mình.',
     photo: 'assets/readers/rabbit.jpg',
     qr: 'assets/readers/rabbit-zalo-qr.jpg',
     zalo: 'https://zaloapp.com/qr/p/1n4zt5cdb2j30',
