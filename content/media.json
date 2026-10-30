@@ -1,0 +1,124 @@
+{
+  "items": [
+    {
+      "path": "assets/emblem-880.png",
+      "name": "Biểu tượng Rabbit Tarot (lớn)",
+      "category": "Hero",
+      "alt": "",
+      "size": 738525,
+      "type": "image/png",
+      "width": 880,
+      "height": 880,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/emblem-440.png",
+      "name": "Biểu tượng Rabbit Tarot",
+      "category": "Hero",
+      "alt": "",
+      "size": 186896,
+      "type": "image/png",
+      "width": 440,
+      "height": 440,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/emblem-144.png",
+      "name": "Biểu tượng Rabbit Tarot (nhỏ)",
+      "category": "Icon",
+      "alt": "",
+      "size": 25309,
+      "type": "image/png",
+      "width": 144,
+      "height": 144,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/rabbit.jpg",
+      "name": "Rabbit — chân dung",
+      "category": "Thumbnail",
+      "alt": "",
+      "size": 239800,
+      "type": "image/jpeg",
+      "width": 720,
+      "height": 960,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/rabbit-zalo-qr.jpg",
+      "name": "Rabbit — mã QR Zalo",
+      "category": "Other",
+      "alt": "",
+      "size": 87056,
+      "type": "image/jpeg",
+      "width": 520,
+      "height": 520,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/moon.jpg",
+      "name": "Moon — chân dung",
+      "category": "Thumbnail",
+      "alt": "",
+      "size": 109440,
+      "type": "image/jpeg",
+      "width": 720,
+      "height": 960,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/moon-zalo-qr.jpg",
+      "name": "Moon — mã QR Zalo",
+      "category": "Other",
+      "alt": "",
+      "size": 113757,
+      "type": "image/jpeg",
+      "width": 520,
+      "height": 520,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/kb.jpg",
+      "name": "Mr. KB — chân dung",
+      "category": "Thumbnail",
+      "alt": "",
+      "size": 147777,
+      "type": "image/jpeg",
+      "width": 700,
+      "height": 960,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/kb-avatar.jpg",
+      "name": "Mr. KB — ảnh đại diện",
+      "category": "Thumbnail",
+      "alt": "",
+      "size": 7093,
+      "type": "image/jpeg",
+      "width": 160,
+      "height": 160,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    },
+    {
+      "path": "assets/readers/kb-zalo-qr.jpg",
+      "name": "Mr. KB — mã QR Zalo",
+      "category": "Other",
+      "alt": "",
+      "size": 112227,
+      "type": "image/jpeg",
+      "width": 520,
+      "height": 520,
+      "uploaded": "2026-10-30T00:00:00.000Z",
+      "by": "theanhsimple"
+    }
+  ]
+}

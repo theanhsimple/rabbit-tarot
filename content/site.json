@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "settings": {
+    "siteTitle": "Rabbit Tarot",
+    "favicon": "assets/emblem-144.png",
+    "header": {
+      "brandName": "Rabbit Tarot",
+      "logo": "assets/emblem-144.png",
+      "ctaLabel": "Đặt lịch",
+      "ctaLabelMobile": "Đặt lịch qua Zalo",
+      "ctaHref": "#zalo"
+    },
+    "seo": {
+      "title": "Rabbit Tarot — Tarot để suy ngẫm",
+      "description": "Rabbit Tarot — không gian Tarot để suy ngẫm và nhìn rõ câu hỏi của bạn. Chọn reader và đặt lịch trải bài qua Zalo, online hoặc tại studio.",
+      "ogTitle": "",
+      "ogDescription": "",
+      "ogImage": "assets/emblem-880.png",
+      "canonical": "https://rabbittarot.io.vn/"
+    },
+    "footer": {
+      "tagline": "Một không gian Tarot nơi biểu tượng, trực giác và nghệ thuật gặp nhau.",
+      "hoursTitle": "Giờ nhận lịch",
+      "hours": [
+        "Thứ 2 – Thứ 7: 9:00 – 21:00",
+        "Chủ nhật: 13:00 – 21:00"
+      ],
+      "showZalo": true,
+      "contact": {
+        "phone": "",
+        "email": "",
+        "address": ""
+      },
+      "pagesTitle": "Trang",
+      "socialTitle": "Theo dõi",
+      "social": [],
+      "copyright": "© 2026 Rabbit Tarot",
+      "disclaimer": "Tarot mang tính tham khảo, không thay thế tư vấn y tế, pháp lý hay tài chính."
+    }
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "visible": true,
+      "data": {
+        "eyebrow": "Tarot · Suy ngẫm · Góc nhìn",
+        "heading": "Một khoảng lặng để nhìn rõ điều *đang diễn ra*.",
+        "lead": "Tarot mở ra một góc nhìn khác để bạn tự suy ngẫm về câu hỏi của mình. Đặt lịch trò chuyện riêng cùng reader — online hoặc tại studio.",
+        "cta": {
+          "label": "Đặt lịch qua Zalo",
+          "href": "#zalo"
+        },
+        "link": {
+          "label": "Rút một lá hôm nay",
+          "href": "#daily"
+        },
+        "image": "assets/emblem-440.png",
+        "imageAlt": "Biểu tượng Rabbit Tarot: chú thỏ tai dài trước đĩa tròn đỏ son",
+        "notes": [
+          {
+            "title": "Online hoặc tại studio",
+            "text": "Xem qua Google Meet hoặc gặp trực tiếp.",
+            "audience": "all"
+          },
+          {
+            "title": "Đổi, huỷ trước 12 giờ",
+            "text": "Miễn phí, ngay trên trang tra cứu lịch.",
+            "audience": "online"
+          },
+          {
+            "title": "Nhắn trực tiếp với reader",
+            "text": "Chọn reader và giữ lịch qua Zalo.",
+            "audience": "zalo"
+          },
+          {
+            "title": "Thanh toán sau buổi xem",
+            "text": "Tiền mặt hoặc chuyển khoản.",
+            "audience": "all"
+          }
+        ]
+      }
+    },
+    {
+      "id": "services",
+      "type": "services",
+      "visible": true,
+      "navLabel": "Gói trải bài",
+      "data": {
+        "eyebrow": "Gói trải bài",
+        "heading": "Chọn độ sâu cho câu hỏi của bạn",
+        "lead": "Mỗi buổi được chuẩn bị theo câu hỏi bạn gửi trước. Sau buổi xem, bạn nhận một bản ghi chú tóm tắt qua email.",
+        "zaloCta": "Đặt qua Zalo",
+        "items": [
+          {
+            "id": "quick",
+            "name": "Trải bài nhanh",
+            "tag": "",
+            "dur": 30,
+            "price": 199000,
+            "desc": "Một đến hai câu hỏi cụ thể, trải 3 lá. Hợp khi bạn cần một góc nhìn cho quyết định gần."
+          },
+          {
+            "id": "deep",
+            "name": "Trải bài chuyên sâu",
+            "tag": "Gợi ý lần đầu",
+            "dur": 60,
+            "price": 399000,
+            "desc": "Đi sâu một chủ đề với trải bài Celtic Cross, kèm ghi chú tóm tắt qua email."
+          },
+          {
+            "id": "love",
+            "name": "Tình cảm & kết nối",
+            "tag": "",
+            "dur": 60,
+            "price": 449000,
+            "desc": "Nhìn vào mối quan hệ giữa bạn và một người, cùng những điều bạn có thể chủ động."
+          },
+          {
+            "id": "year",
+            "name": "Hành trình năm",
+            "tag": "",
+            "dur": 90,
+            "price": 799000,
+            "desc": "Trải bài cho 12 tháng tới: chủ đề, bài học và điều nên để ý từng giai đoạn."
+          }
+        ]
+      }
+    },
+    {
+      "id": "process",
+      "type": "process",
+      "visible": true,
+      "data": {
+        "eyebrow": "Cách đặt lịch",
+        "heading": "Bốn bước, không cần trả trước",
+        "lead": "Bạn chỉ cần chọn và giữ chỗ. Reader sẽ liên hệ xác nhận trước buổi xem.",
+        "steps": [
+          {
+            "n": "i.",
+            "title": "Chọn gói",
+            "text": "Theo thời lượng và độ sâu bạn cần."
+          },
+          {
+            "n": "ii.",
+            "title": "Chọn reader",
+            "text": "Hoặc để chúng tôi gợi ý người phù hợp."
+          },
+          {
+            "n": "iii.",
+            "title": "Chọn giờ",
+            "text": "Chỉ hiển thị những khung giờ còn trống."
+          },
+          {
+            "n": "iv.",
+            "title": "Nhận mã lịch",
+            "text": "Dùng mã để tra cứu, đổi hoặc huỷ lịch."
+          }
+        ]
+      }
+    },
+    {
+      "id": "readers",
+      "type": "readers",
+      "visible": true,
+      "navLabel": "Reader",
+      "data": {
+        "eyebrow": "Reader",
+        "heading": "Người cùng bạn lắng nghe",
+        "lead": "Mỗi reader mang năng lượng của một lá bài riêng. Bạn có thể nhắn trực tiếp cho reader qua Zalo.",
+        "items": [
+          {
+            "id": "rabbit",
+            "name": "Rabbit",
+            "card": "major-11",
+            "title": "Thấu hiểu bản thân, cân bằng lựa chọn, truyền cảm hứng sống.",
+            "bio": "Mang năng lượng của lá bài Justice, Rabbit đại diện cho sự công tâm, thấu hiểu và khả năng nhìn nhận mọi vấn đề từ nhiều góc độ. Với mong muốn trở thành người truyền cảm hứng, Rabbit tin rằng mỗi trải nghiệm đều mang đến một bài học, mỗi lựa chọn đều mở ra một hướng đi mới. Thông qua Tarot, Rabbit mong muốn giúp mọi người hiểu rõ bản thân, tìm thấy sự cân bằng và tự tin hơn trên hành trình của chính mình.",
+            "photo": "assets/readers/rabbit.jpg",
+            "qr": "assets/readers/rabbit-zalo-qr.jpg",
+            "phone": "0855108999",
+            "off": []
+          },
+          {
+            "id": "moon",
+            "name": "Moon",
+            "card": "major-18",
+            "title": "Lắng nghe tiếng vọng bên trong bằng Trực Giác.",
+            "bio": [
+              "Với hơn 300+ khách hàng đã đồng hành, Ms.Moon xem Tarot không đơn thuần là “bói bài”, mà là một công cụ khai mở nhận thức và chữa lành. Sở hữu trực giác nhạy bén cùng tư duy phân tích chặt chẽ, Moon kết hợp Tarot với nền tảng tâm lý học ứng dụng để giúp mỗi người:",
+              {
+                "list": [
+                  "Nhìn rõ vấn đề cốt lõi phía sau cảm xúc",
+                  "Dự báo xu hướng trong công việc, tình cảm, gia đình, học tập, đầu tư",
+                  "Đưa ra lựa chọn tỉnh táo và phù hợp với chính mình"
+                ]
+              },
+              "Cô tin rằng:",
+              {
+                "quote": "Tarot không quyết định số phận, mà giúp bạn hiểu mình đủ sâu để tự quyết định số phận."
+              },
+              "Trong hành trình làm nghề, chưa có một câu hỏi nào làm khó được cô – bởi mỗi trải bài đều mở ra một lối đi, khi ta sẵn sàng đối diện và thấu hiểu.",
+              "Bên cạnh việc trực tiếp xem bài, Ms.Moon cũng là một tarot coaching. Trên hành trình thực hiện sứ mệnh tâm linh, cô đã giảng dạy và đào tạo ra các reader với sự tâm huyết và trách nhiệm, truyền cảm hứng về việc sử dụng tarot như công cụ khai mở và khám phá tiềm năng, thấu hiểu sâu sắc bản thân."
+            ],
+            "photo": "assets/readers/moon.jpg",
+            "qr": "assets/readers/moon-zalo-qr.jpg",
+            "phone": "0966429968",
+            "off": []
+          },
+          {
+            "id": "kb",
+            "name": "Mr. KB",
+            "alias": "Keeper of the Bridge",
+            "card": "major-14",
+            "title": "Cân bằng & Chuyển hoá",
+            "bio": [
+              {
+                "quote": "Tôi không đọc bài để biết trước tương lai. Tôi đọc bài để giúp bạn hiểu rõ chúng ta là ai và vị trí chúng ta đang đứng."
+              },
+              "Với kinh nghiệm 15 năm làm việc trong lĩnh vực văn hóa và 3 năm nghiên cứu Tarot, thần số học, tôi chuyên sâu về các giai đoạn chuyển tiếp trong cuộc sống – tình cảm lâu năm, khủng hoảng nội tâm, thay đổi sự nghiệp. Tôi sử dụng Tarot như một công cụ soi chiếu, giúp bạn nhìn thấy điều cốt lõi, cân bằng lại cảm xúc và đưa ra quyết định sáng suốt.",
+              "Tarot, với tôi là hành trình trở về sự hài hoà của thân - tâm - trí."
+            ],
+            "photo": "assets/readers/kb.jpg",
+            "avatar": "assets/readers/kb-avatar.jpg",
+            "qr": "assets/readers/kb-zalo-qr.jpg",
+            "phone": "0898981696",
+            "off": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "booking",
+      "type": "booking",
+      "visible": true,
+      "data": {
+        "eyebrow": "Đặt lịch",
+        "heading": "Chọn reader, nhắn qua Zalo",
+        "lead": "Gửi câu hỏi bạn đang trăn trở cùng khung giờ mong muốn, reader sẽ phản hồi qua Zalo để giữ lịch cho bạn.",
+        "stepsTitle": "Ba bước giữ lịch",
+        "steps": [
+          "Xem nhanh và chọn reader bạn muốn trò chuyện",
+          "Quét mã QR hoặc bấm “Mở Zalo” trong cửa sổ hiện ra",
+          "Gửi gói, ngày giờ và hình thức bạn muốn; reader xác nhận lịch qua Zalo"
+        ],
+        "pickCta": "Nhắn Zalo",
+        "popupNote": "Khi đã kết nối, hãy gửi gói bạn quan tâm, ngày giờ và hình thức: online hoặc tại studio.",
+        "headingOnline": "Giữ chỗ cho buổi trải bài",
+        "leadOnline": "Không cần thanh toán trước. Bạn có thể đổi hoặc huỷ miễn phí trước 12 giờ."
+      }
+    },
+    {
+      "id": "daily",
+      "type": "daily",
+      "visible": true,
+      "navLabel": "Lá bài hôm nay",
+      "data": {
+        "eyebrow": "Lá bài hôm nay",
+        "heading": "Nghĩ về một câu hỏi, rồi lật lá bài.",
+        "lead": "Một lá bài không trả lời thay bạn — nó gợi một hướng để bạn nghĩ tiếp. Khi đã sẵn sàng, chạm vào lá bài hoặc bấm “Lật lá bài”.",
+        "flipLabel": "Lật lá bài",
+        "ctaLabel": "Đặt lịch trải bài qua Zalo",
+        "disclaimer": "Rút ngẫu nhiên trong 78 lá của bộ Rabbit Tarot, chỉ mang tính gợi mở."
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq",
+      "visible": true,
+      "navLabel": "Hỏi đáp",
+      "data": {
+        "eyebrow": "Hỏi đáp",
+        "heading": "Trước khi bạn đặt lịch",
+        "asideText": "Chưa thấy câu trả lời bạn cần? Hỏi trực tiếp reader qua Zalo.",
+        "asideLink": {
+          "label": "Chọn reader",
+          "href": "#zalo"
+        },
+        "items": [
+          {
+            "q": "Tarot có dự đoán được tương lai không?",
+            "a": "Rabbit Tarot xem Tarot như một công cụ phản chiếu: giúp bạn nhìn rõ suy nghĩ, cảm xúc và những lựa chọn đang có. Kết quả mang tính tham khảo — quyết định luôn thuộc về bạn.",
+            "audience": "all"
+          },
+          {
+            "q": "Xem online có khác xem tại studio không?",
+            "a": "Nội dung buổi xem như nhau. Khi xem online, reader trải bài trước camera để bạn cùng nhìn từng lá.",
+            "audience": "all"
+          },
+          {
+            "q": "Tôi nên chuẩn bị gì?",
+            "a": "Một nơi yên tĩnh và một đến ba câu hỏi rõ ràng. Câu hỏi mở như “Mình nên cân nhắc điều gì khi…” thường gợi nhiều góc nhìn hơn câu hỏi có/không.",
+            "audience": "all"
+          },
+          {
+            "q": "Đổi hoặc huỷ lịch thế nào?",
+            "a": "Bạn có thể huỷ miễn phí trước 12 giờ bằng mã đặt lịch ở mục Tra cứu lịch, sau đó đặt lại khung giờ mới.",
+            "audience": "online"
+          },
+          {
+            "q": "Thông tin của tôi có được giữ kín?",
+            "a": "Thông tin liên hệ chỉ dùng cho buổi xem. Buổi xem không được ghi âm nếu bạn không đồng ý.",
+            "audience": "all"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lookup",
+      "type": "lookup",
+      "visible": true,
+      "navLabel": "Tra cứu lịch",
+      "data": {
+        "eyebrow": "Tra cứu lịch",
+        "heading": "Xem hoặc huỷ lịch đã đặt"
+      }
+    }
+  ]
+}

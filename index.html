@@ -1,11 +1,20 @@
 <!DOCTYPE html>
+<!-- Built by the Rabbit Tarot CMS from cms/template.html + content/site.json. Edit content at /admin, not here. -->
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rabbit Tarot — Tarot để suy ngẫm</title>
 <meta name="description" content="Rabbit Tarot — không gian Tarot để suy ngẫm và nhìn rõ câu hỏi của bạn. Chọn reader và đặt lịch trải bài qua Zalo, online hoặc tại studio.">
-<link rel="icon" type="image/png" href="assets/emblem-144.png">
+<link rel="canonical" href="https://rabbittarot.io.vn/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rabbit Tarot">
+<meta property="og:title" content="Rabbit Tarot — Tarot để suy ngẫm">
+<meta property="og:description" content="Rabbit Tarot — không gian Tarot để suy ngẫm và nhìn rõ câu hỏi của bạn. Chọn reader và đặt lịch trải bài qua Zalo, online hoặc tại studio.">
+<meta property="og:url" content="https://rabbittarot.io.vn/">
+<meta property="og:image" content="https://rabbittarot.io.vn/assets/emblem-880.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/emblem-144.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -324,6 +333,21 @@ footer li a:hover{color:var(--color-vermilion)}
 .js .reveal{opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease}
 .js .reveal.in{opacity:1;transform:none}
 
+/* ---------- sections added in the CMS ---------- */
+.cms-text.tone-paper{background:var(--color-paper);--color-muted-ink:var(--color-muted-on-paper)}
+.cms-text.tone-ink{background:var(--color-ink);color:var(--color-ivory)}
+.cms-text.tone-ink .eyebrow,.cms-text.tone-ink .cms-body{color:var(--color-stone)}
+.cms-text-grid{display:grid;grid-template-columns:7fr 5fr;gap:var(--space-16);align-items:center}
+.cms-text-grid.img-left .cms-figure{order:-1}
+.cms-text-grid.no-img{grid-template-columns:minmax(0,48rem)}
+.cms-body{color:var(--color-muted-ink);margin:var(--space-6) 0 var(--space-8);max-width:var(--measure)}
+.cms-body p + p{margin-top:var(--space-4)}
+.cms-figure img{width:100%;border-radius:var(--radius-sm)}
+.cms-banner img{width:100%;border-radius:var(--radius-md)}
+.cms-caption{margin-top:var(--space-3);font-size:var(--text-sm);color:var(--color-muted-ink)}
+@media (min-width:821px){.hide-desktop{display:none!important}}
+@media (max-width:820px){.hide-mobile{display:none!important}.cms-text-grid{grid-template-columns:1fr;gap:var(--space-8)}.cms-text-grid.img-left .cms-figure{order:0}}
+
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
   .svc{grid-template-columns:40px minmax(0,1fr) auto;row-gap:var(--space-2)}
@@ -427,7 +451,6 @@ footer li a:hover{color:var(--color-vermilion)}
 
 <main id="main">
 <noscript><p class="container" style="padding:var(--space-6) 0">Trang đặt lịch cần JavaScript. Vui lòng bật JavaScript trong trình duyệt để xem gói và đặt lịch.</p></noscript>
-<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
@@ -436,15 +459,11 @@ footer li a:hover{color:var(--color-vermilion)}
         <h1>Một khoảng lặng để nhìn rõ điều <em>đang diễn ra</em>.</h1>
         <p class="lead">Tarot mở ra một góc nhìn khác để bạn tự suy ngẫm về câu hỏi của mình. Đặt lịch trò chuyện riêng cùng reader — online hoặc tại studio.</p>
         <div class="hero-cta">
-          <a href="#booking" class="btn btn-primary" data-booking>Đặt lịch trải bài</a>
-          <a href="#daily" class="link" data-booking>Rút một lá hôm nay →</a>
-          <a href="#zalo" class="btn btn-primary" data-soon>Đặt lịch qua Zalo</a>
-          <a href="#daily" class="link" data-soon>Rút một lá hôm nay →</a>
+          <a href="#zalo" class="btn btn-primary">Đặt lịch qua Zalo</a>
+          <a href="#daily" class="link">Rút một lá hôm nay <span aria-hidden="true">→</span></a>
         </div>
       </div>
-      <div class="emblem reveal">
-        <img src="assets/emblem-440.png" srcset="assets/emblem-440.png 440w, assets/emblem-880.png 880w" sizes="(max-width:820px) 64vw, 440px" alt="Biểu tượng Rabbit Tarot: chú thỏ tai dài trước đĩa tròn đỏ son" width="440" height="440" fetchpriority="high">
-      </div>
+      <div class="emblem reveal"><img src="assets/emblem-440.png" alt="Biểu tượng Rabbit Tarot: chú thỏ tai dài trước đĩa tròn đỏ son" width="440" height="440" fetchpriority="high"></div>
     </div>
     <div class="hero-notes reveal">
       <div><b>Online hoặc tại studio</b>Xem qua Google Meet hoặc gặp trực tiếp.</div>
@@ -455,18 +474,49 @@ footer li a:hover{color:var(--color-vermilion)}
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="container">
     <div class="section-head reveal">
       <div><span class="eyebrow">Gói trải bài</span><h2>Chọn độ sâu cho câu hỏi của bạn</h2></div>
       <p class="lead">Mỗi buổi được chuẩn bị theo câu hỏi bạn gửi trước. Sau buổi xem, bạn nhận một bản ghi chú tóm tắt qua email.</p>
     </div>
-    <ol class="svc-list" id="svcList"></ol>
+    <ol class="svc-list">
+      <li class="svc reveal">
+        <span class="svc-no">01</span>
+        <div><h3>Trải bài nhanh</h3><p>Một đến hai câu hỏi cụ thể, trải 3 lá. Hợp khi bạn cần một góc nhìn cho quyết định gần.</p></div>
+        <span class="svc-dur">30 phút</span>
+        <span class="svc-price">199.000đ</span>
+        <button type="button" class="link" data-booking data-pick-svc="quick">Chọn gói <span aria-hidden="true">→</span></button>
+        <a class="link" href="#zalo" data-soon>Đặt qua Zalo <span aria-hidden="true">→</span></a>
+      </li>
+      <li class="svc reveal">
+        <span class="svc-no">02</span>
+        <div><h3>Trải bài chuyên sâu <span class="tag">Gợi ý lần đầu</span></h3><p>Đi sâu một chủ đề với trải bài Celtic Cross, kèm ghi chú tóm tắt qua email.</p></div>
+        <span class="svc-dur">60 phút</span>
+        <span class="svc-price">399.000đ</span>
+        <button type="button" class="link" data-booking data-pick-svc="deep">Chọn gói <span aria-hidden="true">→</span></button>
+        <a class="link" href="#zalo" data-soon>Đặt qua Zalo <span aria-hidden="true">→</span></a>
+      </li>
+      <li class="svc reveal">
+        <span class="svc-no">03</span>
+        <div><h3>Tình cảm &amp; kết nối</h3><p>Nhìn vào mối quan hệ giữa bạn và một người, cùng những điều bạn có thể chủ động.</p></div>
+        <span class="svc-dur">60 phút</span>
+        <span class="svc-price">449.000đ</span>
+        <button type="button" class="link" data-booking data-pick-svc="love">Chọn gói <span aria-hidden="true">→</span></button>
+        <a class="link" href="#zalo" data-soon>Đặt qua Zalo <span aria-hidden="true">→</span></a>
+      </li>
+      <li class="svc reveal">
+        <span class="svc-no">04</span>
+        <div><h3>Hành trình năm</h3><p>Trải bài cho 12 tháng tới: chủ đề, bài học và điều nên để ý từng giai đoạn.</p></div>
+        <span class="svc-dur">90 phút</span>
+        <span class="svc-price">799.000đ</span>
+        <button type="button" class="link" data-booking data-pick-svc="year">Chọn gói <span aria-hidden="true">→</span></button>
+        <a class="link" href="#zalo" data-soon>Đặt qua Zalo <span aria-hidden="true">→</span></a>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section id="process" data-booking>
   <div class="container">
     <div class="section-head reveal">
@@ -482,18 +532,59 @@ footer li a:hover{color:var(--color-vermilion)}
   </div>
 </section>
 
-<!-- READERS -->
 <section id="readers">
   <div class="container">
     <div class="section-head reveal">
       <div><span class="eyebrow">Reader</span><h2>Người cùng bạn lắng nghe</h2></div>
       <p class="lead">Mỗi reader mang năng lượng của một lá bài riêng. Bạn có thể nhắn trực tiếp cho reader qua Zalo.</p>
     </div>
-    <div class="readers" id="readerGrid"></div>
+    <div class="readers">
+      <article class="reader-profile reveal" id="reader-rabbit">
+        <figure class="rp-photo"><img src="assets/readers/rabbit.jpg" alt="Reader Rabbit đang trải bài Tarot" width="720" height="960" loading="lazy"></figure>
+        <div class="rp-body">
+          <span class="eyebrow">Reader</span>
+          <h3>Rabbit</h3>
+          <p class="rp-title">“Thấu hiểu bản thân, cân bằng lựa chọn, truyền cảm hứng sống.”</p>
+          <div class="rp-bio"><p>Mang năng lượng của lá bài Justice, Rabbit đại diện cho sự công tâm, thấu hiểu và khả năng nhìn nhận mọi vấn đề từ nhiều góc độ. Với mong muốn trở thành người truyền cảm hứng, Rabbit tin rằng mỗi trải nghiệm đều mang đến một bài học, mỗi lựa chọn đều mở ra một hướng đi mới. Thông qua Tarot, Rabbit mong muốn giúp mọi người hiểu rõ bản thân, tìm thấy sự cân bằng và tự tin hơn trên hành trình của chính mình.</p></div>
+          <div class="rp-foot">
+            <div class="rp-card"><div class="mini" data-card="major-11"></div><div class="rp-meta"><span class="label">Lá bài đại diện</span><b>Công Lý</b><span>Justice</span></div></div>
+            <a class="btn btn-primary" href="https://zalo.me/0855108999" data-zalo="rabbit">Nhắn Zalo cho Rabbit</a>
+          </div>
+          <button type="button" class="link" data-booking data-pick-reader="rabbit">Đặt lịch với Rabbit <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+      <article class="reader-profile reveal" id="reader-moon">
+        <figure class="rp-photo"><img src="assets/readers/moon.jpg" alt="Reader Moon đang trải bài Tarot" width="720" height="960" loading="lazy"></figure>
+        <div class="rp-body">
+          <span class="eyebrow">Reader</span>
+          <h3>Moon</h3>
+          <p class="rp-title">“Lắng nghe tiếng vọng bên trong bằng Trực Giác.”</p>
+          <div class="rp-bio"><p>Với hơn 300+ khách hàng đã đồng hành, Ms.Moon xem Tarot không đơn thuần là “bói bài”, mà là một công cụ khai mở nhận thức và chữa lành. Sở hữu trực giác nhạy bén cùng tư duy phân tích chặt chẽ, Moon kết hợp Tarot với nền tảng tâm lý học ứng dụng để giúp mỗi người:</p><ul><li>Nhìn rõ vấn đề cốt lõi phía sau cảm xúc</li><li>Dự báo xu hướng trong công việc, tình cảm, gia đình, học tập, đầu tư</li><li>Đưa ra lựa chọn tỉnh táo và phù hợp với chính mình</li></ul><p>Cô tin rằng:</p><blockquote>“Tarot không quyết định số phận, mà giúp bạn hiểu mình đủ sâu để tự quyết định số phận.”</blockquote><p>Trong hành trình làm nghề, chưa có một câu hỏi nào làm khó được cô – bởi mỗi trải bài đều mở ra một lối đi, khi ta sẵn sàng đối diện và thấu hiểu.</p><p>Bên cạnh việc trực tiếp xem bài, Ms.Moon cũng là một tarot coaching. Trên hành trình thực hiện sứ mệnh tâm linh, cô đã giảng dạy và đào tạo ra các reader với sự tâm huyết và trách nhiệm, truyền cảm hứng về việc sử dụng tarot như công cụ khai mở và khám phá tiềm năng, thấu hiểu sâu sắc bản thân.</p></div>
+          <div class="rp-foot">
+            <div class="rp-card"><div class="mini" data-card="major-18"></div><div class="rp-meta"><span class="label">Lá bài đại diện</span><b>Mặt Trăng</b><span>The Moon</span></div></div>
+            <a class="btn btn-primary" href="https://zalo.me/0966429968" data-zalo="moon">Nhắn Zalo cho Moon</a>
+          </div>
+          <button type="button" class="link" data-booking data-pick-reader="moon">Đặt lịch với Moon <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+      <article class="reader-profile reveal" id="reader-kb">
+        <figure class="rp-photo"><img src="assets/readers/kb.jpg" alt="Reader Mr. KB đang trải bài Tarot" width="720" height="960" loading="lazy"></figure>
+        <div class="rp-body">
+          <span class="eyebrow">Reader · Keeper of the Bridge</span>
+          <h3>Mr. KB</h3>
+          <p class="rp-title">“Cân bằng &amp; Chuyển hoá”</p>
+          <div class="rp-bio"><blockquote>“Tôi không đọc bài để biết trước tương lai. Tôi đọc bài để giúp bạn hiểu rõ chúng ta là ai và vị trí chúng ta đang đứng.”</blockquote><p>Với kinh nghiệm 15 năm làm việc trong lĩnh vực văn hóa và 3 năm nghiên cứu Tarot, thần số học, tôi chuyên sâu về các giai đoạn chuyển tiếp trong cuộc sống – tình cảm lâu năm, khủng hoảng nội tâm, thay đổi sự nghiệp. Tôi sử dụng Tarot như một công cụ soi chiếu, giúp bạn nhìn thấy điều cốt lõi, cân bằng lại cảm xúc và đưa ra quyết định sáng suốt.</p><p>Tarot, với tôi là hành trình trở về sự hài hoà của thân - tâm - trí.</p></div>
+          <div class="rp-foot">
+            <div class="rp-card"><div class="mini" data-card="major-14"></div><div class="rp-meta"><span class="label">Lá bài đại diện</span><b>Tiết Độ</b><span>Temperance</span></div></div>
+            <a class="btn btn-primary" href="https://zalo.me/0898981696" data-zalo="kb">Nhắn Zalo cho Mr. KB</a>
+          </div>
+          <button type="button" class="link" data-booking data-pick-reader="kb">Đặt lịch với Mr. KB <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
-<!-- BOOKING -->
 <section id="booking" aria-labelledby="bookingTitle">
   <div class="container">
     <div class="section-head reveal">
@@ -511,7 +602,36 @@ footer li a:hover{color:var(--color-vermilion)}
         </ol>
       </div>
       <ul class="reader-pick" id="readerPick" aria-label="Chọn reader">
-        <li class="pick-empty">Thông tin reader đang được cập nhật</li>
+        <li class="pick">
+          <img src="assets/readers/rabbit.jpg" alt="" width="72" height="96" loading="lazy">
+          <div>
+            <div class="pick-name">Rabbit</div>
+            <div class="label pick-card">Justice</div>
+            <p class="pick-title">Thấu hiểu bản thân, cân bằng lựa chọn, truyền cảm hứng sống.</p>
+            <a class="pick-more" href="#reader-rabbit">Xem hồ sơ</a>
+          </div>
+          <a class="btn btn-secondary" href="#zalo" data-zalo="rabbit" aria-label="Nhắn Zalo cho Rabbit">Nhắn Zalo</a>
+        </li>
+        <li class="pick">
+          <img src="assets/readers/moon.jpg" alt="" width="72" height="96" loading="lazy">
+          <div>
+            <div class="pick-name">Moon</div>
+            <div class="label pick-card">The Moon</div>
+            <p class="pick-title">Lắng nghe tiếng vọng bên trong bằng Trực Giác.</p>
+            <a class="pick-more" href="#reader-moon">Xem hồ sơ</a>
+          </div>
+          <a class="btn btn-secondary" href="#zalo" data-zalo="moon" aria-label="Nhắn Zalo cho Moon">Nhắn Zalo</a>
+        </li>
+        <li class="pick">
+          <img src="assets/readers/kb-avatar.jpg" alt="" width="72" height="96" loading="lazy">
+          <div>
+            <div class="pick-name">Mr. KB</div>
+            <div class="label pick-card">Temperance</div>
+            <p class="pick-title">Cân bằng &amp; Chuyển hoá</p>
+            <a class="pick-more" href="#reader-kb">Xem hồ sơ</a>
+          </div>
+          <a class="btn btn-secondary" href="#zalo" data-zalo="kb" aria-label="Nhắn Zalo cho Mr. KB">Nhắn Zalo</a>
+        </li>
       </ul>
     </div>
     <div class="booking-box" data-booking>
@@ -599,7 +719,6 @@ footer li a:hover{color:var(--color-vermilion)}
   </div>
 </section>
 
-<!-- DAILY CARD -->
 <section id="daily" class="on-dark" aria-labelledby="dailyTitle">
   <div class="container daily">
     <div class="reveal stack-head">
@@ -625,7 +744,6 @@ footer li a:hover{color:var(--color-vermilion)}
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <div class="container faq-grid">
     <div class="reveal stack-head faq-aside">
@@ -644,7 +762,6 @@ footer li a:hover{color:var(--color-vermilion)}
   </div>
 </section>
 
-<!-- LOOKUP -->
 <section id="lookup" aria-labelledby="lookupTitle" data-booking>
   <div class="container lookup-grid">
     <div class="reveal stack-head">
@@ -661,6 +778,7 @@ footer li a:hover{color:var(--color-vermilion)}
     </div>
   </div>
 </section>
+
 </main>
 
 <footer>
@@ -670,8 +788,9 @@ footer li a:hover{color:var(--color-vermilion)}
         <a href="#" class="brand" aria-label="Rabbit Tarot — về đầu trang"><img src="assets/emblem-144.png" alt="" width="48" height="48"><span>Rabbit Tarot</span></a>
         <p>Một không gian Tarot nơi biểu tượng, trực giác và nghệ thuật gặp nhau.</p>
       </div>
-      <div><h2 class="label">Giờ nhận lịch</h2><ul><li>Thứ 2 – Thứ 7: 9:00 – 21:00</li><li>Chủ nhật: 13:00 – 21:00</li><li id="footZalo" hidden></li></ul></div>
-      <div><h2 class="label">Trang</h2><ul><li><a href="#services">Gói trải bài</a></li><li><a href="#readers">Reader</a></li><li data-booking><a href="#booking">Đặt lịch</a></li><li data-booking><a href="#lookup">Tra cứu lịch</a></li><li data-soon><a href="#zalo">Đặt lịch qua Zalo</a></li><li data-soon><a href="#daily">Lá bài hôm nay</a></li></ul></div>
+      <div><h2 class="label">Giờ nhận lịch</h2><ul><li>Thứ 2 – Thứ 7: 9:00 – 21:00</li><li>Chủ nhật: 13:00 – 21:00</li><li id="footZalo">Zalo: <a href="#zalo" data-zalo="rabbit">Rabbit</a>, <a href="#zalo" data-zalo="moon">Moon</a>, <a href="#zalo" data-zalo="kb">Mr. KB</a></li></ul></div>
+      <div><h2 class="label">Trang</h2><ul><li><a href="#services">Gói trải bài</a></li><li><a href="#readers">Reader</a></li><li><a href="#daily">Lá bài hôm nay</a></li><li><a href="#faq">Hỏi đáp</a></li><li data-booking><a href="#lookup">Tra cứu lịch</a></li></ul></div>
+      
     </div>
     <div class="copy"><span>© 2026 Rabbit Tarot</span><span>Tarot mang tính tham khảo, không thay thế tư vấn y tế, pháp lý hay tài chính.</span></div>
   </div>
@@ -700,20 +819,16 @@ footer li a:hover{color:var(--color-vermilion)}
 
 <div class="toast" id="toast" role="status"></div>
 
-<script src="assets/readers.js"></script>
+<script>window.RT_CONTENT={"services":[{"id":"quick","name":"Trải bài nhanh","dur":30,"price":199000},{"id":"deep","name":"Trải bài chuyên sâu","dur":60,"price":399000},{"id":"love","name":"Tình cảm & kết nối","dur":60,"price":449000},{"id":"year","name":"Hành trình năm","dur":90,"price":799000}],"readers":[{"id":"rabbit","name":"Rabbit","card":"major-11","photo":"assets/readers/rabbit.jpg","qr":"assets/readers/rabbit-zalo-qr.jpg","phone":"0855108999","off":[]},{"id":"moon","name":"Moon","card":"major-18","photo":"assets/readers/moon.jpg","qr":"assets/readers/moon-zalo-qr.jpg","phone":"0966429968","off":[]},{"id":"kb","name":"Mr. KB","card":"major-14","photo":"assets/readers/kb.jpg","avatar":"assets/readers/kb-avatar.jpg","qr":"assets/readers/kb-zalo-qr.jpg","phone":"0898981696","off":[]}]};</script>
 <script src="assets/firebase-config.js"></script>
 <script src="assets/booking-store.js"></script>
 <script src="assets/deck-data.js"></script>
 <script src="assets/card-art.js"></script>
 <script>
-/* ---------- data ---------- */
-const SERVICES = [
-  {id:'quick', name:'Trải bài nhanh', dur:30, price:199000, desc:'Một đến hai câu hỏi cụ thể, trải 3 lá. Hợp khi bạn cần một góc nhìn cho quyết định gần.'},
-  {id:'deep', name:'Trải bài chuyên sâu', dur:60, price:399000, tag:'Gợi ý lần đầu', desc:'Đi sâu một chủ đề với trải bài Celtic Cross, kèm ghi chú tóm tắt qua email.'},
-  {id:'love', name:'Tình cảm & kết nối', dur:60, price:449000, desc:'Nhìn vào mối quan hệ giữa bạn và một người, cùng những điều bạn có thể chủ động.'},
-  {id:'year', name:'Hành trình năm', dur:90, price:799000, desc:'Trải bài cho 12 tháng tới: chủ đề, bài học và điều nên để ý từng giai đoạn.'},
-];
-const READERS = window.RT_READERS || [];
+/* ---------- data (baked in by the CMS from content/site.json) ---------- */
+const C = window.RT_CONTENT || {};
+const SERVICES = C.services || [];
+const READERS = C.readers || [];
 const HOURS = ['09:00','10:30','13:00','14:30','16:00','17:30','19:00','20:30'];
 const DOW = ['CN','T2','T3','T4','T5','T6','T7'];
 const DOW_FULL = ['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
@@ -724,44 +839,21 @@ const esc = s => String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 /* ---------- storage: Firestore when configured, else this browser (assets/booking-store.js) ---------- */
 const DB = window.RTStore;
 
-/* ---------- static render ---------- */
-$('#svcList').innerHTML = SERVICES.map((s,i)=>`
-  <li class="svc reveal">
-    <span class="svc-no">0${i+1}</span>
-    <div><h3>${s.name}${s.tag?` <span class="tag">${s.tag}</span>`:''}</h3><p>${s.desc}</p></div>
-    <span class="svc-dur">${s.dur} phút</span>
-    <span class="svc-price">${fmt(s.price)}</span>
-    <button type="button" class="link" data-booking data-pick-svc="${s.id}">Chọn gói <span aria-hidden="true">→</span></button>
-    <a class="link" href="#zalo" data-soon>Đặt qua Zalo <span aria-hidden="true">→</span></a>
-  </li>`).join('');
-
 const offText = r => r.off && r.off.length ? 'Nghỉ ' + r.off.map(d=>DOW_FULL[d]).join(', ') : 'Nhận lịch mọi ngày';
 const readerCard = r => (window.RABBIT_DECK||[]).find(c=>c.id===r.card);
 // zalo.me/<phone> opens that person's Zalo directly; a Zalo QR's own link only works when scanned inside Zalo
 const zaloUrl = r => { const d=String(r.phone||'').replace(/\D/g,''); return d ? `https://zalo.me/${d}` : ''; };
-const bioHtml = b => (Array.isArray(b) ? b : [b]).map(x =>
-  typeof x === 'string' ? `<p>${esc(x)}</p>`
-  : x.list ? `<ul>${x.list.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`
-  : x.quote ? `<blockquote>“${esc(x.quote)}”</blockquote>` : '').join('');
-$('#readerGrid').innerHTML = READERS.map(r=>{
-  const card = readerCard(r);
-  return `
-  <article class="reader-profile reveal" id="reader-${esc(r.id)}">
-    <figure class="rp-photo"><img src="${esc(r.photo)}" alt="Reader ${esc(r.name)} đang trải bài Tarot" width="720" height="960" loading="lazy"></figure>
-    <div class="rp-body">
-      <span class="eyebrow">Reader${r.alias?` · ${esc(r.alias)}`:''}</span>
-      <h3>${esc(r.name)}</h3>
-      <p class="rp-title">“${esc(r.title)}”</p>
-      <div class="rp-bio">${bioHtml(r.bio)}</div>
-      <div class="rp-foot">
-        ${card?`<div class="rp-card"><div class="mini">${RabbitCard.face(card)}</div><div class="rp-meta"><span class="label">Lá bài đại diện</span><b>${esc(card.vi)}</b><span>${esc(card.name)}</span></div></div>`:''}
-        ${(r.qr||r.phone)?`<a class="btn btn-primary" href="${esc(zaloUrl(r)||'#zalo')}" data-zalo="${esc(r.id)}">Nhắn Zalo cho ${esc(r.name)}</a>`:''}
-      </div>
-      <button type="button" class="link" data-booking data-pick-reader="${r.id}">Đặt lịch với ${esc(r.name)} <span aria-hidden="true">→</span></button>
-    </div>
-  </article>`;}).join('');
+// reader card thumbnails are drawn from the deck at load
+document.querySelectorAll('.mini[data-card]').forEach(el=>{ const c=(window.RABBIT_DECK||[]).find(x=>x.id===el.dataset.card); if(c) el.innerHTML=RabbitCard.face(c); });
 
-$('#optSvc').innerHTML = SERVICES.map(s=>`<button type="button" class="opt" aria-pressed="false" data-id="${s.id}"><b>${s.name}</b><small>${s.dur} phút</small><span class="p">${fmt(s.price)}</span></button>`).join('');
+// Slot times are Vietnam time (UTC+7) regardless of the visitor's timezone.
+const TZ = '+07:00';
+const key = d => { const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; };
+const slotTime = (dateKey,t) => new Date(`${dateKey}T${t}:00${TZ}`);
+
+/* ---------- online booking wizard (only when its markup is on the page) ---------- */
+if($('.wizard')){
+$('#optSvc').innerHTML = SERVICES.map(s=>`<button type="button" class="opt" aria-pressed="false" data-id="${esc(s.id)}"><b>${esc(s.name)}</b><small>${s.dur} phút</small><span class="p">${fmt(s.price)}</span></button>`).join('');
 $('#optReader').innerHTML = `<button type="button" class="opt" aria-pressed="false" data-id="any"><b>Để chúng tôi gợi ý</b><small>Chọn reader hợp với chủ đề của bạn</small></button>` +
   READERS.map(r=>`<button type="button" class="opt" aria-pressed="false" data-id="${r.id}"><b>${esc(r.name)}</b><small>${readerCard(r)?`Năng lượng ${esc(readerCard(r).name)} · `:''}${offText(r)}</small></button>`).join('');
 
@@ -825,10 +917,6 @@ document.addEventListener('click', e=>{
 });
 
 /* ---------- availability ---------- */
-// Slot times are Vietnam time (UTC+7) regardless of the visitor's timezone.
-const TZ = '+07:00';
-const key = d => { const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; };
-const slotTime = (dateKey,t) => new Date(`${dateKey}T${t}:00${TZ}`);
 const taken = {};   // dateKey -> Set("HH:MM_reader") of booked slots, once loaded
 function loadTaken(dateKey, force=false){
   if(taken[dateKey] && !force) return Promise.resolve(taken[dateKey]);
@@ -953,6 +1041,8 @@ $('#icsBtn').onclick = ()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
+}
+
 /* ---------- lookup ---------- */
 const CANCEL_HOURS = 12;
 async function renderLookup(code, focus=false){
@@ -983,6 +1073,7 @@ async function renderLookup(code, focus=false){
   </div>`;
   if(focus) box.querySelector('.lk-card').focus();
 }
+if($('#lkForm')){
 $('#lkForm').onsubmit = e=>{ e.preventDefault(); renderLookup($('#lkInput').value.trim().toUpperCase()); };
 // Two-step confirm instead of confirm(), which in-app browsers (Zalo, Facebook) may block.
 $('#lookupResult').onclick = async e=>{
@@ -993,9 +1084,11 @@ $('#lookupResult').onclick = async e=>{
   try{ await DB.cancel(c); await renderLookup(c,true); toast('Đã huỷ lịch '+c); }
   catch(err){ console.error(err); btn.disabled=false; delete btn.dataset.armed; btn.textContent='Huỷ lịch này'; toast('Chưa huỷ được — vui lòng thử lại'); }
 };
+}
 
 /* ---------- daily card ---------- */
 const flip=$('#flip'); let flipBusy=false;
+if(flip){
 const DECK = window.RABBIT_DECK || [];
 $('#cardBack').innerHTML = RabbitCard.back();
 let lastCard = null;
@@ -1020,6 +1113,7 @@ $('#redraw').onclick=()=>{
   if(flipBusy) return; flipBusy=true; flip.classList.remove('on');
   setTimeout(()=>{ draw(); flip.classList.add('on'); flipBusy=false; },650);
 };
+}
 
 /* ---------- ui ---------- */
 function toast(m){const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast.t); toast.t=setTimeout(()=>t.classList.remove('on'),2800);}
@@ -1039,28 +1133,10 @@ if('IntersectionObserver' in window){
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 } else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
-$('#demoNote').hidden = DB.mode!=='demo';
+if($('#demoNote')) $('#demoNote').hidden = DB.mode!=='demo';
 
-/* ---------- Zalo contact: pick a reader, then a popup with that reader's QR and link ---------- */
+/* ---------- Zalo popup: the reader picker and Zalo links are in the page; this opens the chosen reader ---------- */
 (function(){
-  const withZalo = READERS.filter(r=>r.qr || r.phone);
-  if(withZalo.length) $('#readerPick').innerHTML = withZalo.map(r=>{
-    const c = readerCard(r);
-    return `<li class="pick">
-      <img src="${esc(r.avatar||r.photo)}" alt="" width="72" height="96" loading="lazy">
-      <div>
-        <div class="pick-name">${esc(r.name)}</div>
-        ${c?`<div class="label pick-card">${esc(c.name)}</div>`:''}
-        <p class="pick-title">${esc(r.title)}</p>
-        <a class="pick-more" href="#reader-${esc(r.id)}">Xem hồ sơ</a>
-      </div>
-      <a class="btn btn-secondary" href="#zalo" data-zalo="${esc(r.id)}" aria-label="Nhắn Zalo cho ${esc(r.name)}">Nhắn Zalo</a>
-    </li>`;}).join('');
-
-  const foot = $('#footZalo');
-  foot.innerHTML = 'Zalo: ' + withZalo.map(r=>`<a href="#zalo" data-zalo="${esc(r.id)}">${esc(r.name)}</a>`).join(', ');
-  foot.hidden = !withZalo.length;
-
   const dlg = $('#zaloDialog');
   let returnTo = null;
   function openZalo(id, from){
@@ -1091,7 +1167,7 @@ $('#demoNote').hidden = DB.mode!=='demo';
   dlg.addEventListener('click', e=>{ if(e.target===dlg || e.target.closest('[data-zd-close]')) dlg.close(); });
   dlg.addEventListener('close', ()=>{ returnTo?.focus(); });
 })();
-summary();
+if($('.wizard')) summary();
 </script>
 </body>
 </html>

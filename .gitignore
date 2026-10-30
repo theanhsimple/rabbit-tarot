@@ -5,5 +5,9 @@
 !/README.md
 !/CNAME
 !/assets/
+!/admin/
+!/cms/
+!/content/
+!/.nojekyll
 /assets/rabbit-tarot-primary-emblem.png
 .DS_Store

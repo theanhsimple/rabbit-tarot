@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Xem trước</title>
+</head>
+<body>
+<p style="font:14px/1.5 sans-serif;color:#6F6860;padding:24px">Đang tạo bản xem trước…</p>
+<script>
+// Loaded by /admin in a sandboxed iframe (no same-origin access to the admin session).
+// Receives the built page from the parent admin window only, then replaces this document with it.
+addEventListener('message', e => {
+  if (e.source !== parent || !e.data || e.data.type !== 'rt-preview') return;
+  document.open(); document.write(e.data.html); document.close();
+});
+parent.postMessage({type: 'rt-preview-ready'}, '*');
+</script>
+</body>
+</html>

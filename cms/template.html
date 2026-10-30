@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<!-- Built by the Rabbit Tarot CMS from cms/template.html + content/site.json. Edit content at /admin, not here. -->
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--CMS:HEAD-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/rabbit-tarot-tokens.css?v=2">
+<script src="assets/site-config.js"></script>
+<script>document.documentElement.classList.add('js'); if(window.RT_BOOKING_OPEN===false) document.documentElement.classList.add('booking-closed');</script>
+<style>
+/* ---------- base ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);background:var(--color-ivory);color:var(--color-ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--color-vermilion);outline-offset:3px}
+.container{width:min(var(--container),100% - 2 * var(--gutter));margin-inline:auto}
+section{padding:var(--section-y) 0}
+[hidden]{display:none!important}
+/* booking switch (assets/site-config.js): [data-booking] only while booking is open, [data-soon] only while closed */
+.booking-closed [data-booking]{display:none!important}
+:root:not(.booking-closed) [data-soon]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip:focus{position:fixed;top:var(--space-2);left:var(--space-2);width:auto;height:auto;clip:auto;z-index:200;background:var(--color-ink);color:var(--color-ivory);padding:var(--space-3) var(--space-4);border-radius:var(--radius-sm)}
+
+/* ---------- type scale ---------- */
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:500;line-height:var(--leading-tight);letter-spacing:-.005em;text-wrap:balance;font-variant-numeric:lining-nums}
+h1{font-size:var(--display-xl)}
+h2{font-size:var(--display-lg)}
+h3{font-size:var(--display-sm)}
+p{text-wrap:pretty}
+.num-lining{font-variant-numeric:lining-nums tabular-nums}
+/* one label style for every small uppercase caption */
+.eyebrow,.label{font-family:var(--font-body);font-size:var(--text-xs);font-weight:500;line-height:var(--leading-snug);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--color-muted-ink)}
+.eyebrow{display:inline-flex;align-items:center;gap:var(--space-3)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--color-vermilion)}
+.lead{color:var(--color-muted-ink);max-width:var(--measure);font-size:var(--text-lg)}
+.section-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:end;padding-bottom:var(--space-8);border-bottom:var(--border-strong);margin-bottom:var(--space-12)}
+.section-head h2,.stack-head h2{margin-top:var(--space-4)}
+.rule{border:0;border-top:var(--border-subtle)}
+
+/* ---------- buttons & links ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:48px;padding:0 var(--space-6);border:1px solid transparent;border-radius:var(--radius-sm);font-size:var(--text-md);font-weight:500;line-height:1.2;text-decoration:none;white-space:nowrap;transition:background-color var(--dur),color var(--dur),border-color var(--dur)}
+.btn-primary{background:var(--color-vermilion);color:var(--color-ivory)}
+.btn-primary:hover{background:var(--color-vermilion-hover)}
+.btn-secondary{border-color:var(--color-ink);color:var(--color-ink)}
+.btn-secondary:hover{background:var(--color-ink);color:var(--color-ivory)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{background:var(--color-stone);border-color:var(--color-stone);color:var(--color-muted-ink);cursor:not-allowed;transform:none}
+.on-dark .btn-secondary{border-color:var(--color-ivory);color:var(--color-ivory)}
+.on-dark .btn-secondary:hover{background:var(--color-ivory);color:var(--color-ink)}
+.link{display:inline-flex;align-items:center;gap:var(--space-2);min-height:44px;font-size:var(--text-md);font-weight:500;text-decoration:underline;text-decoration-color:var(--color-stone);text-underline-offset:5px;transition:text-decoration-color var(--dur),color var(--dur)}
+.link:hover{text-decoration-color:var(--color-vermilion)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:var(--color-ivory);transition:border-color .3s;border-bottom:1px solid transparent}
+header.scrolled{border-bottom-color:var(--color-stone)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);height:80px}
+.brand{display:flex;align-items:center;gap:var(--space-3);text-decoration:none}
+.brand img{height:48px;width:48px}
+.brand span{font-family:var(--font-display);font-size:var(--display-sm);font-weight:600;letter-spacing:.01em;line-height:1}
+.nav ul{display:flex;gap:var(--space-8);list-style:none;font-size:var(--text-sm)}
+.nav ul a{position:relative;display:inline-block;padding:var(--space-2) 0;text-decoration:none;color:var(--color-muted-ink);transition:color var(--dur)}
+.nav ul a:hover,.nav ul a[aria-current="true"]{color:var(--color-ink)}
+.nav ul a[aria-current="true"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--color-vermilion)}
+.nav-cta{display:none}
+.menu-btn{display:none;min-height:44px;padding:0 var(--space-4);border:var(--border-strong);border-radius:var(--radius-sm);font-size:var(--text-sm);font-weight:500}
+
+/* ---------- hero ---------- */
+.hero{padding:var(--space-16) 0 var(--section-y)}
+.hero-grid{display:grid;grid-template-columns:7fr 5fr;gap:var(--space-12);align-items:center}
+.hero h1{margin:var(--space-6) 0}
+.hero h1 em{font-style:italic;color:var(--color-vermilion)}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3) var(--space-6);margin-top:var(--space-8)}
+.emblem{justify-self:center;width:clamp(260px,32vw,420px)}
+.emblem img{width:100%}
+.hero-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8);margin-top:var(--space-16);border-top:var(--border-strong)}
+.hero-notes div{padding-top:var(--space-6);font-size:var(--text-sm);color:var(--color-muted-ink)}
+.hero-notes b{display:block;font-family:var(--font-display);font-size:var(--display-xs);font-weight:500;line-height:var(--leading-snug);color:var(--color-ink);margin-bottom:var(--space-1)}
+
+/* ---------- services (editorial list) ---------- */
+.svc-list{list-style:none}
+.svc{display:grid;grid-template-columns:48px minmax(0,1fr) 96px 136px 160px;gap:var(--space-6);align-items:baseline;padding:var(--space-8) 0;border-bottom:var(--border-subtle)}
+.svc:first-child{padding-top:0}
+.svc-no{font-size:var(--text-sm);font-weight:500;color:var(--color-vermilion);font-variant-numeric:tabular-nums}
+.svc h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-3)}
+.svc p{color:var(--color-muted-ink);font-size:var(--text-md);margin-top:var(--space-2);max-width:var(--measure)}
+.tag{font-family:var(--font-body);font-size:var(--text-xs);font-weight:500;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--color-vermilion);border:1px solid currentColor;padding:1px var(--space-2);border-radius:2px;white-space:nowrap}
+.svc-dur{color:var(--color-muted-ink);font-size:var(--text-sm)}
+.svc-price{font-family:var(--font-display);font-size:var(--display-sm);font-weight:500;font-variant-numeric:lining-nums tabular-nums;text-align:right}
+.svc .link{justify-self:end}
+
+/* ---------- process ---------- */
+#process,#lookup{background:var(--color-paper)}
+#process,#booking,#lookup{--color-muted-ink:var(--color-muted-on-paper)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-8);list-style:none}
+.step{border-top:var(--border-strong);padding-top:var(--space-6)}
+.step .n{font-family:var(--font-display);font-style:italic;font-size:var(--display-md);color:var(--color-vermilion);line-height:1}
+.step h3{font-size:var(--display-xs);margin:var(--space-4) 0 var(--space-2)}
+.step p{color:var(--color-muted-ink);font-size:var(--text-md)}
+
+/* ---------- readers ---------- */
+.readers{display:grid;gap:var(--space-30)}
+.reader-profile{display:grid;grid-template-columns:5fr 7fr;gap:var(--space-16);align-items:start}
+.reader-profile:nth-child(even) .rp-photo{order:2}
+.rp-photo{position:sticky;top:112px;margin:0;padding:0 var(--space-8) var(--space-8) 0}
+.reader-profile:nth-child(even) .rp-photo{padding:0 0 var(--space-8) var(--space-8)}
+.reader-profile:nth-child(even) .rp-photo::before{right:auto;left:0}
+.rp-photo::before{content:"";position:absolute;right:0;bottom:0;width:58%;aspect-ratio:1;border-radius:50%;background:var(--color-vermilion)}
+.rp-photo img{position:relative;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-sm)}
+.rp-body{max-width:600px}
+.rp-body h3{font-size:var(--display-lg);margin:var(--space-3) 0 var(--space-6)}
+.rp-title{font-family:var(--font-display);font-style:italic;font-size:var(--display-xs);line-height:var(--leading-snug);padding-left:var(--space-6);border-left:2px solid var(--color-vermilion)}
+.rp-bio{color:var(--color-muted-ink);margin:var(--space-6) 0 var(--space-8)}
+.rp-bio > * + *{margin-top:var(--space-4)}
+.rp-bio ul{list-style:none;display:grid;gap:var(--space-2)}
+.rp-bio li{position:relative;padding-left:var(--space-6);color:var(--color-ink)}
+.rp-bio li::before{content:"";position:absolute;left:0;top:.8em;width:12px;height:1px;background:var(--color-vermilion)}
+.rp-bio blockquote{padding:var(--space-4) var(--space-6);background:var(--color-paper);border-radius:var(--radius-sm);font-family:var(--font-display);font-style:italic;font-size:var(--display-xs);line-height:var(--leading-snug);color:var(--color-ink)}
+.rp-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-6);align-items:center;padding-top:var(--space-6);border-top:var(--border-strong)}
+.rp-card{display:flex;gap:var(--space-4);align-items:center}
+.rp-card .mini{width:56px;aspect-ratio:3/5;border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow-soft);flex:none}
+.rp-card .mini svg{display:block;width:100%;height:100%}
+.rp-meta b{display:block;font-family:var(--font-display);font-size:var(--display-xs);font-weight:500;line-height:1.2;margin-top:var(--space-1)}
+.rp-meta b + span{font-family:var(--font-display);font-style:italic;color:var(--color-muted-ink)}
+
+/* ---------- booking via Zalo ---------- */
+.zalo-box{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-16);align-items:start}
+.zalo-steps{list-style:none;display:grid;margin-top:var(--space-4);border-top:var(--border-subtle)}
+.zalo-steps li{display:grid;grid-template-columns:32px 1fr;gap:var(--space-3);align-items:baseline;padding:var(--space-4) 0;border-bottom:var(--border-subtle);font-size:var(--text-md)}
+.zalo-steps b{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:var(--display-xs);line-height:1;color:var(--color-vermilion);font-variant-numeric:lining-nums}
+.reader-pick{list-style:none;display:grid;gap:var(--space-3)}
+.pick{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:var(--space-4);align-items:center;padding:var(--space-3) var(--space-6) var(--space-3) var(--space-3);background:var(--color-white);border:var(--border-subtle);border-radius:var(--radius-md);transition:border-color var(--dur)}
+.pick:hover{border-color:var(--color-ink)}
+.pick img{width:72px;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-sm)}
+.pick-name{font-family:var(--font-display);font-size:var(--display-sm);font-weight:500;line-height:1.1}
+.pick-card{color:var(--color-vermilion);margin-top:var(--space-1)}
+.pick-title{font-size:var(--text-sm);line-height:1.5;color:var(--color-muted-ink);margin-top:var(--space-1);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pick-more{display:inline-flex;align-items:center;min-height:32px;font-size:var(--text-sm);color:var(--color-muted-ink);text-decoration-color:var(--color-stone);text-underline-offset:4px}
+.pick-more:hover{color:var(--color-ink);text-decoration-color:var(--color-vermilion)}
+.pick-empty{padding:var(--space-6);text-align:center;color:var(--color-muted-ink);background:var(--color-white);border:1px dashed var(--color-stone);border-radius:var(--radius-md)}
+
+/* Zalo popup */
+.zalo-dialog{border:0;padding:0;margin:auto;width:min(420px,calc(100% - 32px));max-height:calc(100% - 32px);border-radius:var(--radius-md);background:var(--color-ivory);color:var(--color-ink);box-shadow:var(--shadow-overlay)}
+.zalo-dialog::backdrop{background:var(--color-scrim)}
+.zalo-dialog[open]{animation:fade .25s ease}
+.zd-inner{position:relative;padding:var(--space-8)}
+.zd-close{position:absolute;top:var(--space-3);right:var(--space-3);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--color-muted-ink);transition:background-color var(--dur),color var(--dur)}
+.zd-close:hover{background:var(--color-paper);color:var(--color-ink)}
+.zd-close svg{width:18px;height:18px}
+.zd-head{display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-6);padding-right:var(--space-12)}
+.zd-head img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:50% 20%;flex:none}
+.zd-head h3{font-size:var(--display-md);line-height:1.1}
+.zd-body{display:flex;flex-direction:column;gap:var(--space-4)}
+.zd-qr{background:var(--color-white);border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-4);width:100%;max-width:280px;margin:0 auto}
+.zd-hint{text-align:center;font-size:var(--text-sm);color:var(--color-muted-ink)}
+.zd-open{width:100%}
+.zd-note{margin-top:var(--space-6);padding-top:var(--space-4);border-top:var(--border-subtle);font-size:var(--text-sm);color:var(--color-muted-ink)}
+.qr-frame{position:relative;aspect-ratio:1;display:grid;place-items:center;padding:var(--space-3)}
+.qr-frame .c{position:absolute;width:22px;height:22px;border:0 solid var(--color-ink)}
+.qr-frame .tl{top:0;left:0;border-top-width:2px;border-left-width:2px}
+.qr-frame .tr{top:0;right:0;border-top-width:2px;border-right-width:2px}
+.qr-frame .bl{bottom:0;left:0;border-bottom-width:2px;border-left-width:2px}
+.qr-frame .br{bottom:0;right:0;border-bottom-width:2px;border-right-width:2px}
+.qr-frame img{width:100%;height:100%;object-fit:contain}
+.only-mobile{display:none}
+
+/* ---------- online booking (dormant while RT_BOOKING_OPEN=false) ---------- */
+.booking-box{display:grid;grid-template-columns:minmax(0,1fr) 340px;background:var(--color-ivory);border:var(--border-subtle);border-radius:var(--radius-md);overflow:hidden}
+.wizard{padding:var(--space-12);min-width:0;scroll-margin-top:96px}
+.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-2);list-style:none;margin-bottom:var(--space-12);counter-reset:p}
+.progress li{font-size:var(--text-sm);color:var(--color-muted-ink);border-top:2px solid var(--color-stone);padding-top:var(--space-2)}
+.progress li.on{color:var(--color-ink);border-top-color:var(--color-vermilion)}
+.progress li.cur{font-weight:500}
+.progress button{display:block;width:100%;text-align:left;font-size:inherit;font-weight:inherit;padding:var(--space-2) 0 0;margin-top:calc(-1 * var(--space-2))}
+.progress button:not(:disabled):hover{color:var(--color-vermilion)}
+.progress button:disabled{cursor:default;color:inherit}
+.pane{display:none}
+.pane.on{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0}}
+.pane > p{color:var(--color-muted-ink);font-size:var(--text-md);margin:var(--space-2) 0 var(--space-8)}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-3)}
+.opt{position:relative;text-align:left;border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-4) var(--space-8) var(--space-4) var(--space-4);background:var(--color-white);transition:border-color var(--dur)}
+.opt:hover{border-color:var(--color-ink)}
+.opt[aria-pressed="true"]{border-color:var(--color-ink);box-shadow:inset 0 0 0 1px var(--color-ink)}
+.opt[aria-pressed="true"]::after{content:"✓";position:absolute;top:var(--space-3);right:var(--space-3);width:22px;height:22px;border-radius:50%;background:var(--color-vermilion);color:var(--color-ivory);font-size:var(--text-xs);display:grid;place-items:center}
+.opt b{display:block;font-weight:500}
+.opt small{display:block;color:var(--color-muted-ink);font-size:var(--text-sm);margin-top:2px}
+.opt .p{display:block;font-family:var(--font-display);font-size:var(--display-xs);margin-top:var(--space-2);font-variant-numeric:lining-nums tabular-nums}
+.sub-label{margin:var(--space-8) 0 var(--space-3)}
+.seg{display:inline-flex;border:var(--border-strong);border-radius:var(--radius-sm);overflow:hidden}
+.seg button{min-height:44px;padding:0 var(--space-6);font-size:var(--text-sm)}
+.seg button[aria-pressed="true"]{background:var(--color-ink);color:var(--color-ivory)}
+.days{display:flex;gap:var(--space-2);overflow-x:auto;padding-bottom:var(--space-3);scrollbar-width:thin;scrollbar-color:var(--color-stone) transparent}
+.day{flex:0 0 68px;border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-2) var(--space-1);text-align:center;background:var(--color-white)}
+.day small{display:block;font-size:var(--text-xs);color:var(--color-muted-ink);text-transform:uppercase;letter-spacing:.06em}
+.day b{display:block;font-family:var(--font-display);font-size:var(--display-sm);font-weight:500;line-height:1.2;font-variant-numeric:lining-nums}
+.day:hover{border-color:var(--color-ink)}
+.day[aria-pressed="true"]{background:var(--color-ink);border-color:var(--color-ink);color:var(--color-ivory)}
+.day[aria-pressed="true"] small{color:var(--color-stone)}
+.day:disabled{opacity:.4;cursor:not-allowed;background:transparent}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:var(--space-2)}
+.slot{min-height:44px;border:var(--border-subtle);border-radius:var(--radius-sm);font-size:var(--text-sm);background:var(--color-white)}
+.slot:hover{border-color:var(--color-ink)}
+.slot[aria-pressed="true"]{background:var(--color-vermilion);border-color:var(--color-vermilion);color:var(--color-ivory)}
+.slot:disabled{background:transparent;color:var(--color-muted-ink);text-decoration:line-through;opacity:.6;cursor:not-allowed}
+.hint{color:var(--color-muted-ink);font-size:var(--text-sm);grid-column:1/-1}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4) var(--space-6)}
+.form .full{grid-column:1/-1}
+label{display:block;font-size:var(--text-sm);font-weight:500;margin-bottom:var(--space-2)}
+input,select,textarea{width:100%;font:inherit;font-size:var(--text-md);color:var(--color-ink);background:var(--color-white);border:var(--border-subtle);border-radius:var(--radius-sm);padding:var(--space-3) var(--space-4);min-height:48px;transition:border-color var(--dur)}
+input::placeholder,textarea::placeholder{color:var(--color-muted-ink);opacity:.8}
+input:hover,select:hover,textarea:hover{border-color:var(--color-muted-ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--color-vermilion);outline-offset:0;border-color:transparent}
+input[aria-invalid="true"]{border-color:var(--color-vermilion)}
+input:disabled,select:disabled,textarea:disabled{background:var(--color-paper);color:var(--color-muted-ink);cursor:not-allowed}
+textarea{resize:vertical;min-height:110px}
+.err{display:block;min-height:1.3em;font-size:var(--text-sm);color:var(--color-vermilion);margin-top:var(--space-1)}
+.err:not(:empty)::before{content:"! "}
+.chk{display:flex;gap:var(--space-3);align-items:flex-start;font-weight:400;font-size:var(--text-sm);color:var(--color-muted-ink)}
+.chk input{width:18px;min-height:18px;height:18px;margin-top:3px;accent-color:var(--color-vermilion);flex:none}
+.wiz-nav{display:flex;justify-content:space-between;gap:var(--space-3);margin-top:var(--space-12);padding-top:var(--space-6);border-top:var(--border-subtle)}
+.summary{background:var(--color-ink);color:var(--color-ivory);padding:var(--space-12) var(--space-8)}
+.summary h4{font-size:var(--display-sm);margin-bottom:var(--space-6)}
+.sum-row{display:flex;justify-content:space-between;gap:var(--space-4);padding:var(--space-3) 0;border-bottom:1px solid var(--color-line-on-dark);font-size:var(--text-sm)}
+.sum-row span{color:var(--color-stone)}
+.sum-row b{font-weight:500;text-align:right}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:var(--space-6)}
+.sum-total b{font-family:var(--font-display);font-size:var(--display-md);font-weight:500;font-variant-numeric:lining-nums tabular-nums}
+.note{font-size:var(--text-sm);color:var(--color-stone);margin-top:var(--space-8)}
+.success{padding:var(--space-8) 0}
+.success h3{font-size:var(--display-md);margin:var(--space-4) 0}
+.code{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:var(--display-xs);letter-spacing:.18em;border:var(--border-strong);padding:var(--space-3) var(--space-6);border-radius:var(--radius-sm);margin:var(--space-3) 0 var(--space-6)}
+.success p{color:var(--color-muted-ink);max-width:var(--measure)}
+.success .actions{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-8)}
+
+/* ---------- daily card ---------- */
+#daily{background:var(--color-ink);color:var(--color-ivory)}
+#daily .eyebrow{color:var(--color-stone)}
+.daily{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center}
+.daily .lead{color:var(--color-stone)}
+.deck{display:flex;justify-content:center;perspective:1400px}
+.flip{width:260px;aspect-ratio:3/5;position:relative;transform-style:preserve-3d;transition:transform .9s var(--ease);cursor:pointer;border-radius:var(--radius-md)}
+.flip:not(.on):hover{transform:translateY(-4px)}
+.flip.on{transform:rotateY(180deg);cursor:default}
+.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:var(--radius-md);overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.face.back{transform:rotateY(180deg)}
+.face svg{display:block;width:100%;height:100%}
+/* Rabbit Tarot card system (see assets/card-art.js); Antique Gold is reserved for the deck */
+.rt-card{--gold:var(--color-gold);--red:var(--color-vermilion)}
+.rt-card *{vector-effect:non-scaling-stroke}
+.rt-card .bf{fill:var(--bg)}
+.rt-card .k{fill:none;stroke:var(--fg);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.rt-card .kf{fill:var(--fg)}
+.rt-card .g{fill:none;stroke:var(--gold);stroke-width:.9;stroke-linecap:round}
+.rt-card .gf{fill:var(--gold)}
+.rt-card .r{fill:var(--red)}
+.rt-card .rs{fill:none;stroke:var(--red);stroke-width:1.6;stroke-linecap:round}
+.rt-card text{text-anchor:middle;font-variant-numeric:lining-nums}
+.rt-card .rt-num{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:.12em;fill:var(--fg)}
+.rt-card .rt-name{font-family:var(--font-display);font-style:italic;font-weight:500;fill:var(--fg)}
+.rt-card .rt-vi{font-family:var(--font-body);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;fill:var(--mt)}
+.reading{margin-top:var(--space-6)}
+.reading h3{font-size:var(--display-md)}
+.reading h3 i{color:var(--color-stone);font-weight:500}
+.reading .label{color:var(--color-stone);margin-bottom:var(--space-2)}
+.reading .scene{font-size:var(--text-sm);color:var(--color-stone);border-left:1px solid var(--color-gold);padding-left:var(--space-4);margin-top:var(--space-6)}
+.reading .scene .label{display:block;margin-bottom:var(--space-1)}
+.kw{display:flex;gap:var(--space-2);flex-wrap:wrap;margin:var(--space-4) 0;list-style:none}
+.kw li{font-size:var(--text-sm);border:1px solid rgba(207,195,181,.45);padding:2px 10px;border-radius:2px;color:var(--color-stone)}
+.reading p{color:var(--color-paper);max-width:var(--measure)}
+.daily-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-8)}
+.disclaimer{font-size:var(--text-sm);color:var(--color-stone);margin-top:var(--space-6)}
+
+/* ---------- faq ---------- */
+.faq-grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--space-16)}
+.faq-aside p{color:var(--color-muted-ink);margin-top:var(--space-6);max-width:22rem}
+.faq-aside .link{margin-top:var(--space-2)}
+details{border-bottom:var(--border-subtle)}
+details:first-child{border-top:var(--border-strong)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-6);padding:var(--space-6) 0;font-family:var(--font-display);font-size:var(--display-xs);font-weight:500;line-height:var(--leading-snug);transition:color var(--dur)}
+summary:hover{color:var(--color-vermilion)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;font-family:var(--font-body);font-size:var(--display-xs);line-height:1;color:var(--color-vermilion);transition:transform var(--dur)}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--color-muted-ink);padding-bottom:var(--space-6);max-width:var(--measure)}
+
+/* ---------- lookup ---------- */
+.lookup-grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--space-16);align-items:start}
+.lookup-form{display:flex;gap:var(--space-3)}
+.lookup-form input{flex:1}
+#lookupResult{margin-top:var(--space-6)}
+.lk-card{background:var(--color-ivory);border:var(--border-subtle);border-radius:var(--radius-md);padding:var(--space-6)}
+.lk-card .row{display:flex;justify-content:space-between;gap:var(--space-4);padding:var(--space-2) 0;border-bottom:1px dashed var(--color-stone);font-size:var(--text-md)}
+.lk-card .row:last-of-type{border-bottom:0}
+.lk-card .row span{color:var(--color-muted-ink)}
+.lk-card .btn{margin-top:var(--space-4);width:100%}
+.lk-msg{color:var(--color-vermilion);font-size:var(--text-md)}
+
+/* ---------- footer ---------- */
+footer{border-top:var(--border-strong);padding:var(--space-16) 0 var(--space-8)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-12)}
+.foot-brand .brand{margin-bottom:var(--space-4)}
+.foot-brand p{color:var(--color-muted-ink);max-width:22rem;font-size:var(--text-md)}
+footer h2{font-family:var(--font-body);margin-bottom:var(--space-3)}
+footer ul{list-style:none;font-size:var(--text-md)}
+footer li{padding:var(--space-1) 0}
+footer li a{display:inline-flex;align-items:center;min-height:32px;text-decoration:none;transition:color var(--dur)}
+footer li a:hover{color:var(--color-vermilion)}
+#footZalo a{text-decoration:underline;text-decoration-color:var(--color-stone);text-underline-offset:4px}
+.copy{display:flex;justify-content:space-between;gap:var(--space-2) var(--space-6);flex-wrap:wrap;margin-top:var(--space-12);padding-top:var(--space-6);border-top:var(--border-subtle);font-size:var(--text-sm);color:var(--color-muted-ink)}
+
+.toast{position:fixed;bottom:var(--space-6);left:50%;transform:translate(-50%,140%);background:var(--color-ink);color:var(--color-ivory);padding:var(--space-3) var(--space-6);border-radius:var(--radius-sm);z-index:100;transition:transform .35s,visibility .35s;font-size:var(--text-sm);visibility:hidden}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+
+/* subtle reveal only when JS is available */
+.js .reveal{opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- sections added in the CMS ---------- */
+.cms-text.tone-paper{background:var(--color-paper);--color-muted-ink:var(--color-muted-on-paper)}
+.cms-text.tone-ink{background:var(--color-ink);color:var(--color-ivory)}
+.cms-text.tone-ink .eyebrow,.cms-text.tone-ink .cms-body{color:var(--color-stone)}
+.cms-text-grid{display:grid;grid-template-columns:7fr 5fr;gap:var(--space-16);align-items:center}
+.cms-text-grid.img-left .cms-figure{order:-1}
+.cms-text-grid.no-img{grid-template-columns:minmax(0,48rem)}
+.cms-body{color:var(--color-muted-ink);margin:var(--space-6) 0 var(--space-8);max-width:var(--measure)}
+.cms-body p + p{margin-top:var(--space-4)}
+.cms-figure img{width:100%;border-radius:var(--radius-sm)}
+.cms-banner img{width:100%;border-radius:var(--radius-md)}
+.cms-caption{margin-top:var(--space-3);font-size:var(--text-sm);color:var(--color-muted-ink)}
+@media (min-width:821px){.hide-desktop{display:none!important}}
+@media (max-width:820px){.hide-mobile{display:none!important}.cms-text-grid{grid-template-columns:1fr;gap:var(--space-8)}.cms-text-grid.img-left .cms-figure{order:0}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .svc{grid-template-columns:40px minmax(0,1fr) auto;row-gap:var(--space-2)}
+  .svc-dur{grid-column:2}
+  .svc-price{grid-column:3;grid-row:1}
+  .svc .link{grid-column:3;grid-row:2}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .booking-box{grid-template-columns:minmax(0,1fr)}
+  .zalo-box{gap:var(--space-12)}
+}
+@media (max-width:820px){
+  html{scroll-padding-top:80px}
+  .nav ul{display:none}
+  .menu-btn{display:inline-flex;align-items:center}
+  .nav .btn-primary{display:none}
+  .nav.open ul{display:flex;flex-direction:column;gap:0;position:absolute;top:72px;left:0;right:0;background:var(--color-ivory);border-bottom:var(--border-strong);padding:var(--space-2) var(--gutter) var(--space-4);font-size:var(--text-md)}
+  .nav.open ul a{display:block;padding:var(--space-3) 0;border-bottom:var(--border-subtle);color:var(--color-ink)}
+  .nav.open ul a[aria-current="true"]::after{display:none}
+  .nav.open ul a[aria-current="true"]{color:var(--color-vermilion)}
+  .nav.open .nav-cta{display:block;margin-top:var(--space-4)}
+  .nav.open .nav-cta a.btn{display:flex;color:var(--color-ivory);border-bottom:0}
+  .nav{height:72px}
+  .brand img{height:40px;width:40px}
+  .brand span{font-size:var(--display-xs)}
+  .hero{padding-top:var(--space-8)}
+  .hero-grid,.daily,.faq-grid,.lookup-grid,.section-head,.zalo-box{grid-template-columns:1fr}
+  .hero-grid{gap:var(--space-6)}
+  .section-head{gap:var(--space-4);padding-bottom:var(--space-6);margin-bottom:var(--space-8)}
+  .emblem{order:-1;width:min(48vw,220px)}
+  .hero-notes{grid-template-columns:1fr;gap:0;margin-top:var(--space-12)}
+  .hero-notes div{padding:var(--space-4) 0;border-bottom:var(--border-subtle)}
+  .readers{gap:var(--space-16)}
+  .reader-profile{grid-template-columns:1fr;gap:var(--space-8)}
+  .reader-profile:nth-child(even) .rp-photo{order:0}
+  .rp-photo,.reader-profile:nth-child(even) .rp-photo{position:relative;top:auto;max-width:420px;padding:0 var(--space-6) var(--space-6) 0}
+  .reader-profile:nth-child(even) .rp-photo::before{left:auto;right:0}
+  .zalo-box{gap:var(--space-8)}
+  .only-mobile{display:inline}
+  .only-desktop{display:none}
+  .daily{gap:var(--space-12)}
+  .deck{order:-1}
+  .faq-grid,.lookup-grid{gap:var(--space-8)}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:var(--space-8)}
+  .foot-brand{grid-column:1/-1}
+}
+@media (max-width:600px){
+  body{font-size:var(--text-md)}
+  .lead{font-size:var(--text-body)}
+  .steps,.opts,.form{grid-template-columns:1fr}
+  .wizard{padding:var(--space-6) var(--space-4)}
+  .summary{padding:var(--space-8) var(--space-4)}
+  .progress li:not(.cur) .pl{display:none}
+  .hero-cta .btn{flex:1 1 100%}
+  .svc{grid-template-columns:minmax(0,1fr) auto;padding:var(--space-6) 0}
+  .svc:first-child{padding-top:0}
+  .svc-no{display:none}
+  .svc-dur{grid-column:1}
+  .svc-price{grid-column:2}
+  .svc .link{grid-column:2}
+  .rp-foot .btn{width:100%}
+  .pick{grid-template-columns:64px minmax(0,1fr);padding:var(--space-3)}
+  .pick img{width:64px}
+  .pick .btn{grid-column:1/-1;width:100%}
+  .zd-inner{padding:var(--space-6)}
+  .lookup-form{flex-direction:column}
+  .flip{width:min(220px,60vw)}
+  .daily-actions .btn{flex:1 1 auto}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media print{.js .reveal{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="sr-only skip">Bỏ qua tới nội dung chính</a>
+
+<!--CMS:HEADER-->
+
+<main id="main">
+<noscript><p class="container" style="padding:var(--space-6) 0">Trang đặt lịch cần JavaScript. Vui lòng bật JavaScript trong trình duyệt để xem gói và đặt lịch.</p></noscript>
+<!--CMS:MAIN-->
+<!--CMS:WIZARD-->
+    <div class="booking-box" data-booking>
+      <div class="wizard">
+        <ol class="progress" id="progress" aria-label="Tiến trình đặt lịch">
+          <li class="on cur" aria-current="step"><button type="button" disabled><span class="pn">1</span><span class="pl"> · Gói</span></button></li><li><button type="button" disabled><span class="pn">2</span><span class="pl"> · Reader</span></button></li><li><button type="button" disabled><span class="pn">3</span><span class="pl"> · Thời gian</span></button></li><li><button type="button" disabled><span class="pn">4</span><span class="pl"> · Thông tin</span></button></li>
+        </ol>
+
+        <div class="pane on" data-step="1">
+          <h3 tabindex="-1">Bạn muốn trải bài theo gói nào?</h3>
+          <p>Nếu đây là lần đầu, gói Chuyên sâu thường đủ cho một chủ đề.</p>
+          <div class="opts" id="optSvc" role="group" aria-label="Gói trải bài"></div>
+          <div class="label sub-label" id="modeLabel">Hình thức</div>
+          <div class="seg" id="segMode" role="group" aria-labelledby="modeLabel">
+            <button type="button" aria-pressed="true" data-v="Online (Google Meet)">Online</button>
+            <button type="button" aria-pressed="false" data-v="Trực tiếp tại studio">Tại studio</button>
+          </div>
+        </div>
+
+        <div class="pane" data-step="2">
+          <h3 tabindex="-1">Chọn reader</h3>
+          <p>Mỗi reader có lịch nghỉ riêng; ngày nghỉ sẽ được khoá ở bước sau.</p>
+          <div class="opts" id="optReader" role="group" aria-label="Reader"></div>
+        </div>
+
+        <div class="pane" data-step="3">
+          <h3 tabindex="-1">Chọn ngày và giờ</h3>
+          <p>Khung giờ gạch ngang là đã có người đặt hoặc đã qua.</p>
+          <div class="label sub-label" id="monthLabel">Ngày</div>
+          <div class="days" id="days" role="group" aria-labelledby="monthLabel"></div>
+          <div class="label sub-label" id="slotLabel">Khung giờ</div>
+          <div class="slots" id="slots" role="group" aria-labelledby="slotLabel"></div>
+        </div>
+
+        <div class="pane" data-step="4">
+          <h3 tabindex="-1">Thông tin của bạn</h3>
+          <p>Chỉ dùng để liên hệ cho buổi xem và không chia sẻ cho bên thứ ba.</p>
+          <form class="form" id="infoForm" novalidate>
+            <div><label for="fName">Họ và tên *</label><input id="fName" autocomplete="name" required aria-required="true" aria-describedby="eName"><span class="err" id="eName" aria-live="polite"></span></div>
+            <div><label for="fPhone">Số điện thoại / Zalo *</label><input id="fPhone" type="tel" required aria-required="true" inputmode="tel" autocomplete="tel" aria-describedby="ePhone"><span class="err" id="ePhone" aria-live="polite"></span></div>
+            <div><label for="fEmail">Email (để nhận ghi chú)</label><input id="fEmail" type="email" autocomplete="email" aria-describedby="eEmail"><span class="err" id="eEmail" aria-live="polite"></span></div>
+            <div><label for="fTopic">Chủ đề chính</label>
+              <select id="fTopic"><option>Tình cảm</option><option>Sự nghiệp</option><option>Tài chính</option><option>Học tập</option><option>Định hướng bản thân</option><option>Khác</option></select></div>
+            <div class="full"><label for="fQ">Câu hỏi bạn muốn mang đến</label><textarea id="fQ" placeholder="Ví dụ: Mình nên cân nhắc điều gì trước khi chuyển việc trong ba tháng tới?"></textarea></div>
+            <div class="full">
+              <label class="chk"><input type="checkbox" id="fAgree" required aria-required="true" aria-describedby="eAgree"> Tôi hiểu Tarot là công cụ để suy ngẫm, không phải lời tiên đoán chắc chắn, và đồng ý với chính sách đổi/huỷ lịch.</label>
+              <span class="err" id="eAgree" aria-live="polite"></span>
+            </div>
+          </form>
+        </div>
+
+        <div class="pane" data-step="5">
+          <div class="success">
+            <span class="eyebrow">Đã giữ chỗ</span>
+            <h3 tabindex="-1">Hẹn gặp bạn.</h3>
+            <p>Mã đặt lịch của bạn:</p>
+            <div class="code" id="bkCode">—</div>
+            <p>Reader sẽ liên hệ qua Zalo hoặc điện thoại khoảng một giờ trước buổi xem. Hãy lưu mã để tra cứu hoặc đổi lịch.</p>
+            <p class="lk-msg" id="demoNote" hidden>Bản demo: lịch này chỉ lưu trên trình duyệt của bạn, chưa được gửi đến Rabbit Tarot.</p>
+            <div class="actions">
+              <button type="button" class="btn btn-primary" id="icsBtn">Thêm vào lịch</button>
+              <button type="button" class="btn btn-secondary" id="againBtn">Đặt lịch khác</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="wiz-nav" id="wizNav">
+          <button type="button" class="btn btn-secondary" id="backBtn" hidden>← Quay lại</button>
+          <span></span>
+          <button type="button" class="btn btn-primary" id="nextBtn" disabled>Tiếp tục →</button>
+        </div>
+      </div>
+
+      <aside class="summary" aria-label="Tóm tắt lịch hẹn" aria-live="polite">
+        <h4>Tóm tắt</h4>
+        <div class="sum-row"><span>Gói</span><b id="sSvc">—</b></div>
+        <div class="sum-row"><span>Hình thức</span><b id="sMode">Online (Google Meet)</b></div>
+        <div class="sum-row"><span>Reader</span><b id="sReader">—</b></div>
+        <div class="sum-row"><span>Ngày</span><b id="sDate">—</b></div>
+        <div class="sum-row"><span>Giờ</span><b id="sTime">—</b></div>
+        <div class="sum-total"><span>Tổng</span><b id="sTotal">—</b></div>
+        <p class="note">Thanh toán sau buổi xem bằng tiền mặt hoặc chuyển khoản. Đổi hoặc huỷ miễn phí trước 12 giờ.</p>
+      </aside>
+    </div>
+<!--/CMS:WIZARD-->
+</main>
+
+<!--CMS:FOOTER-->
+
+<dialog class="zalo-dialog" id="zaloDialog" aria-labelledby="zdName">
+  <div class="zd-inner">
+    <button type="button" class="zd-close" data-zd-close aria-label="Đóng"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <div class="zd-head">
+      <img id="zdPhoto" alt="" width="56" height="56">
+      <div><span class="label">Nhắn Zalo cho reader</span><h3 id="zdName">—</h3></div>
+    </div>
+    <div class="zd-body">
+      <div class="zd-qr" id="zdQrWrap">
+        <div class="qr-frame">
+          <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+          <img id="zdQr" alt="" width="520" height="520">
+        </div>
+      </div>
+      <p class="zd-hint" id="zdHint"><span class="only-desktop">Mở Zalo trên điện thoại và quét mã này</span><span class="only-mobile" id="zdHintMobile"></span></p>
+      <a class="btn btn-primary zd-open" id="zdOpen" href="#" target="_blank" rel="noopener">Mở Zalo</a>
+    </div>
+    <!--CMS:DIALOG_NOTE-->
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<!--CMS:DATA-->
+<script src="assets/firebase-config.js"></script>
+<script src="assets/booking-store.js"></script>
+<script src="assets/deck-data.js"></script>
+<script src="assets/card-art.js"></script>
+<script>
+/* ---------- data (baked in by the CMS from content/site.json) ---------- */
+const C = window.RT_CONTENT || {};
+const SERVICES = C.services || [];
+const READERS = C.readers || [];
+const HOURS = ['09:00','10:30','13:00','14:30','16:00','17:30','19:00','20:30'];
+const DOW = ['CN','T2','T3','T4','T5','T6','T7'];
+const DOW_FULL = ['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
+const fmt = v => v.toLocaleString('vi-VN')+'đ';
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+/* ---------- storage: Firestore when configured, else this browser (assets/booking-store.js) ---------- */
+const DB = window.RTStore;
+
+const offText = r => r.off && r.off.length ? 'Nghỉ ' + r.off.map(d=>DOW_FULL[d]).join(', ') : 'Nhận lịch mọi ngày';
+const readerCard = r => (window.RABBIT_DECK||[]).find(c=>c.id===r.card);
+// zalo.me/<phone> opens that person's Zalo directly; a Zalo QR's own link only works when scanned inside Zalo
+const zaloUrl = r => { const d=String(r.phone||'').replace(/\D/g,''); return d ? `https://zalo.me/${d}` : ''; };
+// reader card thumbnails are drawn from the deck at load
+document.querySelectorAll('.mini[data-card]').forEach(el=>{ const c=(window.RABBIT_DECK||[]).find(x=>x.id===el.dataset.card); if(c) el.innerHTML=RabbitCard.face(c); });
+
+// Slot times are Vietnam time (UTC+7) regardless of the visitor's timezone.
+const TZ = '+07:00';
+const key = d => { const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; };
+const slotTime = (dateKey,t) => new Date(`${dateKey}T${t}:00${TZ}`);
+
+/* ---------- online booking wizard (only when its markup is on the page) ---------- */
+if($('.wizard')){
+$('#optSvc').innerHTML = SERVICES.map(s=>`<button type="button" class="opt" aria-pressed="false" data-id="${esc(s.id)}"><b>${esc(s.name)}</b><small>${s.dur} phút</small><span class="p">${fmt(s.price)}</span></button>`).join('');
+$('#optReader').innerHTML = `<button type="button" class="opt" aria-pressed="false" data-id="any"><b>Để chúng tôi gợi ý</b><small>Chọn reader hợp với chủ đề của bạn</small></button>` +
+  READERS.map(r=>`<button type="button" class="opt" aria-pressed="false" data-id="${r.id}"><b>${esc(r.name)}</b><small>${readerCard(r)?`Năng lượng ${esc(readerCard(r).name)} · `:''}${offText(r)}</small></button>`).join('');
+
+/* ---------- booking state ---------- */
+const B = {step:1, svc:null, mode:'Online (Google Meet)', reader:null, date:null, time:null};
+const panes = [...document.querySelectorAll('.pane')];
+
+function goto(n, focus=true){
+  B.step = n;
+  panes.forEach(p=>p.classList.toggle('on', +p.dataset.step===n));
+  [...$('#progress').children].forEach((li,i)=>{
+    li.classList.toggle('on', i<n); li.classList.toggle('cur', i===n-1);
+    i===n-1 ? li.setAttribute('aria-current','step') : li.removeAttribute('aria-current');
+    li.querySelector('button').disabled = !(i < n-1 && n < 5);
+  });
+  $('#backBtn').hidden = !(n>1 && n<5);
+  $('#wizNav').hidden = n===5;
+  $('#nextBtn').textContent = n===4 ? 'Xác nhận đặt lịch' : 'Tiếp tục →';
+  if(n===3){ if(B.date) delete taken[key(B.date)]; renderDays(); }
+  validate();
+  if(focus){
+    const w=$('.wizard'); if(w.getBoundingClientRect().top<0) w.scrollIntoView({block:'start'});
+    panes[n-1].querySelector('h3')?.focus({preventScroll:true});
+  }
+}
+function validate(){
+  $('#nextBtn').disabled = !({1:!!B.svc, 2:!!B.reader, 3:!!(B.date&&B.time&&slotOpen(B.date,B.time)), 4:true}[B.step]);
+}
+function summary(){
+  const s = SERVICES.find(x=>x.id===B.svc), r = READERS.find(x=>x.id===B.reader);
+  $('#sSvc').textContent = s ? `${s.name} · ${s.dur}′` : '—';
+  $('#sMode').textContent = B.mode;
+  $('#sReader').textContent = B.reader==='any' ? 'Gợi ý phù hợp' : r ? r.name : '—';
+  $('#sDate').textContent = B.date ? B.date.toLocaleDateString('vi-VN',{weekday:'long',day:'2-digit',month:'2-digit'}) : '—';
+  $('#sTime').textContent = B.time || '—';
+  $('#sTotal').textContent = s ? fmt(s.price) : '—';
+}
+const press = (container, sel, id) => container.querySelectorAll(sel).forEach(o=>o.setAttribute('aria-pressed', o.dataset.id===id));
+function setReader(id){
+  if(B.reader!==id){ B.reader=id; B.date=B.time=null; }
+  press($('#optReader'),'.opt',B.reader);
+}
+function resetBooking(){
+  Object.assign(B,{svc:null,reader:null,date:null,time:null});
+  $('#infoForm').reset(); document.querySelectorAll('#infoForm [aria-invalid]').forEach(el=>el.removeAttribute('aria-invalid'));
+  document.querySelectorAll('#infoForm .err').forEach(el=>el.textContent='');
+  document.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-pressed','false'));
+}
+
+$('#optSvc').onclick = e=>{const o=e.target.closest('.opt'); if(!o) return; B.svc=o.dataset.id; press($('#optSvc'),'.opt',B.svc); summary(); validate();};
+$('#optReader').onclick = e=>{const o=e.target.closest('.opt'); if(!o) return; setReader(o.dataset.id); summary(); validate();};
+$('#segMode').onclick = e=>{const b=e.target.closest('button'); if(!b) return; B.mode=b.dataset.v; $('#segMode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); summary();};
+
+document.addEventListener('click', e=>{
+  const sv = e.target.closest('[data-pick-svc]'), rd = e.target.closest('[data-pick-reader]');
+  if(!sv && !rd) return;
+  if(B.step===5) resetBooking();   // start a fresh booking instead of reusing the finished one
+  if(sv){ B.svc=sv.dataset.pickSvc; press($('#optSvc'),'.opt',B.svc); summary(); goto(B.reader?3:2,false); }
+  if(rd){ setReader(rd.dataset.pickReader); summary(); goto(B.svc?3:1,false); }
+  $('#booking').scrollIntoView();
+});
+
+/* ---------- availability ---------- */
+const taken = {};   // dateKey -> Set("HH:MM_reader") of booked slots, once loaded
+function loadTaken(dateKey, force=false){
+  if(taken[dateKey] && !force) return Promise.resolve(taken[dateKey]);
+  return DB.taken(dateKey, READERS.map(r=>r.id), HOURS).then(s=>{ taken[dateKey]=s; return s; });
+}
+function readerFree(rid,d,t){
+  const r=READERS.find(x=>x.id===rid);
+  if(!r || r.off.includes(d.getDay())) return false;
+  const s=taken[key(d)];
+  return !!s && !s.has(`${t}_${rid}`);
+}
+function slotOpen(d,t){
+  if(slotTime(key(d),t) <= new Date()) return false;
+  if(d.getDay()===0 && parseInt(t,10)<13) return false;
+  return B.reader==='any' ? READERS.some(r=>readerFree(r.id,d,t)) : readerFree(B.reader,d,t);
+}
+function renderDays(){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const r = READERS.find(x=>x.id===B.reader);
+  let html='';
+  for(let i=0;i<14;i++){
+    const d=new Date(today); d.setDate(today.getDate()+i);
+    const off = r && r.off.includes(d.getDay());
+    const sel = B.date && key(B.date)===key(d);
+    const label = d.toLocaleDateString('vi-VN',{weekday:'long',day:'numeric',month:'numeric'}) + (off?' — reader nghỉ':'');
+    html += `<button type="button" class="day" data-i="${i}" aria-pressed="${!!sel}" aria-label="${label}" ${off?'disabled':''}><small>${i===0?'Nay':DOW[d.getDay()]}</small><b>${d.getDate()}</b><small>Th${d.getMonth()+1}</small></button>`;
+  }
+  $('#days').innerHTML = html;
+  $('#monthLabel').textContent = r ? `Ngày · ${r.name} ${offText(r).toLowerCase()}` : 'Ngày';
+  renderSlots();
+}
+function renderSlots(){
+  if(!B.date){ $('#slots').innerHTML='<p class="hint">Chọn một ngày để xem giờ trống.</p>'; return; }
+  const k=key(B.date);
+  if(!taken[k]){
+    $('#slots').innerHTML='<p class="hint">Đang tải giờ trống…</p>';
+    loadTaken(k).then(()=>{ if(B.date && key(B.date)===k){ renderSlots(); validate(); } })
+      .catch(()=>{ if(B.date && key(B.date)===k) $('#slots').innerHTML='<p class="hint">Không tải được giờ trống. <button type="button" class="link" data-retry>Thử lại</button></p>'; });
+    return;
+  }
+  if(B.time && !slotOpen(B.date,B.time)) { B.time=null; summary(); }   // chosen slot expired or was taken
+  $('#slots').innerHTML = HOURS.map(t=>{
+    const open = slotOpen(B.date,t);
+    return `<button type="button" class="slot" data-t="${t}" aria-pressed="${B.time===t}" ${open?'':`disabled aria-label="${t}, không còn trống"`}>${t}</button>`;
+  }).join('');
+}
+$('#days').onclick = e=>{const b=e.target.closest('.day'); if(!b||b.disabled) return;
+  const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+ +b.dataset.i); B.date=d; B.time=null; delete taken[key(d)]; renderDays(); summary(); validate();
+  $(`#days .day[data-i="${b.dataset.i}"]`).focus();};
+$('#slots').onclick = e=>{ if(e.target.closest('[data-retry]')) return renderSlots(); const b=e.target.closest('.slot'); if(!b||b.disabled) return; B.time=b.dataset.t; renderSlots(); summary(); validate(); $(`#slots .slot[data-t="${B.time}"]`).focus();};
+
+/* ---------- form ---------- */
+function checkForm(){
+  let first=null;
+  const set=(el,errEl,msg)=>{ $(errEl).textContent=msg; el.setAttribute('aria-invalid',!!msg); if(msg&&!first) first=el; };
+  const name=$('#fName'), phone=$('#fPhone'), email=$('#fEmail'), agree=$('#fAgree');
+  set(name,'#eName', name.value.trim().length<2 ? 'Vui lòng nhập họ tên' : '');
+  set(phone,'#ePhone', /^(0|\+84)\d{9}$/.test(phone.value.replace(/[\s.]/g,'')) ? '' : 'Số điện thoại cần 10 chữ số, ví dụ 0909 123 456');
+  set(email,'#eEmail', email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value) ? 'Email chưa đúng định dạng' : '');
+  set(agree,'#eAgree', agree.checked ? '' : 'Vui lòng đánh dấu xác nhận để tiếp tục');
+  if(first) first.focus();
+  return !first;
+}
+function makeCode(){
+  const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s='RT-'; for(let i=0;i<6;i++) s+=c[Math.floor(Math.random()*c.length)];
+  return s;
+}
+
+let lastBooking=null, submitting=false;
+$('#nextBtn').onclick = async ()=>{
+  if(B.step<4) return goto(B.step+1);
+  if(submitting || !checkForm()) return;
+  const btn=$('#nextBtn'); submitting=true; btn.disabled=true; btn.textContent='Đang giữ chỗ…';
+  const name=$('#fName').value.trim(), k=key(B.date);
+  const contact={name, phone:$('#fPhone').value.replace(/[\s.]/g,''), email:$('#fEmail').value.trim(),
+    topic:$('#fTopic').value, q:$('#fQ').value.trim().slice(0,1000)};
+  try{
+    await loadTaken(k,true);
+    for(let attempt=0;;attempt++){
+      if(!slotOpen(B.date,B.time)) throw new DB.SlotTakenError();
+      const reader = B.reader==='any' ? READERS.find(r=>readerFree(r.id,B.date,B.time)).id : B.reader;
+      const bk={code:makeCode(), svc:B.svc, mode:B.mode, reader, requested:B.reader, date:k, time:B.time,
+        dur:SERVICES.find(x=>x.id===B.svc).dur, displayName:name.split(/\s+/).pop().slice(0,40)};
+      try{ await DB.create(bk, contact); lastBooking=bk; taken[k]?.add(`${bk.time}_${bk.reader}`); break; }
+      catch(e){
+        if(!(e instanceof DB.SlotTakenError) || attempt>=1) throw e;
+        await loadTaken(k,true);   // slot just taken, or (rarely) the code collided: re-check and retry once
+      }
+    }
+    $('#bkCode').textContent=lastBooking.code;
+    goto(5); toast('Đã giữ chỗ — mã '+lastBooking.code);
+  }catch(e){
+    if(e instanceof DB.SlotTakenError){ B.time=null; summary(); goto(3); toast('Khung giờ này vừa có người đặt, vui lòng chọn giờ khác'); }
+    else { console.error(e); toast('Chưa gửi được lịch — kiểm tra kết nối mạng rồi thử lại'); }
+  }finally{
+    submitting=false;
+    if(B.step===4){ btn.textContent='Xác nhận đặt lịch'; validate(); }
+  }
+};
+$('#backBtn').onclick = ()=>goto(B.step-1);
+$('#progress').onclick = e=>{ const b=e.target.closest('button'); if(!b||b.disabled) return; goto([...$('#progress').children].indexOf(b.parentElement)+1); };
+$('#againBtn').onclick = ()=>{ resetBooking(); summary(); goto(1); };
+
+// RFC 5545: lines longer than 75 octets are folded with CRLF + space
+function foldIcs(line){
+  const enc=new TextEncoder(); let out='', len=0;
+  for(const ch of line){ const n=enc.encode(ch).length; if(len+n>74){ out+='\r\n '; len=1; } out+=ch; len+=n; }
+  return out;
+}
+$('#icsBtn').onclick = ()=>{
+  if(!lastBooking) return;
+  const s=SERVICES.find(x=>x.id===lastBooking.svc);
+  const st=slotTime(lastBooking.date,lastBooking.time), en=new Date(st.getTime()+s.dur*60000);
+  const f=d=>d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//RabbitTarot//VI','BEGIN:VEVENT',
+    `UID:${lastBooking.code}@rabbittarot`,`DTSTAMP:${f(new Date())}`,`DTSTART:${f(st)}`,`DTEND:${f(en)}`,
+    `SUMMARY:Rabbit Tarot - ${s.name}`,`DESCRIPTION:Mã đặt lịch ${lastBooking.code} · ${lastBooking.mode}`,
+    'END:VEVENT','END:VCALENDAR'].map(foldIcs).join('\r\n');
+  const url=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
+  const a=document.createElement('a'); a.href=url; a.download=`rabbit-tarot-${lastBooking.code}.ics`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+}
+
+/* ---------- lookup ---------- */
+const CANCEL_HOURS = 12;
+async function renderLookup(code, focus=false){
+  const box=$('#lookupResult');
+  let b=null;
+  if(/^RT-[A-Z2-9]{5,6}$/.test(code)){
+    box.innerHTML='<p class="hint">Đang tra cứu…</p>';
+    try{ b=await DB.get(code); }
+    catch(e){ console.error(e); box.innerHTML='<p class="lk-msg">! Chưa kết nối được để tra cứu, vui lòng thử lại.</p>'; return; }
+  }
+  if(!b){ box.innerHTML=`<p class="lk-msg">! Không tìm thấy mã “${esc(code)||'—'}”. Hãy kiểm tra lại mã trong tin nhắn xác nhận.</p>`; return; }
+  const s=SERVICES.find(x=>x.id===b.svc), r=READERS.find(x=>x.id===b.reader);
+  const when=slotTime(b.date,b.time), hoursLeft=(when-new Date())/36e5;
+  const d=new Date(b.date+'T00:00').toLocaleDateString('vi-VN',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'});
+  const status = b.status==='cancelled' ? 'Đã huỷ' : hoursLeft<0 ? 'Đã diễn ra' : 'Đã xác nhận';
+  let action='';
+  if(status==='Đã xác nhận') action = hoursLeft>=CANCEL_HOURS
+    ? `<button type="button" class="btn btn-secondary" data-cancel="${esc(b.code)}">Huỷ lịch này</button>`
+    : `<p class="lk-msg">Còn dưới ${CANCEL_HOURS} giờ trước buổi xem nên không thể huỷ trực tuyến.</p>`;
+  box.innerHTML=`<div class="lk-card" tabindex="-1">
+    <div class="row"><span>Mã</span><b>${esc(b.code)}</b></div>
+    <div class="row"><span>Khách</span><b>${esc(b.displayName||'—')}</b></div>
+    <div class="row"><span>Gói</span><b>${s?s.name:'—'}</b></div>
+    <div class="row"><span>Reader</span><b>${r?r.name:'—'}${b.requested==='any'?' (được gợi ý)':''}</b></div>
+    <div class="row"><span>Thời gian</span><b>${esc(b.time)} · ${d}</b></div>
+    <div class="row"><span>Trạng thái</span><b style="color:${status==='Đã huỷ'?'var(--color-vermilion)':'inherit'}">${status}</b></div>
+    ${action}
+  </div>`;
+  if(focus) box.querySelector('.lk-card').focus();
+}
+if($('#lkForm')){
+$('#lkForm').onsubmit = e=>{ e.preventDefault(); renderLookup($('#lkInput').value.trim().toUpperCase()); };
+// Two-step confirm instead of confirm(), which in-app browsers (Zalo, Facebook) may block.
+$('#lookupResult').onclick = async e=>{
+  const btn=e.target.closest('[data-cancel]'); if(!btn || btn.disabled) return;
+  const c=btn.dataset.cancel;
+  if(!btn.dataset.armed){ btn.dataset.armed='1'; btn.textContent='Bấm lần nữa để xác nhận huỷ'; return; }
+  btn.disabled=true; btn.textContent='Đang huỷ…';
+  try{ await DB.cancel(c); await renderLookup(c,true); toast('Đã huỷ lịch '+c); }
+  catch(err){ console.error(err); btn.disabled=false; delete btn.dataset.armed; btn.textContent='Huỷ lịch này'; toast('Chưa huỷ được — vui lòng thử lại'); }
+};
+}
+
+/* ---------- daily card ---------- */
+const flip=$('#flip'); let flipBusy=false;
+if(flip){
+const DECK = window.RABBIT_DECK || [];
+$('#cardBack').innerHTML = RabbitCard.back();
+let lastCard = null;
+function draw(){
+  let c; do{ c=DECK[Math.floor(Math.random()*DECK.length)]; }while(DECK.length>1 && c===lastCard);
+  lastCard = c;
+  $('#cardFace').innerHTML = RabbitCard.face(c);
+  flip.setAttribute('aria-label',`Lá bài đã lật: ${c.vi} (${c.name})`);
+  flip.setAttribute('aria-disabled','true');
+  setTimeout(()=>{
+    const meta = c.arcana==='major' ? `Ẩn chính · ${c.label}` : `Ẩn phụ · Bộ ${RabbitCard.SUIT_VI[c.suit]}`;
+    $('#reading').innerHTML=`<p class="label">${meta}</p><h3>${esc(c.vi)} <i>· ${esc(c.name)}</i></h3><ul class="kw">${c.kw.map(k=>`<li>${esc(k)}</li>`).join('')}</ul><p>${esc(c.q)}</p><p class="scene"><span class="label">Trên lá bài</span>${esc(c.concept)}</p>`;
+    $('#redraw').hidden=$('#readMore').hidden=$('#readMoreZalo').hidden=false;
+    $('#flipBtn').hidden=true;
+  },500);
+}
+function reveal(){ if(flipBusy || flip.classList.contains('on')) return; draw(); flip.classList.add('on'); }
+flip.onclick=reveal;
+$('#flipBtn').onclick=reveal;
+flip.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); reveal(); } };
+$('#redraw').onclick=()=>{
+  if(flipBusy) return; flipBusy=true; flip.classList.remove('on');
+  setTimeout(()=>{ draw(); flip.classList.add('on'); flipBusy=false; },650);
+};
+}
+
+/* ---------- ui ---------- */
+function toast(m){const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast.t); toast.t=setTimeout(()=>t.classList.remove('on'),2800);}
+addEventListener('scroll',()=>$('#top').classList.toggle('scrolled',scrollY>8),{passive:true});
+const nav=$('#nav'), menuBtn=$('#menuBtn');
+menuBtn.onclick=()=>{ const o=nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded',o); menuBtn.textContent=o?'Đóng':'Menu'; };
+// mark the nav link of the section in view
+if('IntersectionObserver' in window){
+  const links=[...document.querySelectorAll('#navList a[href^="#"]')].filter(a=>a.getAttribute('href').length>1);
+  const spy=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return;
+    links.forEach(a=>{ if(a.getAttribute('href')==='#'+e.target.id) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
+  }),{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('main > section[id]').forEach(sec=>spy.observe(sec));
+}
+document.querySelectorAll('#navList a').forEach(a=>a.addEventListener('click',()=>{ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded',false); menuBtn.textContent='Menu'; }));
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+} else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+if($('#demoNote')) $('#demoNote').hidden = DB.mode!=='demo';
+
+/* ---------- Zalo popup: the reader picker and Zalo links are in the page; this opens the chosen reader ---------- */
+(function(){
+  const dlg = $('#zaloDialog');
+  let returnTo = null;
+  function openZalo(id, from){
+    const r = READERS.find(x=>x.id===id);
+    if(!r) return;
+    if(!dlg.showModal){ if(zaloUrl(r)) window.open(zaloUrl(r), '_blank', 'noopener'); return; }   // very old browsers: go straight to Zalo
+    $('#zdName').textContent = r.name;
+    $('#zdPhoto').src = r.avatar || r.photo;
+    $('#zdQrWrap').hidden = $('#zdHint').hidden = !r.qr;
+    if(r.qr){ $('#zdQr').src = r.qr; $('#zdQr').alt = `Mã QR Zalo của ${r.name}`; }
+    const open = $('#zdOpen');
+    const url = zaloUrl(r);
+    open.hidden = !url;
+    if(url){ open.href = url; open.textContent = `Mở Zalo của ${r.name}`; }
+    $('#zdHintMobile').textContent = url
+      ? 'Hoặc chụp màn hình mã QR để quét trong Zalo'
+      : 'Chụp màn hình mã QR, mở Zalo, chọn Quét mã QR rồi chọn ảnh vừa chụp';
+    returnTo = from;
+    dlg.showModal();
+  }
+  document.addEventListener('click', e=>{
+    const b = e.target.closest('[data-zalo]');
+    if(!b) return;
+    e.preventDefault();
+    openZalo(b.dataset.zalo, b);
+  });
+  // close on ×, or on a click on the backdrop (the dialog element itself, outside its content)
+  dlg.addEventListener('click', e=>{ if(e.target===dlg || e.target.closest('[data-zd-close]')) dlg.close(); });
+  dlg.addEventListener('close', ()=>{ returnTo?.focus(); });
+})();
+if($('.wizard')) summary();
+</script>
+</body>
+</html>
