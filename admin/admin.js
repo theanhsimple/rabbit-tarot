@@ -15,7 +15,9 @@ const CFG = {
 const P = {published: 'content/site.json', draft: 'content/draft.json', media: 'content/media.json', template: 'cms/template.html', index: 'index.html'};
 const REPO = `${CFG.owner}/${CFG.repo}`;
 const SESSION_KEY = 'rt-cms-session';
-const IDLE_MS = 30 * 60e3, MAX_MS = 8 * 3600e3;
+const IDLE_MS = 2 * 3600e3, MAX_MS = 12 * 3600e3;
+// access code sign-in: a repo-scoped GitHub token, encrypted in the browser with the owner's access code
+const ACCESS_PATH = 'admin/access.json', KDF_ITER = 600000, MIN_CODE = 12;
 const MAX_UPLOAD = 15 * 1024 * 1024, MAX_EDGE = 2400;
 const CATEGORIES = ['Banner', 'Hero', 'Background', 'Tarot Artwork', 'Thumbnail', 'Icon', 'Other'];
 // files the page template or renderer use on their own, outside content/site.json
@@ -33,7 +35,7 @@ const S = {
   mediaSel: null, mediaFilter: 'all', mediaQuery: '',
   localImg: {},          // path → data URL for files uploaded in this session (not deployed yet)
   busy: '', deploy: '',  // deploy: '', 'building', 'live', 'slow'
-  errors: [], history: null, historyLoading: false
+  errors: [], history: null, historyLoading: false, accessBox: undefined
 };
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -98,7 +100,7 @@ async function gh(path, opts = {}) {
       headers: {Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', Authorization: `Bearer ${S.token}`, ...(opts.body ? {'Content-Type': 'application/json'} : {})}
     });
   } catch (e) { throw new ApiError(0, 'Không kết nối được tới GitHub. Kiểm tra mạng rồi thử lại.'); }
-  if (res.status === 401) { endSession('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.'); throw new ApiError(401, 'Phiên đăng nhập đã hết hạn'); }
+  if (res.status === 401) { if (S.user) endSession('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.'); throw new ApiError(401, 'Phiên đăng nhập đã hết hạn'); }
   if (!res.ok) {
     let m = ''; try { m = (await res.json()).message; } catch (e) {}
     if (res.status === 403 && /rate limit/i.test(m)) m = 'GitHub đang giới hạn số lần gọi. Đợi vài phút rồi thử lại.';
@@ -163,7 +165,7 @@ function readSession() {
   } catch (e) { return null; }
 }
 async function login() {
-  const btn = $('#loginBtn'), err = $('#loginErr');
+  const btn = $('#ghBtn'), err = $('#loginErr');
   err.hidden = true; btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Đang đăng nhập…';
   try {
     const provider = new GithubAuthProvider();
@@ -189,6 +191,117 @@ async function login() {
     btn.disabled = false; btn.textContent = 'Đăng nhập bằng GitHub';
   }
 }
+/* ---------- access code ---------- */
+const b64ToBytes = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+async function codeKey(code, salt, iter) {
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(code.normalize('NFC')), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name: 'PBKDF2', hash: 'SHA-256', salt, iterations: iter}, base, {name: 'AES-GCM', length: 256}, false, ['encrypt', 'decrypt']);
+}
+async function sealToken(token, code, meta) {
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({name: 'AES-GCM', iv}, await codeKey(code, salt, KDF_ITER), new TextEncoder().encode(token)));
+  return {v: 1, kdf: 'PBKDF2-SHA256', iter: KDF_ITER, cipher: 'AES-256-GCM', salt: b64FromBytes(salt), iv: b64FromBytes(iv), ct: b64FromBytes(ct), ...meta};
+}
+async function openToken(box, code) {
+  try {
+    const pt = await crypto.subtle.decrypt({name: 'AES-GCM', iv: b64ToBytes(box.iv)}, await codeKey(code, b64ToBytes(box.salt), box.iter), b64ToBytes(box.ct));
+    return new TextDecoder().decode(pt);
+  } catch (e) { return null; }
+}
+// read without signing in: the file only holds the encrypted token
+async function loadAccessBox() {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${ACCESS_PATH}?ref=${CFG.main}`, {cache: 'no-store', headers: {Accept: 'application/vnd.github+json'}});
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error('Không đọc được cấu hình đăng nhập từ GitHub (mã ' + res.status + ').');
+  return JSON.parse(b64dec((await res.json()).content));
+}
+async function codeLogin(e) {
+  e.preventDefault();
+  const btn = $('#codeBtn'), err = $('#loginErr'), code = $('#accessCode').value;
+  err.hidden = true; btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Đang mở khoá…';
+  try {
+    const token = await openToken(S.accessBox, code);
+    if (!token) { await new Promise(r => setTimeout(r, 800)); throw new Error('Mã truy cập không đúng.'); }
+    S.token = token;
+    await authorize();
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({token, start: Date.now(), last: Date.now()}));
+    await boot();
+  } catch (ex) {
+    S.token = null;
+    err.textContent = ex.status === 401 ? 'Khoá GitHub đã hết hạn hoặc bị thu hồi. Hãy thiết lập lại mã truy cập.' : ex.message;
+    err.hidden = false; btn.disabled = false; btn.textContent = 'Vào CMS';
+    $('#accessCode').select();
+  }
+}
+function codeProblem(code, again) {
+  if (code.length < MIN_CODE) return `Mã cần ít nhất ${MIN_CODE} ký tự. Một câu ngắn dễ nhớ là được, ví dụ: tho-trang-doc-bai-2026.`;
+  if (/^\d+$/.test(code) || new Set(code).size < 6) return 'Mã quá dễ đoán. Hãy dùng chữ, số và dấu gạch, ví dụ: tho-trang-doc-bai-2026.';
+  if (code !== again) return 'Hai lần nhập mã không giống nhau.';
+  return '';
+}
+async function saveAccessBox(token, code, expires) {
+  const box = await sealToken(token, code, {login: S.user.login, expires: expires || '', updated: new Date().toISOString()});
+  await commitFiles(CFG.main, [{path: ACCESS_PATH, text: pretty(box)}], `CMS: cập nhật mã truy cập (${S.user.login})`);
+  S.accessBox = box;
+}
+function showSetup(message) {
+  const exp = new Date(Date.now() + 365 * 864e5).toISOString().slice(0, 10);
+  $('#app').innerHTML = `<main class="login"><form class="login-card setup" id="setupForm" autocomplete="off">
+    <img src="../assets/emblem-144.png" alt="">
+    <h1>Thiết lập mã truy cập</h1>
+    <p>Làm một lần. Sau đó chỉ cần nhập mã để vào CMS.</p>
+    <div class="field"><label for="patInput">Khoá GitHub (fine-grained token)</label><input type="password" id="patInput" class="input" required autocomplete="off" spellcheck="false">
+      <p class="help">Tạo tại GitHub › Settings › Developer settings › Fine-grained tokens. Chỉ chọn repository <span class="mono">${esc(REPO)}</span>, quyền <b>Contents: Read and write</b>.</p></div>
+    <div class="field"><label for="patExp">Ngày khoá hết hạn</label><input type="date" id="patExp" class="input" value="${exp}"><p class="help">CMS sẽ nhắc bạn trước khi khoá hết hạn.</p></div>
+    <div class="field"><label for="newCode">Mã truy cập mới</label><input type="password" id="newCode" class="input" required autocomplete="new-password"><p class="help">Ít nhất ${MIN_CODE} ký tự, ví dụ: tho-trang-doc-bai-2026.</p></div>
+    <div class="field"><label for="newCode2">Nhập lại mã</label><input type="password" id="newCode2" class="input" required autocomplete="new-password"></div>
+    <button class="btn btn-dark" id="setupBtn">Lưu và vào CMS</button>
+    <p class="login-err" id="loginErr"${message ? '' : ' hidden'}>${esc(message || '')}</p>
+    <p class="note"><button type="button" class="btn btn-ghost btn-sm" id="backLogin">← Quay lại đăng nhập</button></p>
+  </form></main>`;
+  $('#backLogin').onclick = () => showLogin();
+  $('#setupForm').onsubmit = async e => {
+    e.preventDefault();
+    const err = $('#loginErr'), btn = $('#setupBtn');
+    const pat = $('#patInput').value.trim(), code = $('#newCode').value, problem = codeProblem(code, $('#newCode2').value);
+    if (problem) { err.textContent = problem; err.hidden = false; return; }
+    err.hidden = true; btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Đang kiểm tra khoá…';
+    try {
+      S.token = pat;
+      await authorize();
+      btn.innerHTML = '<span class="spin"></span> Đang lưu…';
+      await saveAccessBox(pat, code, $('#patExp').value);
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({token: pat, start: Date.now(), last: Date.now()}));
+      toast('Đã thiết lập mã truy cập. Từ lần sau chỉ cần nhập mã.', 'ok');
+      await boot();
+    } catch (ex) {
+      S.token = null; S.user = null;
+      err.textContent = ex.status === 401 ? 'Khoá GitHub không hợp lệ hoặc đã hết hạn.'
+        : ex.status === 403 || ex.status === 404 ? 'Khoá này chưa có quyền ghi (Contents: Read and write) vào repository ' + REPO + '.'
+        : ex.message;
+      err.hidden = false; btn.disabled = false; btn.textContent = 'Lưu và vào CMS';
+    }
+  };
+  $('#patInput').focus();
+}
+async function changeCode() {
+  let code = '', again = '';
+  const ok = await modal({
+    title: 'Đổi mã truy cập', ok: 'Lưu mã mới',
+    body: `<div class="form"><div class="field"><label for="cc1">Mã mới</label><input type="password" id="cc1" class="input" autocomplete="new-password"><p class="help">Ít nhất ${MIN_CODE} ký tự.</p></div>
+      <div class="field"><label for="cc2">Nhập lại mã mới</label><input type="password" id="cc2" class="input" autocomplete="new-password"></div></div>`,
+    onOpen: d => { $('#cc1', d).oninput = e => code = e.target.value; $('#cc2', d).oninput = e => again = e.target.value; $('#cc1', d).focus(); }
+  });
+  if (!ok) return;
+  const problem = codeProblem(code, again);
+  if (problem) { toast(problem, 'err'); return; }
+  setBusy('Đang lưu mã truy cập…');
+  try { await saveAccessBox(S.token, code, (S.accessBox || {}).expires); toast('Đã đổi mã truy cập.', 'ok'); render(); }
+  catch (e) { toast('Chưa đổi được mã: ' + e.message, 'err'); }
+  finally { setBusy(''); }
+}
+const keyDaysLeft = () => { const x = (S.accessBox || {}).expires; return x ? Math.ceil((new Date(x + 'T23:59:59') - Date.now()) / 864e5) : null; };
+
 // The token must belong to an administrator of the site repository.
 async function authorize() {
   const [user, repo] = await Promise.all([gh('/user'), gh(`/repos/${REPO}`)]);
@@ -695,17 +808,30 @@ const NAV = [
 ];
 const TITLES = Object.fromEntries(NAV.map(n => [n[0], n[1]]));
 
-function showLogin(message) {
+async function showLogin(message) {
   document.title = 'Đăng nhập — Rabbit Tarot CMS';
+  $('#app').innerHTML = '<div class="loading" role="status"><span class="spin"></span>Đang tải…</div>';
+  try { S.accessBox = await loadAccessBox(); } catch (e) { S.accessBox = undefined; message = message || e.message; }
+  const hasCode = !!S.accessBox;
   $('#app').innerHTML = `<main class="login"><div class="login-card">
     <img src="../assets/emblem-144.png" alt="">
     <h1>Rabbit Tarot CMS</h1>
     <p>Quản trị nội dung website rabbittarot.io.vn</p>
-    <button class="btn btn-dark" id="loginBtn">Đăng nhập bằng GitHub</button>
+    ${hasCode ? `<form id="codeForm" class="code-form">
+        <label for="accessCode" class="sr-only">Mã truy cập</label>
+        <input type="password" id="accessCode" class="input" placeholder="Nhập mã truy cập" autocomplete="current-password" required>
+        <button class="btn btn-dark" id="codeBtn">Vào CMS</button>
+      </form>` : `<p class="notice" style="margin-top:20px;text-align:left">Chưa có mã truy cập. Thiết lập một lần để từ sau chỉ cần nhập mã.</p>
+      <button class="btn btn-dark" id="setupLink">Thiết lập mã truy cập</button>`}
     <p class="login-err" id="loginErr"${message ? '' : ' hidden'}>${esc(message || '')}</p>
-    <p class="note">Chỉ tài khoản GitHub có quyền quản trị repository <span class="mono">${esc(REPO)}</span> mới truy cập được.</p>
+    <div class="login-alt">
+      <button class="btn btn-ghost btn-sm" id="ghBtn">Đăng nhập bằng GitHub</button>
+      ${hasCode ? '<button class="btn btn-ghost btn-sm" id="setupLink">Thiết lập lại mã</button>' : ''}
+    </div>
   </div></main>`;
-  $('#loginBtn').onclick = login;
+  $('#ghBtn').onclick = login;
+  $('#setupLink').onclick = () => showSetup();
+  if (hasCode) { $('#codeForm').onsubmit = codeLogin; $('#accessCode').focus(); }
 }
 
 function shell() {
@@ -793,7 +919,8 @@ function viewDashboard() {
   const ch = changes(S.draft, S.published);
   const lastPub = S.history && S.history.published[0];
   const lastDraft = S.history && S.history.drafts[0];
-  return `<div class="stats">
+  const days = keyDaysLeft();
+  return `${days != null && days <= 21 ? `<div class="notice">Khoá GitHub dùng cho mã truy cập ${days > 0 ? `sẽ hết hạn sau ${days} ngày` : 'đã hết hạn'}. Hãy tạo khoá mới rồi chọn “Thiết lập lại mã” ở màn hình đăng nhập.</div>` : ''}<div class="stats">
       <div class="panel stat"><span class="label-s">Section</span><b>${secs.length}</b><small>${visible} đang hiển thị</small></div>
       <div class="panel stat"><span class="label-s">Mục nội dung</span><b>${items}</b><small>gói, reader, câu hỏi, ghi chú…</small></div>
       <div class="panel stat"><span class="label-s">Thư viện ảnh</span><b>${S.media.items.length}</b><small>${fmtBytes(mediaSize)}</small></div>
@@ -886,6 +1013,7 @@ function bindDrag() {
 async function onViewClick(e) {
   const t = e.target;
   if (t.closest('[data-act-dash=preview]')) preview();
+  if (t.closest('[data-change-code]')) changeCode();
   // landing page
   const vis = t.closest('[data-vis]');
   if (vis) { e.stopPropagation(); const s = S.draft.sections[+vis.dataset.vis]; s.visible = s.visible === false; rerender(); return; }
@@ -973,7 +1101,11 @@ const settingsForm = groups => `<div class="panel form">${groups.map(([title, fi
   return fieldHtml(f, getAt(S.draft, path), path);
 }).join('')}</div>`).join('')}</div>`;
 function viewSettings() {
-  return `<p class="muted" style="margin-bottom:16px">Thay đổi ở đây nằm trong bản nháp và chỉ lên website khi bạn publish. Màu sắc, font và cấu hình kỹ thuật không chỉnh được từ CMS để giữ nhận diện thương hiệu.</p>${settingsForm(SETTINGS_FORM)}`;
+  const days = keyDaysLeft();
+  return `<p class="muted" style="margin-bottom:16px">Thay đổi ở đây nằm trong bản nháp và chỉ lên website khi bạn publish. Màu sắc, font và cấu hình kỹ thuật không chỉnh được từ CMS để giữ nhận diện thương hiệu.</p>${settingsForm(SETTINGS_FORM)}
+    <section class="panel" style="margin-top:20px"><div class="panel-head"><h2>Đăng nhập CMS</h2><button class="btn btn-sm" data-change-code>${S.accessBox ? 'Đổi mã truy cập' : 'Tạo mã truy cập'}</button></div>
+      <div class="panel-body"><p>${S.accessBox ? `Đăng nhập bằng mã truy cập đang bật. ${days != null ? `Khoá GitHub hết hạn ngày <b>${esc(fmtTime((S.accessBox.expires) + 'T12:00:00').slice(0, 10))}</b> (còn ${days} ngày).` : ''}` : 'Chưa có mã truy cập; đang dùng đăng nhập GitHub.'}</p>
+      <p class="help" style="margin-top:6px">Đổi mã không làm mất nội dung. Khi khoá GitHub sắp hết hạn, tạo khoá mới rồi chọn “Thiết lập lại mã” ở màn hình đăng nhập.</p></div></section>`;
 }
 function viewSeo() {
   return `<div class="grid-2"><div>${settingsForm(SEO_FORM)}</div>
@@ -1113,7 +1245,7 @@ async function historyAction(act, {sha, kind}) {
 /* ---------- boot ---------- */
 async function boot() {
   $('#app').innerHTML = '<div class="loading" role="status"><span class="spin"></span>Đang tải nội dung…</div>';
-  try { await loadContent(); }
+  try { await loadContent(); if (S.accessBox === undefined || S.accessBox === null) S.accessBox = await loadAccessBox().catch(() => null); }
   catch (e) {
     $('#app').innerHTML = `<main class="login"><div class="login-card"><h1>Không tải được nội dung</h1><p class="login-err">${esc(e.message)}</p><button class="btn btn-dark" id="retry">Thử lại</button></div></main>`;
     $('#retry').onclick = boot; return;

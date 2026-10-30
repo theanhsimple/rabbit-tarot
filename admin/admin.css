@@ -57,6 +57,18 @@ h3{font-size:var(--text-sm)}
 .login-card .note{margin-top:20px;font-size:var(--text-xs);color:var(--color-muted-ink)}
 .login-err{margin-top:16px;padding:10px 12px;border-radius:6px;background:var(--err-bg);color:var(--err);text-align:left}
 
+/* access code */
+.code-form{display:grid;gap:10px;margin-top:24px}
+.code-form .input{min-height:44px;padding:0 12px;border:1px solid var(--line-strong);border-radius:6px;text-align:center;font-size:var(--text-md)}
+.code-form .btn{margin-top:0}
+.login-alt{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:16px}
+.login-card .login-alt .btn,.login-card .note .btn{width:auto;min-height:32px;margin-top:0;font-size:var(--text-xs)}
+.setup{text-align:left}
+.setup img,.setup h1,.setup > p{text-align:center}
+.setup .field{margin-top:16px}
+.setup .input{width:100%;min-height:40px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:6px}
+.setup .note{text-align:center}
+
 /* ---------- shell ---------- */
 .shell{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100%}
 .sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px;padding:16px 12px;background:var(--color-ink);color:var(--color-stone)}
