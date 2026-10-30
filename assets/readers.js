@@ -4,6 +4,7 @@
            and keep integrations/firestore.rules + Code.gs in sync)
    card    id of the reader's card in assets/deck-data.js, e.g. 'major-11' = Justice, 'major-18' = The Moon
    photo   portrait, 3:4, about 720×960 px, in assets/readers/
+   avatar  optional close-up of the face (square) for the Zalo popup and the reader picker; defaults to photo
    qr      square crop of the Zalo QR code, in assets/readers/
    zalo    the link inside that QR code (opens the reader's Zalo on phones)
    bio     a string, or a list of blocks: 'paragraph text', {list: ['…', '…']}, {quote: '…'}
@@ -40,6 +41,23 @@ window.RT_READERS = [
     photo: 'assets/readers/moon.jpg',
     qr: 'assets/readers/moon-zalo-qr.jpg',
     zalo: 'https://zaloapp.com/qr/p/4yefgnajzotr',
+    off: []
+  },
+  {
+    id: 'kb',
+    name: 'Mr. KB',
+    alias: 'Keeper of the Bridge',
+    card: 'major-14',
+    title: 'Cân bằng & Chuyển hoá',
+    bio: [
+      {quote: 'Tôi không đọc bài để biết trước tương lai. Tôi đọc bài để giúp bạn hiểu rõ chúng ta là ai và vị trí chúng ta đang đứng.'},
+      'Với kinh nghiệm 15 năm làm việc trong lĩnh vực văn hóa và 3 năm nghiên cứu Tarot, thần số học, tôi chuyên sâu về các giai đoạn chuyển tiếp trong cuộc sống – tình cảm lâu năm, khủng hoảng nội tâm, thay đổi sự nghiệp. Tôi sử dụng Tarot như một công cụ soi chiếu, giúp bạn nhìn thấy điều cốt lõi, cân bằng lại cảm xúc và đưa ra quyết định sáng suốt.',
+      'Tarot, với tôi là hành trình trở về sự hài hoà của thân - tâm - trí.'
+    ],
+    photo: 'assets/readers/kb.jpg',
+    avatar: 'assets/readers/kb-avatar.jpg',
+    qr: 'assets/readers/kb-zalo-qr.jpg',
+    zalo: 'https://zaloapp.com/qr/p/n0shl1xegqk9',
     off: []
   }
 ];

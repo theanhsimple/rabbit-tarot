@@ -1027,7 +1027,7 @@ $('#demoNote').hidden = DB.mode!=='demo';
   if(withZalo.length) $('#readerPick').innerHTML = withZalo.map(r=>{
     const c = readerCard(r);
     return `<li class="pick">
-      <img src="${esc(r.photo)}" alt="" width="72" height="96" loading="lazy">
+      <img src="${esc(r.avatar||r.photo)}" alt="" width="72" height="96" loading="lazy">
       <div>
         <div class="pick-name">${esc(r.name)}</div>
         ${c?`<div class="pick-card">${esc(c.name)}</div>`:''}
@@ -1048,7 +1048,7 @@ $('#demoNote').hidden = DB.mode!=='demo';
     if(!r) return;
     if(!dlg.showModal){ if(r.zalo) window.open(r.zalo, '_blank', 'noopener'); return; }   // very old browsers: go straight to Zalo
     $('#zdName').textContent = r.name;
-    $('#zdPhoto').src = r.photo;
+    $('#zdPhoto').src = r.avatar || r.photo;
     $('#zdQrWrap').hidden = $('#zdHint').hidden = !r.qr;
     if(r.qr){ $('#zdQr').src = r.qr; $('#zdQr').alt = `Mã QR Zalo của ${r.name}`; }
     const open = $('#zdOpen');
