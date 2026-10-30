@@ -45,7 +45,7 @@
       "visible": true,
       "data": {
         "eyebrow": "Tarot · Suy ngẫm · Góc nhìn",
-        "heading": "Một khoảng lặng để nhìn rõ điều *đang diễn ra* — bản thử CMS.",
+        "heading": "Một khoảng lặng để nhìn rõ điều *đang diễn ra*.",
         "lead": "Tarot mở ra một góc nhìn khác để bạn tự suy ngẫm về câu hỏi của mình. Đặt lịch trò chuyện riêng cùng reader — online hoặc tại studio.",
         "cta": {
           "label": "Đặt lịch qua Zalo",
@@ -55,7 +55,7 @@
           "label": "Rút một lá hôm nay",
           "href": "#daily"
         },
-        "image": "assets/readers/rabbit.jpg",
+        "image": "assets/emblem-440.png",
         "imageAlt": "Biểu tượng Rabbit Tarot: chú thỏ tai dài trước đĩa tròn đỏ son",
         "notes": [
           {
