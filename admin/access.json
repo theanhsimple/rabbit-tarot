@@ -1,0 +1,12 @@
+{
+  "v": 1,
+  "kdf": "PBKDF2-SHA256",
+  "iter": 600000,
+  "cipher": "AES-256-GCM",
+  "salt": "eBbhVDRS/oz0UynpD8gkHA==",
+  "iv": "VxmFeSKo9m+vUSP3",
+  "ct": "REPT4nD0r807V8fLuKe6GPk4b8yWa0+8+mojUguCLrNhnBAb0KufrsM+qxhPxZGAz+YADF2DJCJbaTGOraWDbViin0GZ7iqxJcq2AR5nOtsm7RRKiw/Sve408Be+9TOirlhdXprKcE2/9EKTBw==",
+  "login": "theanhsimple",
+  "expires": "2027-10-29",
+  "updated": "2026-10-30T11:21:03.248Z"
+}
