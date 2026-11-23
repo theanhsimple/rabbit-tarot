@@ -9,5 +9,7 @@
 !/cms/
 !/content/
 !/.nojekyll
+# Little Postcard app (Next.js); its own .gitignore excludes node_modules/.next
+!/little-postcard/
 /assets/rabbit-tarot-primary-emblem.png
 .DS_Store

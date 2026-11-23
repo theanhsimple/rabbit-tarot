@@ -1,0 +1,228 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Little Postcard — design tokens (Cinematic Archive, light theme).
+ * The nine brand tokens below are the source of truth. The shadcn/ui
+ * aliases further down map onto them so library components inherit
+ * the palette instead of shadcn's neutral defaults.
+ */
+:root {
+  --background: #f7f7f4;
+  --surface: #ffffff;
+  --surface-secondary: #f0f0ec;
+  --foreground: #222521;
+  --muted: #777a73;
+  --muted-foreground: #a0a29b;
+  --border: #e7e8e2;
+  --accent: #a66f5b;
+  --media-background: #171916;
+
+  /* shadcn/ui aliases */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --primary: var(--foreground);
+  --primary-foreground: var(--surface);
+  --secondary: var(--surface-secondary);
+  --secondary-foreground: var(--foreground);
+  --accent-foreground: var(--surface);
+  --destructive: #a5432f;
+  --input: var(--border);
+  --ring: var(--accent);
+  --radius: 0.25rem;
+
+  /* layout */
+  --header-height: 64px;
+  --container-max: 1280px;
+  --gutter: 20px;
+
+  /* motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 76px;
+    --gutter: 48px;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-media: var(--media-background);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), "Times New Roman", serif;
+  --font-heading: var(--font-display);
+
+  /* Display scale — fluid between 390px and 1440px viewports */
+  --text-display-xl: clamp(2.75rem, 1.9rem + 3.6vw, 5.25rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.015em;
+  --text-display-lg: clamp(2.125rem, 1.6rem + 2.2vw, 3.75rem);
+  --text-display-lg--line-height: 1.06;
+  --text-display-lg--letter-spacing: -0.01em;
+  --text-display-md: clamp(1.75rem, 1.45rem + 1.25vw, 2.625rem);
+  --text-display-md--line-height: 1.12;
+  --text-display-sm: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
+  --text-display-sm--line-height: 1.2;
+
+  /* UI scale */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.5);
+  --radius-xl: calc(var(--radius) * 2);
+
+  --ease-soft: var(--ease-out-soft);
+
+  --animate-rise: rise 0.9s var(--ease-out-soft) both;
+  --animate-page-in: page-in 0.5s var(--ease-out-soft) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-height) + 16px);
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer components {
+  /* 4 / 8 / 12-column editorial grid */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .editorial-grid {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      column-gap: 24px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .editorial-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: 32px;
+    }
+  }
+
+  .eyebrow {
+    font-size: var(--text-eyebrow);
+    line-height: var(--text-eyebrow--line-height);
+    letter-spacing: var(--text-eyebrow--letter-spacing);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Hide a horizontal scroller's bar but keep it scrollable */
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Entrance motion. Sections rise into view as they enter the viewport
+ * using scroll-driven animations — no JavaScript, no scroll-jacking.
+ * Browsers without support, and anyone who prefers reduced motion,
+ * simply see the content in place.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-on-load {
+    animation: var(--animate-rise);
+  }
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
