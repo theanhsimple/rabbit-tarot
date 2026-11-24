@@ -1,0 +1,11 @@
+:HL["/healing/_next/static/chunks/1kb2_xapx6qe6.css","style"]
+:HL["/healing/_next/static/media/01d6212a423b17a1-s.p.1pvupmngxrt5z.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/healing/_next/static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/healing/_next/static/media/28c5fc0db96362f0-s.p.0gv8q2vqi14yg.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/healing/_next/static/media/45462fd7b7c12654-s.p.0k62hbripvv8p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/healing/_next/static/media/6f3ab718e3727c1a-s.p.3huc2loe0ie8a.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/healing/_next/static/media/b57845f0cf557e59-s.p.1xtu7gopqv2u0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+3:[["children",{"s":"__PAGE__","h":160}]]
+2:[["children",{"s":{"n":"slug","t":"d","k":"nhung-canh-buom-trong-nang-bac","s":[]},"h":96,"c":"$Q3"}]]
+1:[["children",{"s":"postcard","h":64,"c":"$Q2"}]]
+0:{"b":"lfgNOMYet9P6o4XleHCkp","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

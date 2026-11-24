@@ -9,5 +9,7 @@
 !/cms/
 !/content/
 !/.nojekyll
+# Little Postcard (Healing): built in its own repo, copied here by its deploy step
+!/healing/
 /assets/rabbit-tarot-primary-emblem.png
 .DS_Store
