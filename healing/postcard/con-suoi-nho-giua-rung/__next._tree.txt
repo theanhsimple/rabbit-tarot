@@ -1,4 +1,4 @@
-:HL["/healing/_next/static/chunks/304npg2chqufp.css","style"]
+:HL["/healing/_next/static/chunks/3r6w9almbxura.css","style"]
 :HL["/healing/_next/static/media/01d6212a423b17a1-s.p.1pvupmngxrt5z.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/healing/_next/static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/healing/_next/static/media/28c5fc0db96362f0-s.p.0gv8q2vqi14yg.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -8,4 +8,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"slug","t":"d","k":"con-suoi-nho-giua-rung","s":[]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":"postcard","h":64,"c":"$Q2"}]]
-0:{"b":"nqbJNuucZqrLe6WIKM7z_","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"8CJlXNlpnwtrlTS2rZfIg","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
