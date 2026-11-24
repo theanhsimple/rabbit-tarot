@@ -1,97 +1,55 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { LibraryExplorer } from "@/components/library/library-explorer";
 import { PageIntro } from "@/components/layout/page-intro";
-import { FilterBar } from "@/components/postcard/filter-bar";
-import { VideoGrid } from "@/components/postcard/video-grid";
-import { ArrowLink } from "@/components/ui/arrow-link";
+import { Skeleton, VideoGridSkeleton } from "@/components/shared/skeleton";
 import { Container } from "@/components/ui/container";
-import { getContentRepository, isCategorySlug, isMoodSlug } from "@/lib/content";
-import { routes } from "@/lib/routes";
+import { getContentRepository } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Thư viện",
-  description: "Tất cả những tấm bưu thiếp của Little Postcard, lọc theo tâm trạng và chủ đề.",
+  description:
+    "Tất cả những tấm bưu thiếp của Little Postcard — tìm theo tên, lọc theo chủ đề và tâm trạng.",
 };
 
-/*
- * Sprint 01A placeholder: a working, URL-driven filter over the archive.
- * Pagination, sorting and richer layouts come with the Library sprint.
- */
-export default function LibraryPage({ searchParams }: PageProps<"/library">) {
+export default async function LibraryPage() {
+  const repo = await getContentRepository();
+  const [videos, categories, moods] = await Promise.all([
+    repo.getPublicVideos(),
+    repo.getCategories(),
+    repo.getMoods(),
+  ]);
+
   return (
     <>
       <PageIntro
         eyebrow="Thư viện"
         title="Tất cả những tấm bưu thiếp."
-        description="Lọc theo tâm trạng hoặc chủ đề để tìm thước phim dành cho lúc này."
+        description="Tìm một thước phim theo tên, hoặc để chủ đề và tâm trạng dẫn đường."
       />
       <Container className="pb-24 lg:pb-32">
-        <Suspense fallback={<LibrarySkeleton />}>
-          <LibraryResults searchParams={searchParams} />
+        {/* useSearchParams needs a boundary; the fallback is the loading state */}
+        <Suspense fallback={<LibraryLoading />}>
+          <LibraryExplorer videos={videos} categories={categories} moods={moods} />
         </Suspense>
       </Container>
     </>
   );
 }
 
-async function LibraryResults({
-  searchParams,
-}: {
-  searchParams: PageProps<"/library">["searchParams"];
-}) {
-  const params = await searchParams;
-  const mood = isMoodSlug(params.mood) ? params.mood : undefined;
-  const category = isCategorySlug(params.category) ? params.category : undefined;
-
-  const repo = await getContentRepository();
-  const [videos, moods, categories] = await Promise.all([
-    repo.getVideos({ mood, category }),
-    repo.getMoods(),
-    repo.getCategories(),
-  ]);
-
-  const activeLabels = [
-    moods.find((m) => m.slug === mood)?.label,
-    categories.find((c) => c.slug === category)?.label,
-  ].filter(Boolean);
-
+function LibraryLoading() {
   return (
-    <>
-      <FilterBar
-        moods={moods}
-        categories={categories}
-        activeMood={mood}
-        activeCategory={category}
-      />
-      <p className="mt-8 mb-10 text-sm text-muted" aria-live="polite">
-        {videos.length} thước phim
-        {activeLabels.length > 0 ? ` · ${activeLabels.join(" · ")}` : ""}
-      </p>
-      {videos.length > 0 ? (
-        <VideoGrid videos={videos} categories={categories} headingLevel="h2" />
-      ) : (
-        <div className="border border-dashed border-border px-6 py-16 text-center">
-          <p className="font-display text-display-sm">Chưa có thước phim nào ở đây.</p>
-          <p className="mt-3 text-sm text-muted">Thử bỏ bớt một bộ lọc nhé.</p>
-          <ArrowLink href={routes.library()} className="mt-6">
-            Xem tất cả
-          </ArrowLink>
-        </div>
-      )}
-    </>
-  );
-}
-
-function LibrarySkeleton() {
-  return (
-    <div aria-hidden className="animate-pulse">
-      <div className="h-[118px] border-y border-border" />
-      <div className="mt-8 mb-10 h-4 w-32 bg-surface-secondary" />
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 3 }, (_, i) => (
-          <div key={i} className="aspect-[3/2] bg-surface-secondary" />
-        ))}
+    <div role="status" aria-label="Đang tải thư viện">
+      <div className="flex flex-col gap-6 md:flex-row md:justify-between">
+        <Skeleton className="h-12 w-full md:max-w-md" />
+        <Skeleton className="h-11 w-52" />
       </div>
+      <div className="mt-8 flex flex-col gap-5 border-y border-border py-6">
+        <Skeleton className="h-11 w-full" />
+        <Skeleton className="h-11 w-full" />
+      </div>
+      <Skeleton className="mt-6 mb-10 h-11 w-40" />
+      <VideoGridSkeleton />
     </div>
   );
 }

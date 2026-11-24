@@ -189,6 +189,74 @@
     font-weight: 500;
   }
 
+  /*
+   * Range input for the video player (progress + volume). The input is
+   * 44px tall for touch; only the 3px track is painted. Fill and buffer
+   * come from --fill and --buffer (percentages) set inline.
+   */
+  .media-range {
+    --fill: 0%;
+    --buffer: 0%;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    height: 44px;
+    margin: 0;
+  }
+  .media-range::-webkit-slider-runnable-track {
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(
+      to right,
+      #fff var(--fill),
+      rgb(255 255 255 / 0.45) var(--fill) var(--buffer),
+      rgb(255 255 255 / 0.22) var(--buffer)
+    );
+  }
+  .media-range::-moz-range-track {
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(
+      to right,
+      rgb(255 255 255 / 0.45) var(--buffer),
+      rgb(255 255 255 / 0.22) var(--buffer)
+    );
+  }
+  .media-range::-moz-range-progress {
+    height: 3px;
+    border-radius: 2px;
+    background: #fff;
+  }
+  .media-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    margin-top: -5px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s var(--ease-out-soft);
+  }
+  .media-range::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .media-range:hover::-webkit-slider-thumb,
+  .media-range:focus-visible::-webkit-slider-thumb {
+    transform: scale(1.25);
+  }
+  .media-range:focus-visible {
+    outline: none;
+  }
+  .media-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  .media-range:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+
   /* Hide a horizontal scroller's bar but keep it scrollable */
   .scrollbar-none {
     scrollbar-width: none;

@@ -2,7 +2,8 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
 import { VideoGrid } from "@/components/postcard/video-grid";
-import type { Category, Video } from "@/lib/content/types";
+import type { Category } from "@/types/category";
+import type { Video } from "@/types/video";
 import { routes } from "@/lib/routes";
 
 interface LatestPostcardsProps {

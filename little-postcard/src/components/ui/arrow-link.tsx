@@ -11,7 +11,7 @@ export function ArrowLink({ className, children, tone = "default", ...props }: A
   return (
     <Link
       className={cn(
-        "group/arrow inline-flex items-center gap-2 text-sm font-medium underline-offset-[6px] transition-colors duration-300 hover:underline",
+        "group/arrow -my-3 inline-flex min-h-11 items-center gap-2 py-3 text-sm font-medium underline-offset-[6px] transition-colors duration-300 hover:underline",
         tone === "inverse" ? "text-white" : "text-foreground hover:text-accent",
         className,
       )}

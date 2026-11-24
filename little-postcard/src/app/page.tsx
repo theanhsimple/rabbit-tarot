@@ -5,26 +5,26 @@ import { HeroSection } from "@/components/home/hero-section";
 import { LatestPostcards } from "@/components/home/latest-postcards";
 import { MoodExplorer } from "@/components/home/mood-explorer";
 import { getContentRepository } from "@/lib/content";
-import { countByCategory, countByMood, labelLookup } from "@/lib/content/stats";
 import { routes } from "@/lib/routes";
+import { countBy } from "@/lib/video-query";
 
 const LATEST_LIMIT = 6;
 
 export default async function HomePage() {
   const repo = await getContentRepository();
-  const [featured, moods, categories, allVideos] = await Promise.all([
+  const [featured, moods, categories, publicVideos] = await Promise.all([
     repo.getFeaturedVideo(),
     repo.getMoods(),
     repo.getCategories(),
-    repo.getVideos(),
+    repo.getPublicVideos(),
   ]);
   const latest = await repo.getLatestVideos({
     limit: LATEST_LIMIT,
     excludeIds: featured ? [featured.id] : [],
   });
 
-  const categoryLabel = labelLookup(categories);
-  const newest = allVideos[0];
+  const newest = publicVideos[0];
+  const featuredCategory = categories.find((c) => c.id === featured?.categoryId);
 
   return (
     <>
@@ -32,13 +32,16 @@ export default async function HomePage() {
       {featured ? (
         <FeaturedPostcard
           video={featured}
-          categoryLabel={categoryLabel(featured.category)}
+          categoryLabel={featuredCategory?.label ?? ""}
           moods={moods}
         />
       ) : null}
       {latest.length > 0 ? <LatestPostcards videos={latest} categories={categories} /> : null}
-      <MoodExplorer moods={moods} counts={countByMood(allVideos)} />
-      <CategoryExplorer categories={categories} counts={countByCategory(allVideos)} />
+      <MoodExplorer moods={moods} counts={countBy(publicVideos, (v) => v.moodIds)} />
+      <CategoryExplorer
+        categories={categories}
+        counts={countBy(publicVideos, (v) => [v.categoryId])}
+      />
       <ClosingStatement />
     </>
   );

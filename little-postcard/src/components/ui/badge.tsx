@@ -13,7 +13,7 @@ const badgeVariants = cva(
           "bg-media/70 px-2 py-1 text-[0.6875rem] tracking-wide text-white tabular-nums",
         /** Hairline tag on light surfaces */
         outline:
-          "border border-border px-2.5 py-1 text-xs text-muted [a&]:transition-colors [a&]:hover:border-foreground/40 [a&]:hover:text-foreground",
+          "border border-border px-2.5 py-1 text-xs text-muted [a&]:relative [a&]:min-h-9 [a&]:px-3 [a&]:transition-colors [a&]:after:absolute [a&]:after:inset-x-0 [a&]:after:-inset-y-1 [a&]:hover:border-foreground/40 [a&]:hover:text-foreground",
         /** Quiet filled tag */
         secondary: "bg-surface-secondary px-2.5 py-1 text-xs text-foreground",
       },

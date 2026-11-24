@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "cn";
-import { primaryNav } from "@/lib/routes";
+import { primaryNav } from "@/data/navigation";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -23,8 +23,8 @@ export function NavLinks() {
               href={item.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "relative py-2 text-sm transition-colors duration-300",
-                "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-accent after:transition-transform after:duration-500 after:ease-soft",
+                "relative inline-flex min-h-11 items-center text-sm transition-colors duration-300",
+                "after:absolute after:inset-x-0 after:bottom-2 after:h-px after:origin-left after:bg-accent after:transition-transform after:duration-500 after:ease-soft",
                 active
                   ? "text-foreground after:scale-x-100"
                   : "text-muted after:scale-x-0 hover:text-foreground hover:after:scale-x-100",

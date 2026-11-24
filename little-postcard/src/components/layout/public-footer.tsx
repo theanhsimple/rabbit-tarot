@@ -1,25 +1,8 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { footerNav } from "@/data/navigation";
 import { getContentRepository } from "@/lib/content";
-import { routes } from "@/lib/routes";
 import { Wordmark } from "./wordmark";
-
-const footerLinks = [
-  {
-    heading: "Khám phá",
-    links: [
-      { href: routes.library(), label: "Thư viện" },
-      { href: routes.search(), label: "Tìm kiếm" },
-    ],
-  },
-  {
-    heading: "Little Postcard",
-    links: [
-      { href: routes.home, label: "Trang chủ" },
-      { href: routes.about, label: "Giới thiệu" },
-    ],
-  },
-] as const;
 
 export async function PublicFooter() {
   const { source } = await getContentRepository();
@@ -34,19 +17,19 @@ export async function PublicFooter() {
           </p>
         </div>
 
-        {footerLinks.map((group) => (
+        {footerNav.map((group) => (
           <nav
             key={group.heading}
             aria-label={group.heading}
             className="col-span-2 md:col-span-2 lg:col-span-3"
           >
-            <p className="eyebrow mb-5 text-muted-foreground">{group.heading}</p>
-            <ul className="flex flex-col gap-3">
+            <p className="eyebrow mb-2 text-muted-foreground">{group.heading}</p>
+            <ul className="flex flex-col">
               {group.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-foreground transition-colors duration-300 hover:text-accent"
+                    className="inline-flex min-h-11 items-center text-sm text-foreground transition-colors duration-300 hover:text-accent"
                   >
                     {link.label}
                   </Link>

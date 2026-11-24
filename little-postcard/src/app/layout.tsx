@@ -41,7 +41,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="vi" className={`${cormorant.variable} ${inter.variable}`}>
+    <html
+      lang="vi"
+      data-scroll-behavior="smooth"
+      className={`${cormorant.variable} ${inter.variable}`}
+    >
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

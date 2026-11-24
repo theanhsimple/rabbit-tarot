@@ -20,7 +20,7 @@ export function PublicHeader() {
           <Link
             href={routes.search()}
             aria-label="Tìm kiếm"
-            className="inline-flex size-10 items-center justify-center rounded-sm text-foreground transition-colors duration-300 hover:bg-surface-secondary hover:text-accent"
+            className="inline-flex size-11 items-center justify-center rounded-sm text-foreground transition-colors duration-300 hover:bg-surface-secondary hover:text-accent"
           >
             <Search aria-hidden className="size-[1.125rem]" strokeWidth={1.5} />
           </Link>

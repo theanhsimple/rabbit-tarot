@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "cn";
 import { Badge } from "@/components/ui/badge";
-import type { Video } from "@/lib/content/types";
+import type { Video } from "@/types/video";
 import { formatDate, formatDuration, formatDurationLong } from "@/lib/format";
 import { routes } from "@/lib/routes";
 
@@ -13,6 +13,8 @@ interface VideoCardProps {
   headingLevel?: "h2" | "h3";
   /** `sizes` hint for the thumbnail; defaults to the 3/2/1-column grid. */
   sizes?: string;
+  /** Load the thumbnail immediately (first row of a grid that may be above the fold). */
+  eager?: boolean;
   className?: string;
 }
 
@@ -25,6 +27,7 @@ export function VideoCard({
   categoryLabel,
   headingLevel: Heading = "h3",
   sizes = "(min-width: 1376px) 405px, (min-width: 1024px) calc((100vw - 160px) / 3), (min-width: 768px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
+  eager = false,
   className,
 }: VideoCardProps) {
   return (
@@ -35,6 +38,7 @@ export function VideoCard({
           alt=""
           fill
           sizes={sizes}
+          loading={eager ? "eager" : "lazy"}
           className="object-cover transition-transform duration-[1400ms] ease-soft group-hover:scale-[1.035]"
         />
         <div

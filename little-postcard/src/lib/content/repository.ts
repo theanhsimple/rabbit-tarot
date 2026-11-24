@@ -1,31 +1,36 @@
-import type { Category, Mood, Video, VideoFilter } from "./types";
+import type { Category } from "@/types/category";
+import type { Mood } from "@/types/mood";
+import type { Video } from "@/types/video";
 
 /**
- * The only way UI code reads content. Implementations:
- *  - `createMockRepository` (development data, src/lib/content/mock)
- *  - `createSupabaseRepository` (src/lib/content/supabase-repository.ts)
+ * The only way pages read content. Every method returns public-safe data:
+ * drafts and private videos never leave the repository.
+ *
+ * Implementations: `createMockRepository` (./mock-repository.ts) and
+ * `createSupabaseRepository` (./supabase-repository.ts, Sprint 02).
  */
 export interface ContentRepository {
-  /** Which implementation is serving content. */
   readonly source: ContentSource;
 
-  /** The postcard currently highlighted on the home page, if any. */
+  /** Published + public videos, newest first. Feeds library and search. */
+  getPublicVideos(): Promise<Video[]>;
+
   getFeaturedVideo(): Promise<Video | null>;
 
-  /** Newest first. `excludeIds` lets the home page skip the featured postcard. */
   getLatestVideos(options: { limit: number; excludeIds?: string[] }): Promise<Video[]>;
 
-  /** All published postcards matching the filter, newest first. */
-  getVideos(filter?: VideoFilter): Promise<Video[]>;
-
+  /** Published videos that are public or unlisted (reachable by link). */
   getVideoBySlug(slug: string): Promise<Video | null>;
 
-  /** Slugs of every published postcard, for static generation. */
+  /** Slugs of every video reachable by link, for static generation. */
   getVideoSlugs(): Promise<string[]>;
 
-  getMoods(): Promise<Mood[]>;
+  /** Up to `limit` public videos related to `video`. */
+  getRelatedVideos(video: Video, limit?: number): Promise<Video[]>;
 
   getCategories(): Promise<Category[]>;
+
+  getMoods(): Promise<Mood[]>;
 }
 
 export type ContentSource = "mock" | "supabase";

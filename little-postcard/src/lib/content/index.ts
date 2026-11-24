@@ -2,7 +2,6 @@ import "server-only";
 import type { ContentRepository, ContentSource } from "./repository";
 
 export type { ContentRepository, ContentSource } from "./repository";
-export * from "./types";
 
 /**
  * Picks the content source from CONTENT_SOURCE ("mock" | "supabase").
@@ -35,7 +34,7 @@ export function getContentRepository(): Promise<ContentRepository> {
         ]);
       return createSupabaseRepository(createSupabaseServerClient());
     }
-    const { createMockRepository } = await import("./mock/mock-repository");
+    const { createMockRepository } = await import("./mock-repository");
     return createMockRepository();
   })();
   return repository;

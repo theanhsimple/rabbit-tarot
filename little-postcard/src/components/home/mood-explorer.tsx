@@ -2,12 +2,13 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
-import type { Mood, MoodSlug } from "@/lib/content/types";
+import type { Mood } from "@/types/mood";
 import { routes } from "@/lib/routes";
 
 interface MoodExplorerProps {
   moods: Mood[];
-  counts: Partial<Record<MoodSlug, number>>;
+  /** Number of public videos per mood id. */
+  counts: Record<string, number>;
 }
 
 export function MoodExplorer({ moods, counts }: MoodExplorerProps) {
@@ -26,11 +27,11 @@ export function MoodExplorer({ moods, counts }: MoodExplorerProps) {
       <Container className="max-md:px-0">
         <ul className="reveal mt-12 flex snap-x snap-mandatory scroll-px-(--gutter) gap-3 overflow-x-auto px-(--gutter) pb-2 scrollbar-none md:mt-16 md:grid md:snap-none md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-6">
           {moods.map((mood, index) => {
-            const count = counts[mood.slug] ?? 0;
+            const count = counts[mood.id] ?? 0;
             return (
-              <li key={mood.slug} className="w-[64%] shrink-0 snap-start sm:w-[42%] md:w-auto">
+              <li key={mood.id} className="w-[64%] shrink-0 snap-start sm:w-[42%] md:w-auto">
                 <Link
-                  href={routes.library({ mood: mood.slug })}
+                  href={routes.library({ moods: [mood.slug] })}
                   className="group flex h-full min-h-48 flex-col justify-between border border-transparent bg-surface p-5 transition-[border-color,transform] duration-500 ease-soft hover:-translate-y-1 hover:border-foreground/15 lg:min-h-56"
                 >
                   <span className="flex items-center justify-between text-xs text-muted-foreground tabular-nums">

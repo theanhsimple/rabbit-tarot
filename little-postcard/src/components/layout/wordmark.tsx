@@ -7,7 +7,7 @@ export function Wordmark({ className }: { className?: string }) {
     <Link
       href={routes.home}
       className={cn(
-        "inline-flex items-baseline gap-2 font-display text-[1.625rem] leading-none font-medium tracking-[-0.01em] text-foreground",
+        "inline-flex items-baseline gap-2 py-2.5 font-display text-[1.625rem] leading-none font-medium tracking-[-0.01em] text-foreground",
         className,
       )}
     >

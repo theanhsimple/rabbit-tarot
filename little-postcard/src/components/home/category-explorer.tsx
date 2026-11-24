@@ -2,12 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
-import type { Category, CategorySlug } from "@/lib/content/types";
+import type { Category } from "@/types/category";
 import { routes } from "@/lib/routes";
 
 interface CategoryExplorerProps {
   categories: Category[];
-  counts: Partial<Record<CategorySlug, number>>;
+  /** Number of public videos per category id. */
+  counts: Record<string, number>;
 }
 
 /** An editorial index of categories rather than a grid of tiles. */
@@ -28,9 +29,9 @@ export function CategoryExplorer({ categories, counts }: CategoryExplorerProps) 
 
         <ol className="reveal col-span-4 border-t border-border md:col-span-8 lg:col-span-7 lg:col-start-6">
           {categories.map((category, index) => {
-            const count = counts[category.slug] ?? 0;
+            const count = counts[category.id] ?? 0;
             return (
-              <li key={category.slug} className="border-b border-border">
+              <li key={category.id} className="border-b border-border">
                 <Link
                   href={routes.library({ category: category.slug })}
                   className="group grid grid-cols-[2rem_1fr_auto] items-baseline gap-x-4 py-6 md:grid-cols-[3rem_1fr_auto] md:gap-x-6 md:py-8"

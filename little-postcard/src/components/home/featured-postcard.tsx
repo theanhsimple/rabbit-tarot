@@ -4,7 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import type { Mood, Video } from "@/lib/content/types";
+import type { Mood } from "@/types/mood";
+import type { Video } from "@/types/video";
 import { formatDate, formatDuration, formatDurationLong } from "@/lib/format";
 import { routes } from "@/lib/routes";
 
@@ -16,7 +17,7 @@ interface FeaturedPostcardProps {
 
 export function FeaturedPostcard({ video, categoryLabel, moods }: FeaturedPostcardProps) {
   const href = routes.postcard(video.slug);
-  const videoMoods = moods.filter((m) => video.moods.includes(m.slug));
+  const videoMoods = moods.filter((m) => video.moodIds.includes(m.id));
 
   return (
     <section aria-labelledby="featured-title" className="reveal py-20 md:py-28 lg:py-36">
@@ -71,9 +72,9 @@ export function FeaturedPostcard({ video, categoryLabel, moods }: FeaturedPostca
             {videoMoods.length > 0 ? (
               <ul aria-label="Tâm trạng" className="mt-6 flex flex-wrap gap-2">
                 {videoMoods.map((mood) => (
-                  <li key={mood.slug}>
+                  <li key={mood.id}>
                     <Badge asChild>
-                      <Link href={routes.library({ mood: mood.slug })}>{mood.label}</Link>
+                      <Link href={routes.library({ moods: [mood.slug] })}>{mood.label}</Link>
                     </Badge>
                   </li>
                 ))}
