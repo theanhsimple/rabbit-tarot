@@ -7,4 +7,4 @@
 :HL["/healing/_next/static/media/b57845f0cf557e59-s.p.1xtu7gopqv2u0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"library","h":64,"c":"$Q2"}]]
-0:{"b":"lfgNOMYet9P6o4XleHCkp","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"mKTBy72_pKIAY20_2wMRS","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
