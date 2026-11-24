@@ -6,4 +6,4 @@
 :HL["/healing/_next/static/media/6f3ab718e3727c1a-s.p.3huc2loe0ie8a.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/healing/_next/static/media/b57845f0cf557e59-s.p.1xtu7gopqv2u0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 1:[["children",{"s":"__PAGE__","h":128}]]
-0:{"b":"mKTBy72_pKIAY20_2wMRS","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"qlP983VthCoP8CO7l9F7V","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
